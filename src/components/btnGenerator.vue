@@ -1,52 +1,15 @@
 <template>
 <div class="container-custom px-4 py-4">
     <div class="controls-container">
-        <div class="pb-4 flex flex-wrap">
-            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Size</p>
-            </div>
 
-            <div class="w-1/2 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                       id="width"
-                       type="number"
-                       placeholder="width" v-model="btnStyle.width">
-            </div>
-
-            <div class="w-1/2 px-3">
-                <Dropdown label="Unit" :value="units.width" @change="onChangeChild" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-            <div class="w-1/2 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                       id="height"
-                       type="number"
-                       placeholder="height"
-                       v-model="btnStyle.height">
-            </div>
-
-            <div class="w-1/2 px-3">
-                <Dropdown label="Unit" :value="units.height" @change="onChangeChild" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-        </div>
         <div class="pb-4 flex flex-wrap">
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
                 <p class="font-bold">Padding</p>
             </div>
 
-            <div class="w-full flex items-center bg-red-500 text-white text-sm font-bold px-3 py-2 mb-4" role="alert" v-show="paddingAlert">
-                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
-                <p>When using padding is recommended to unset width and height</p>
-            </div>
-
             <div class="w-1/4 px-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingTop">Top</label>
                 <input
-                    @click="informUserAboutPadding"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="paddingTop"
                     type="number"
@@ -58,7 +21,6 @@
             <div class="w-1/4 px-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingRight">Right</label>
                 <input
-                    @click="informUserAboutPadding"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="paddingRight"
                     type="number"
@@ -70,7 +32,6 @@
             <div class="w-1/4 px-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingBottom">Bottom</label>
                 <input
-                    @click="informUserAboutPadding"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="paddingBottom"
                     type="number"
@@ -82,13 +43,64 @@
             <div class="w-1/4 px-3">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingLeft">Left</label>
                 <input
-                    @click="informUserAboutPadding"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="paddingLeft"
                     type="number"
                     placeholder="width"
                     v-model="btnStyle.paddingLeft">
                 <Dropdown label="Unit" :value="units.paddingLeft" @change="onChangeChild" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            </div>
+
+        </div>
+
+        <div class="pb-4 flex flex-wrap">
+            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
+                <p class="font-bold flex">
+                    Size
+                    <span class="ml-auto">
+                        <input class="mr-2 leading-tight" type="checkbox" @click="enableWidth = !enableWidth; paddingAlert = !paddingAlert">
+                        <span class="text-sm">Enable</span>
+                    </span>
+                </p>
+            </div>
+
+            <transition name="fade">
+                <div class="w-full flex items-center bg-red-500 text-white text-sm font-bold px-3 py-2 mb-4" role="alert" v-show="paddingAlert">
+                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <p>When using padding is recommended to unset width and height</p>
+                </div>
+            </transition>
+
+            <div class="w-1/2 px-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       @click="informUserAboutPadding"
+                       id="width"
+                       type="number"
+                       placeholder="width" v-model="btnStyle.width"
+                       :class="{'cursor-not-allowed' : !enableWidth}"
+                       :disabled="!enableWidth">
+            </div>
+
+            <div class="w-1/2 px-3">
+                <Dropdown label="Unit" :value="units.width" @change="onChangeChild" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            </div>
+
+            <div class="w-1/2 px-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       @click="informUserAboutPadding"
+                       id="height"
+                       type="number"
+                       placeholder="height"
+                       v-model="btnStyle.height"
+                       :class="{'cursor-not-allowed' : !enableWidth}"
+                       :disabled="!enableWidth">
+            </div>
+
+            <div class="w-1/2 px-3">
+                <Dropdown label="Unit" :value="units.height" @change="onChangeChild" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
             </div>
 
         </div>
@@ -102,16 +114,259 @@
 
         <div class="pb-4 flex flex-wrap">
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Colors</p>
+                <p class="font-bold flex">
+                    Colors
+                    <span class="ml-auto">
+                        <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvancedColor = !enableAdvancedColor">
+                        <span class="text-sm">Advanced</span>
+                    </span>
+                </p>
             </div>
             background, color, gradient
         </div>
 
         <div class="pb-4 flex flex-wrap">
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Border</p>
+                <p class="font-bold flex">Border
+                    <span class="ml-auto">
+                        <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvBorder()">
+                        <span class="text-sm">Advanced</span>
+                    </span>
+                </p>
             </div>
-            border (border (with every corner option),border size,border radius,border color)</div>
+
+            <transition name="fade" mode="out-in">
+                <div v-if="!enableAdvancedBorder" v-show="!enableAdvancedBorder" class="w-full flex flex-wrap">
+                    <div class="w-1/4 px-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderWidth">Width</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="borderWidth"
+                            type="number"
+                            placeholder="width"
+                            v-model="btnStyle.borderWidth">
+                    </div>
+
+                    <div class="w-1/4 px-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadius">Radius</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="borderRadius"
+                            type="number"
+                            placeholder="radius"
+                            v-model="btnStyle.borderRadius">
+                    </div>
+
+                    <div class="w-1/4 px-3">
+                        <Dropdown label="Style" :value="btnStyle.borderStyle" @change="onChangeChild" unitType="borderStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                    </div>
+
+                    <div class="w-1/4 px-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderColor">Color</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="borderColor"
+                            type="color"
+                            placeholder="color"
+                            v-model="btnStyle.borderColor">
+                    </div>
+
+                </div>
+                <div v-else class="w-full">
+                    <!-- TOP BORDER -->
+                    <div class="flex flex-wrap py-3">
+                        <h4 class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopWidth">Width</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderTopWidth"
+                                type="number"
+                                placeholder="top width"
+                                v-model="btnStyle.borderTopWidth">
+                        </div>
+
+                        <div class="w-1/4 px-3 flex">
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopLeftOne">TL 1</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusTopLeftOne"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusTopLeftOne">
+                            </div>
+
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopLeftTwo">TL 2</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusTopLeftTwo"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusTopLeftTwo">
+                            </div>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <Dropdown label="Style" :value="btnStyle.borderTopStyle" @change="onChangeChild" unitType="borderTopStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColor">Color HEX or name</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderTopColor"
+                                type="text"
+                                placeholder="HEX or Name"
+                                v-model="btnStyle.borderTopColor">
+                        </div>
+                    </div>
+                    <!-- END TOP BORDER -->
+                    <div class="flex flex-wrap py-3">
+                        <h4 class="bg-pink-100 border-l-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightWidth">Width</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderRightWidth"
+                                type="number"
+                                placeholder="right width"
+                                v-model="btnStyle.borderRightWidth">
+                        </div>
+
+                        <div class="w-1/4 px-3 flex">
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopRightOne">TR 1</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusTopRightOne"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusTopRightOne">
+                            </div>
+
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopRightTwo">TR 2</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusTopRightTwo"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusTopRightTwo">
+                            </div>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <Dropdown label="Style" :value="btnStyle.borderRightStyle" @change="onChangeChild" unitType="borderRightStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightColor">Color HEX or name</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderRightColor"
+                                type="text"
+                                placeholder="HEX or Name"
+                                v-model="btnStyle.borderRightColor">
+                        </div>
+
+                    </div>
+                    <div class="flex flex-wrap py-3">
+                        <h4 class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomWidth">Width</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderBottomWidth"
+                                type="number"
+                                placeholder="top width"
+                                v-model="btnStyle.borderBottomWidth">
+                        </div>
+
+                        <div class="w-1/4 px-3 flex">
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomRightOne">BR 1</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusBottomRightOne"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusBottomRightOne">
+                            </div>
+
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomRightTwo">BR 2</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusBottomRightTwo"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusBottomRightTwo">
+                            </div>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <Dropdown label="Style" :value="btnStyle.borderBottomStyle" @change="onChangeChild" unitType="borderBottomStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomColor">Color HEX or name</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderBottomColor"
+                                type="text"
+                                placeholder="HEX or name"
+                                v-model="btnStyle.borderBottomColor">
+                        </div>
+
+                    </div>
+                    <div class="flex flex-wrap py-3">
+                        <h4 class="bg-teal-100 border-l-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftWidth">Width</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderLeftWidth"
+                                type="number"
+                                placeholder="top width"
+                                v-model="btnStyle.borderLeftWidth">
+                        </div>
+
+                        <div class="w-1/4 px-3 flex">
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomLeftOne">BL 1</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusBottomLeftOne"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusBottomLeftOne">
+                            </div>
+
+                            <div class="w-1/2 w-1/2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomLeftTwo">BL 2</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="borderRadiusBottomLeftTwo"
+                                    type="number"
+                                    v-model="btnStyle.borderRadiusBottomLeftTwo">
+                            </div>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <Dropdown label="Style" :value="btnStyle.borderLeftStyle" @change="onChangeChild" unitType="borderLeftStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        </div>
+
+                        <div class="w-1/4 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftColor">Color HEX or name</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderLeftColor"
+                                type="text"
+                                placeholder="HEX or name"
+                                v-model="btnStyle.borderLeftColor">
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </div>
 
         <div class="pb-4 flex flex-wrap">
             <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
@@ -142,14 +397,40 @@ name: "btnGenerator",
                 height: "50",
                 fontSize: "16",
                 textAlign: "center",
-                paddingTop: '5',
-                paddingRight: '5',
-                paddingBottom: '5',
-                paddingLeft: '5',
+                paddingTop: '15',
+                paddingRight: '15',
+                paddingBottom: '15',
+                paddingLeft: '15',
                 color: "black",
-                border: '1px solid',
-                borderRadius: "4px",
-                borderColor: 'black'
+                borderWidth: '2',
+                borderStyle: 'solid',
+                borderRadius: "4",
+                borderColor: 'black',
+                borderTopWidth: '',
+                borderRightWidth: '',
+                borderBottomWidth: '',
+                borderLeftWidth: '',
+                borderTopStyle: '',
+                borderRightStyle: '',
+                borderBottomStyle: '',
+                borderLeftStyle: '',
+                borderTopColor: '',
+                borderRightColor: '',
+                borderBottomColor: '',
+                borderLeftColor: '',
+                borderRadiusTopLeftOne: '',
+                borderRadiusTopLeftTwo: '',
+                borderRadiusTopRightOne: '',
+                borderRadiusTopRightTwo: '',
+                borderRadiusBottomLeftOne: '',
+                borderRadiusBottomLeftTwo: '',
+                borderRadiusBottomRightOne: '',
+                borderRadiusBottomRightTwo: '',
+                borderTopLeftRadius: '',
+                borderTopRightRadius: '',
+                borderBottomRightRadius: '',
+                borderBottomLeftRadius: '',
+
             },
             units: {
                 width: 'px',
@@ -159,15 +440,56 @@ name: "btnGenerator",
                 paddingRight: 'px',
                 paddingBottom: 'px',
                 paddingLeft: 'px',
+                borderWidth: 'px',
+                borderRadius: 'px'
+
             },
             paddingAlert: false,
+            enableWidth: false,
+            enableAdvancedBorder: false,
+            enableAdvancedColor: false,
         };
     },
     computed: {
         style() {
+
+            let width = `${this.btnStyle.width}${this.units.width}`;
+            let height = `${this.btnStyle.height}${this.units.height}`;
+            if(!this.enableWidth) {
+                width = '';
+                height = '';
+            }
+
+            let borderWidth = `${this.btnStyle.borderWidth}${this.units.borderWidth}`;
+            let borderStyle =  this.btnStyle.borderStyle;
+            let borderRadius = `${this.btnStyle.borderRadius}${this.units.borderRadius}`;
+            let borderColor =  this.btnStyle.borderColor;
+            let borderTopLeftRadius= '';
+            let borderTopRightRadius= '';
+            let borderBottomRightRadius= '';
+            let borderBottomLeftRadius= '';
+            if(this.enableAdvancedBorder) {
+
+                borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth}
+                ${this.btnStyle.borderRightWidth}${this.units.borderWidth}
+                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth}
+                ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
+
+                borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
+
+                borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
+
+                borderRadius = '';
+
+                borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
+                borderTopRightRadius = `${this.btnStyle.borderRadiusTopRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopRightTwo}${this.units.borderRadius}`;
+                borderBottomRightRadius = `${this.btnStyle.borderRadiusBottomRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomRightTwo}${this.units.borderRadius}`;
+                borderBottomLeftRadius = `${this.btnStyle.borderRadiusBottomLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomLeftTwo}${this.units.borderRadius}`;
+            }
+
             return {
-                width: `${this.btnStyle.width}${this.units.width}`,
-                height: `${this.btnStyle.height}${this.units.height}`,
+                width: width,
+                height: height,
                 fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
                 textAlign: `${this.btnStyle.textAlign}`,
                 paddingTop: `${this.btnStyle.paddingTop}${this.units.paddingTop}`,
@@ -175,9 +497,14 @@ name: "btnGenerator",
                 paddingBottom: `${this.btnStyle.paddingBottom}${this.units.paddingBottom}`,
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
                 color: "black",
-                border: '1px solid',
-                borderRadius: "4px",
-                borderColor: 'black'
+                borderWidth: borderWidth,
+                borderStyle: borderStyle,
+                borderRadius: borderRadius,
+                borderColor: borderColor,
+                borderTopLeftRadius: borderTopLeftRadius,
+                borderTopRightRadius: borderTopRightRadius,
+                borderBottomRightRadius: borderBottomRightRadius,
+                borderBottomLeftRadius: borderBottomLeftRadius,
             }
         }
     },
@@ -193,6 +520,29 @@ name: "btnGenerator",
         },
         informUserAboutPadding() {
             this.paddingAlert = true;
+        },
+        enableAdvBorder() {
+            this.enableAdvancedBorder = !this.enableAdvancedBorder;
+            this.btnStyle.borderTopWidth = this.btnStyle.borderWidth;
+            this.btnStyle.borderRightWidth = this.btnStyle.borderWidth;
+            this.btnStyle.borderBottomWidth = this.btnStyle.borderWidth;
+            this.btnStyle.borderLeftWidth = this.btnStyle.borderWidth;
+            this.btnStyle.borderTopStyle = this.btnStyle.borderStyle;
+            this.btnStyle.borderRightStyle = this.btnStyle.borderStyle;
+            this.btnStyle.borderBottomStyle = this.btnStyle.borderStyle;
+            this.btnStyle.borderLeftStyle = this.btnStyle.borderStyle;
+            this.btnStyle.borderTopColor = 'black';
+            this.btnStyle.borderRightColor = 'black';
+            this.btnStyle.borderBottomColor = 'black';
+            this.btnStyle.borderLeftColor = 'black';
+            this.btnStyle.borderRadiusTopLeftOne = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusTopLeftTwo = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusTopRightOne = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusTopRightTwo = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusBottomLeftOne = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusBottomLeftTwo = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusBottomRightOne = `${this.btnStyle.borderRadius}`;
+            this.btnStyle.borderRadiusBottomRightTwo = `${this.btnStyle.borderRadius}`;
         }
     }
 }
@@ -218,5 +568,12 @@ name: "btnGenerator",
         display: grid;
         place-items: center;
         flex: 2;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 </style>
