@@ -63,11 +63,10 @@
             <div>Box shadow</div>
             <div>text shadow</div>
         </div>
+    </div>
 
-    </div>
-    <div class="btn-container">
-        <button :style="style">Button</button>
-    </div>
+    <preview-btn :btnStyle="style"></preview-btn>
+
 </div>
 </template>
 
@@ -76,10 +75,11 @@ import Dropdown from "@/components/dropdown";
 import PaddingOpt from "@/components/paddingOpt";
 import SizeOpt from "@/components/sizeOpt";
 import BorderOpt from "@/components/borderOpt";
+import PreviewBtn from "@/components/previewBtn";
 
 export default {
     name: "btnGenerator",
-    components: {BorderOpt, SizeOpt, PaddingOpt, Dropdown},
+    components: {PreviewBtn, BorderOpt, SizeOpt, PaddingOpt, Dropdown},
     data: function() {
         return {
             btnStyle: {
@@ -236,10 +236,5 @@ export default {
         flex-wrap: wrap;
         flex: 1;
         align-content: center;
-    }
-    .btn-container {
-        display: grid;
-        place-items: center;
-        flex: 2;
     }
 </style>
