@@ -2,56 +2,7 @@
 <div class="container-custom px-4 py-4">
     <div class="controls-container">
 
-        <div class="pb-4 flex flex-wrap">
-            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Padding</p>
-            </div>
-
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingTop">Top</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="paddingTop"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.paddingTop">
-                <Dropdown label="Unit" :value="units.paddingTop" @change="onChangeChild" unitType="paddingTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingRight">Right</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="paddingRight"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.paddingRight">
-                <Dropdown label="Unit" :value="units.paddingRight" @change="onChangeChild" unitType="paddingRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingBottom">Bottom</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="paddingBottom"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.paddingBottom">
-                <Dropdown label="Unit" :value="units.paddingBottom" @change="onChangeChild" unitType="paddingBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingLeft">Left</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="paddingLeft"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.paddingLeft">
-                <Dropdown label="Unit" :value="units.paddingLeft" @change="onChangeChild" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
-            </div>
-
-        </div>
+        <padding :btnStyle="btnStyle" :units="units"></padding>
 
         <div class="pb-4 flex flex-wrap">
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
@@ -72,7 +23,7 @@
                 </div>
             </transition>
 
-            <div class="w-1/2 px-3">
+            <div class="w-1/2 px-3" v-show="enableWidth">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        @click="informUserAboutPadding"
@@ -83,11 +34,11 @@
                        :disabled="!enableWidth">
             </div>
 
-            <div class="w-1/2 px-3">
+            <div class="w-1/2 px-3" v-show="enableWidth">
                 <Dropdown label="Unit" :value="units.width" @change="onChangeChild" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
             </div>
 
-            <div class="w-1/2 px-3">
+            <div class="w-1/2 px-3" v-show="enableWidth">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        @click="informUserAboutPadding"
@@ -99,17 +50,43 @@
                        :disabled="!enableWidth">
             </div>
 
-            <div class="w-1/2 px-3">
+            <div class="w-1/2 px-3" v-show="enableWidth">
                 <Dropdown label="Unit" :value="units.height" @change="onChangeChild" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
             </div>
-
         </div>
+
         <div class="pb-4 flex flex-wrap">
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
                 <p class="font-bold">Font</p>
             </div>
-            font size and unit , type (bold, italic),
+
+            <div class="w-1/4 px-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="fontSize"
+                    type="number"
+                    placeholder="width"
+                    v-model="btnStyle.fontSize">
+                <Dropdown label="Unit" :value="units.fontSize" @change="onChangeChild" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"></Dropdown>
+            </div>
+
             <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
+
+            <div class="w-1/4 px-3">
+                <Dropdown label="Style" :value="btnStyle.fontStyle" @change="onChangeChild" unitType="fontStyle" :options="['normal','italic','oblique']"></Dropdown>
+            </div>
+
+            <div class="w-1/4 px-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="fontStretch"
+                    type="number"
+                    placeholder="width"
+                    v-model="btnStyle.fontStretch">
+                <Dropdown label="Unit" :value="units.fontStretch" @change="onChangeChild" unitType="fontStretch" :options="['%']"></Dropdown>
+            </div>
         </div>
 
         <div class="pb-4 flex flex-wrap">
@@ -386,16 +363,19 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
+import Padding from "@/components/padding";
 
 export default {
-name: "btnGenerator",
-    components: {Dropdown},
+    name: "btnGenerator",
+    components: {Padding, Dropdown},
     data: function() {
         return {
             btnStyle: {
                 width: "100",
                 height: "50",
                 fontSize: "16",
+                fontStretch: '100',
+                fontStyle: 'normal',
                 textAlign: "center",
                 paddingTop: '15',
                 paddingRight: '15',
@@ -441,7 +421,8 @@ name: "btnGenerator",
                 paddingBottom: 'px',
                 paddingLeft: 'px',
                 borderWidth: 'px',
-                borderRadius: 'px'
+                borderRadius: 'px',
+                fontStretch: '%'
 
             },
             paddingAlert: false,
@@ -491,6 +472,8 @@ name: "btnGenerator",
                 width: width,
                 height: height,
                 fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
+                fontStretch: `${this.btnStyle.fontStretch}${this.units.fontStretch}`,
+                fontStyle: `${this.btnStyle.fontStyle}`,
                 textAlign: `${this.btnStyle.textAlign}`,
                 paddingTop: `${this.btnStyle.paddingTop}${this.units.paddingTop}`,
                 paddingRight: `${this.btnStyle.paddingRight}${this.units.paddingRight}`,
@@ -543,7 +526,7 @@ name: "btnGenerator",
             this.btnStyle.borderRadiusBottomLeftTwo = `${this.btnStyle.borderRadius}`;
             this.btnStyle.borderRadiusBottomRightOne = `${this.btnStyle.borderRadius}`;
             this.btnStyle.borderRadiusBottomRightTwo = `${this.btnStyle.borderRadius}`;
-        }
+        },
     }
 }
 </script>
@@ -561,7 +544,6 @@ name: "btnGenerator",
         flex-direction: column;
         flex-wrap: wrap;
         flex: 1;
-        justify-content: center;
         align-content: center;
     }
     .btn-container {

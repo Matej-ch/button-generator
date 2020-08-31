@@ -9,3 +9,9 @@ body {
 body, html {
     height: 100vh;
 }
+
+
+html {
+    font-size: calc(1em - -0.04vw);
+    height: 100%;
+}
