@@ -55,11 +55,11 @@
 import Dropdown from "@/components/dropdown";
 
 export default {
-    name: "padding",
+    name: "paddingOpt",
     components: {Dropdown},
     props: {
         btnStyle: Object,
-        units: Object
+        units: Object,
     },
     methods: {
         onChangeChild(value) {
