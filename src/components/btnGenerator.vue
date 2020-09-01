@@ -1,71 +1,77 @@
 <template>
-<div class="container-custom px-4 py-4">
-    <div class="controls-container">
+<div class="container-custom pb-4">
+    <header-component/>
 
-        <padding-opt :btnStyle="btnStyle" :units="units"></padding-opt>
+    <div class="px-4 flex flex-wrap w-full">
+        <div class="controls-container">
 
-        <size-opt :btnStyle="btnStyle" :units="units" :enableWidth="enableWidth" @enableSize="enableSize"></size-opt>
+            <padding-opt :btnStyle="btnStyle" :units="units"></padding-opt>
 
-        <div class="pb-4 flex flex-wrap">
-            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Font</p>
+            <size-opt :btnStyle="btnStyle" :units="units" :enableWidth="enableWidth" @enableSize="enableSize"></size-opt>
+
+            <div class="pb-4 flex flex-wrap">
+                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
+                    <p class="font-bold">Font</p>
+                </div>
+
+                <div class="w-1/4 px-3">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="fontSize"
+                        type="number"
+                        placeholder="width"
+                        v-model="btnStyle.fontSize">
+                    <Dropdown label="Unit" :value="units.fontSize" @change="onChangeChild" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"></Dropdown>
+                </div>
+
+                <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
+
+                <div class="w-1/4 px-3">
+                    <Dropdown label="Style" :value="btnStyle.fontStyle" @change="onChangeChild" unitType="fontStyle" :options="['normal','italic','oblique']"></Dropdown>
+                </div>
+
+                <div class="w-1/4 px-3">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="fontStretch"
+                        type="number"
+                        placeholder="width"
+                        v-model="btnStyle.fontStretch">
+                    <Dropdown label="Unit" :value="units.fontStretch" @change="onChangeChild" unitType="fontStretch" :options="['%']"></Dropdown>
+                </div>
             </div>
 
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="fontSize"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.fontSize">
-                <Dropdown label="Unit" :value="units.fontSize" @change="onChangeChild" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"></Dropdown>
+            <div class="pb-4 flex flex-wrap">
+                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
+                    <p class="font-bold flex">
+                        Colors
+                        <span class="ml-auto">
+                            <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvancedColor = !enableAdvancedColor">
+                            <span class="text-sm">Advanced</span>
+                        </span>
+                    </p>
+                </div>
+                background, color, gradient
             </div>
 
-            <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
+            <border-opt :btnStyle="btnStyle" :units="units" @enableAdvanced="enableAdvanced"></border-opt>
 
-            <div class="w-1/4 px-3">
-                <Dropdown label="Style" :value="btnStyle.fontStyle" @change="onChangeChild" unitType="fontStyle" :options="['normal','italic','oblique']"></Dropdown>
-            </div>
+            <div class="pb-4 flex flex-wrap">
+                <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
+                    <p class="font-bold">Shadows</p>
+                </div>
 
-            <div class="w-1/4 px-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="fontStretch"
-                    type="number"
-                    placeholder="width"
-                    v-model="btnStyle.fontStretch">
-                <Dropdown label="Unit" :value="units.fontStretch" @change="onChangeChild" unitType="fontStretch" :options="['%']"></Dropdown>
+                <div>Box shadow</div>
+                <div>text shadow</div>
             </div>
         </div>
 
-        <div class="pb-4 flex flex-wrap">
-            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold flex">
-                    Colors
-                    <span class="ml-auto">
-                        <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvancedColor = !enableAdvancedColor">
-                        <span class="text-sm">Advanced</span>
-                    </span>
-                </p>
-            </div>
-            background, color, gradient
-        </div>
-
-        <border-opt :btnStyle="btnStyle" :units="units" @enableAdvanced="enableAdvanced"></border-opt>
-
-        <div class="pb-4 flex flex-wrap">
-            <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
-                <p class="font-bold">Shadows</p>
-            </div>
-
-            <div>Box shadow</div>
-            <div>text shadow</div>
-        </div>
+        <preview-btn :btnStyle="style"></preview-btn>
     </div>
 
-    <preview-btn :btnStyle="style"></preview-btn>
+    <footer-component/>
 
 </div>
 </template>
@@ -76,10 +82,12 @@ import PaddingOpt from "@/components/paddingOpt";
 import SizeOpt from "@/components/sizeOpt";
 import BorderOpt from "@/components/borderOpt";
 import PreviewBtn from "@/components/previewBtn";
+import HeaderComponent from "@/components/headerComponent";
+import FooterComponent from "@/components/footerComponent";
 
 export default {
     name: "btnGenerator",
-    components: {PreviewBtn, BorderOpt, SizeOpt, PaddingOpt, Dropdown},
+    components: {FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt, Dropdown},
     data: function() {
         return {
             btnStyle: {
