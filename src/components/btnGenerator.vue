@@ -1,11 +1,11 @@
 <template>
-<div class="container-custom pb-4">
+<div class="flex flex-col h-screen justify-between">
     <header-component/>
 
     <div class="px-4 flex flex-wrap w-full">
         <div class="controls-container">
 
-            <padding-opt :btnStyle="btnStyle" :units="units"></padding-opt>
+            <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild"></padding-opt>
 
             <size-opt :btnStyle="btnStyle" :units="units" :enableWidth="enableWidth" @enableSize="enableSize"></size-opt>
 
@@ -25,10 +25,20 @@
                     <Dropdown label="Unit" :value="units.fontSize" @change="onChangeChild" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"></Dropdown>
                 </div>
 
-                <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
+                <div class="w-1/4 px-3">
+                    <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
+                </div>
 
                 <div class="w-1/4 px-3">
                     <Dropdown label="Style" :value="btnStyle.fontStyle" @change="onChangeChild" unitType="fontStyle" :options="['normal','italic','oblique']"></Dropdown>
+
+                    <label v-show="btnStyle.fontStyle === 'oblique'" class="block text-gray-700 text-sm font-bold mb-2" for="fontStyleDeg">Deg</label>
+                    <input v-show="btnStyle.fontStyle === 'oblique'"
+                           type="text"
+                           id="fontStyleDeg"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           placeholder="Degree" v-model="units.fontStyle">
+
                 </div>
 
                 <div class="w-1/4 px-3">
@@ -142,7 +152,8 @@ export default {
                 paddingLeft: 'px',
                 borderWidth: 'px',
                 borderRadius: 'px',
-                fontStretch: '%'
+                fontStretch: '%',
+                fontStyle: 'deg'
 
             },
             enableAdvancedBorder: false,
@@ -231,13 +242,6 @@ export default {
 </script>
 
 <style scoped>
-    .container-custom {
-        display: flex;
-        height: 100vh;
-        flex-wrap: wrap;
-        width: 100%;
-        overflow: auto;
-    }
     .controls-container {
         display: flex;
         flex-direction: column;

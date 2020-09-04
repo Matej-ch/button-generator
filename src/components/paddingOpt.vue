@@ -11,7 +11,8 @@
                 id="paddingTop"
                 type="number"
                 placeholder="width"
-                v-model="btnStyle.paddingTop">
+                v-model="btnStyle.paddingTop"
+                tabindex="1">
             <Dropdown label="Unit" :value="units.paddingTop" @change="onChangeChild" unitType="paddingTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
@@ -22,7 +23,8 @@
                 id="paddingRight"
                 type="number"
                 placeholder="width"
-                v-model="btnStyle.paddingRight">
+                v-model="btnStyle.paddingRight"
+                tabindex="2">
             <Dropdown label="Unit" :value="units.paddingRight" @change="onChangeChild" unitType="paddingRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
@@ -33,7 +35,8 @@
                 id="paddingBottom"
                 type="number"
                 placeholder="width"
-                v-model="btnStyle.paddingBottom">
+                v-model="btnStyle.paddingBottom"
+                tabindex="3">
             <Dropdown label="Unit" :value="units.paddingBottom" @change="onChangeChild" unitType="paddingBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
@@ -44,8 +47,9 @@
                 id="paddingLeft"
                 type="number"
                 placeholder="width"
-                v-model="btnStyle.paddingLeft">
-            <Dropdown label="Unit" :value="units.paddingLeft" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+                v-model="btnStyle.paddingLeft"
+                tabindex="4">
+            <Dropdown label="Unit" :value="units.paddingLeft" @change="onChangeChild" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
     </div>
@@ -63,13 +67,7 @@ export default {
     },
     methods: {
         onChangeChild(value) {
-            let valueKey = Object.keys(value)[0];
-            let unitsKeys = Object.keys(this.units);
-            if(unitsKeys.find(element => element === valueKey)) {
-                Object.assign(this.units, value);
-            } else {
-                Object.assign(this.btnStyle, value);
-            }
+            this.$emit('dropdownChange',value)
         }
     }
 }

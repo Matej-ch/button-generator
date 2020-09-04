@@ -1,5 +1,5 @@
 <template>
-    <div  class="w-full h-24 text-gray-700 font-semibold mb-4 p-4 flex flex-row items-center text-sm bg-gray-200">
+    <div  class="w-full h-24 text-gray-700 font-semibold p-4 flex flex-row items-center text-sm bg-gray-200">
         <div>Button generator {{ new Date().getFullYear() }}</div>
         <div class="ml-auto px-4">
             <a href="https://www.linkedin.com/in/matejchalachan">Linkedin</a>

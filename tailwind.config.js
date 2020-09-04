@@ -1,5 +1,8 @@
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: true,
+    content: ['./src/**/*.vue'],
+  },
   theme: {
     extend: {},
   },
@@ -7,5 +10,6 @@ module.exports = {
   plugins: [],
   future: {
     removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
 }
