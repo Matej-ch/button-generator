@@ -7,7 +7,11 @@
 
             <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild"></padding-opt>
 
-            <size-opt :btnStyle="btnStyle" :units="units" :enableWidth="enableWidth" @enableSize="enableSize"></size-opt>
+            <size-opt :btnStyle="btnStyle"
+                      :units="units"
+                      :enableWidth="enableWidth"
+                      @enableSize="enableSize"
+                      @dropdownChange="onChangeChild"></size-opt>
 
             <div class="pb-4 flex flex-wrap">
                 <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">

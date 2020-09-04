@@ -70,13 +70,7 @@ export default {
     },
     methods: {
         onChangeChild(value) {
-            let valueKey = Object.keys(value)[0];
-            let unitsKeys = Object.keys(this.units);
-            if(unitsKeys.find(element => element === valueKey)) {
-                Object.assign(this.units, value);
-            } else {
-                Object.assign(this.btnStyle, value);
-            }
+            this.$emit('dropdownChange',value)
         },
         informUserAboutPadding() {
             this.paddingAlert = true;
