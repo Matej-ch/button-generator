@@ -11,7 +11,8 @@
                       :units="units"
                       :enableWidth="enableWidth"
                       @enableSize="enableSize"
-                      @dropdownChange="onChangeChild"></size-opt>
+                      @dropdownChange="onChangeChild">
+            </size-opt>
 
             <div class="pb-4 flex flex-wrap">
                 <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
@@ -70,7 +71,11 @@
                 background, color, gradient
             </div>
 
-            <border-opt :btnStyle="btnStyle" :units="units" @enableAdvanced="enableAdvanced"></border-opt>
+            <border-opt :btnStyle="btnStyle"
+                        :units="units"
+                        @enableAdvanced="enableAdvanced"
+                        @dropdownChange="onChangeChild">
+            </border-opt>
 
             <div class="pb-4 flex flex-wrap">
                 <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
@@ -175,34 +180,7 @@ export default {
                 height = '';
             }
 
-            let borderWidth = `${this.btnStyle.borderWidth}${this.units.borderWidth}`;
-            let borderStyle =  this.btnStyle.borderStyle;
-            let borderRadius = `${this.btnStyle.borderRadius}${this.units.borderRadius}`;
-            let borderColor =  this.btnStyle.borderColor;
-            let borderTopLeftRadius= null;
-            let borderTopRightRadius= null;
-            let borderBottomRightRadius= null;
-            let borderBottomLeftRadius= null;
-            if(this.enableAdvancedBorder) {
-
-                borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth}
-                ${this.btnStyle.borderRightWidth}${this.units.borderWidth}
-                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth}
-                ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
-
-                borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
-
-                borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
-
-                borderRadius = '';
-
-                borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
-                borderTopRightRadius = `${this.btnStyle.borderRadiusTopRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopRightTwo}${this.units.borderRadius}`;
-                borderBottomRightRadius = `${this.btnStyle.borderRadiusBottomRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomRightTwo}${this.units.borderRadius}`;
-                borderBottomLeftRadius = `${this.btnStyle.borderRadiusBottomLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomLeftTwo}${this.units.borderRadius}`;
-            }
-
-            return {
+            let newStyle = {
                 width: width,
                 height: height,
                 fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
@@ -214,15 +192,31 @@ export default {
                 paddingBottom: `${this.btnStyle.paddingBottom}${this.units.paddingBottom}`,
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
                 color: "black",
-                borderWidth: borderWidth,
-                borderStyle: borderStyle,
-                borderColor: borderColor,
-                borderTopLeftRadius: borderTopLeftRadius,
-                borderTopRightRadius: borderTopRightRadius,
-                borderBottomRightRadius: borderBottomRightRadius,
-                borderBottomLeftRadius: borderBottomLeftRadius,
-                borderRadius: borderRadius,
+            };
+
+            if(this.enableAdvancedBorder) {
+                delete newStyle.borderRadius;
+
+                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth}${this.btnStyle.borderRightWidth}${this.units.borderWidth}
+                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth}${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
+                newStyle.borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
+                newStyle.borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
+                newStyle.borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
+                newStyle.borderTopRightRadius = `${this.btnStyle.borderRadiusTopRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopRightTwo}${this.units.borderRadius}`;
+                newStyle.borderBottomRightRadius = `${this.btnStyle.borderRadiusBottomRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomRightTwo}${this.units.borderRadius}`;
+                newStyle.borderBottomLeftRadius = `${this.btnStyle.borderRadiusBottomLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomLeftTwo}${this.units.borderRadius}`;
+            } else {
+                delete newStyle.borderTopLeftRadius;
+                delete newStyle.borderTopRightRadius;
+                delete newStyle.borderBottomRightRadius;
+                delete newStyle.borderBottomLeftRadius;
+                newStyle.borderWidth = `${this.btnStyle.borderWidth}${this.units.borderWidth}`;
+                newStyle.borderStyle =  this.btnStyle.borderStyle;
+                newStyle.borderRadius = `${this.btnStyle.borderRadius}${this.units.borderRadius}`;
+                newStyle.borderColor =  this.btnStyle.borderColor;
             }
+
+            return newStyle;
         }
     },
     methods: {
