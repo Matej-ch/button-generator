@@ -19,15 +19,15 @@
 <script>
 export default {
 name: "dropdown",
-    props: {'label':String,'value':String,'unitType':String,'options': Array},
+    props: {'obj':Object,'label':String,'unitType':String,'options': Array},
     data() {
         return {
-            selectValue: this.value
+            selectValue: this.obj[this.unitType]
         }
     },
     methods: {
         handleOption () {
-            this.$emit('change',{[this.unitType]: this.selectValue})
+            this.$emit('change',this.obj[this.unitType] = this.selectValue)
         }
     }
 }

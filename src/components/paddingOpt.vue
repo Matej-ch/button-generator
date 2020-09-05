@@ -13,7 +13,7 @@
                 placeholder="width"
                 v-model="btnStyle.paddingTop"
                 tabindex="1">
-            <Dropdown label="Unit" :value="units.paddingTop" @change="onChangeChild" unitType="paddingTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="paddingTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
         <div class="w-1/4 px-3">
@@ -25,7 +25,7 @@
                 placeholder="width"
                 v-model="btnStyle.paddingRight"
                 tabindex="2">
-            <Dropdown label="Unit" :value="units.paddingRight" @change="onChangeChild" unitType="paddingRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="paddingRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
         <div class="w-1/4 px-3">
@@ -37,7 +37,7 @@
                 placeholder="width"
                 v-model="btnStyle.paddingBottom"
                 tabindex="3">
-            <Dropdown label="Unit" :value="units.paddingBottom" @change="onChangeChild" unitType="paddingBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="paddingBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
         <div class="w-1/4 px-3">
@@ -49,7 +49,7 @@
                 placeholder="width"
                 v-model="btnStyle.paddingLeft"
                 tabindex="4">
-            <Dropdown label="Unit" :value="units.paddingLeft" @change="onChangeChild" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
     </div>
@@ -65,11 +65,6 @@ export default {
         btnStyle: Object,
         units: Object,
     },
-    methods: {
-        onChangeChild(value) {
-            this.$emit('dropdownChange',value)
-        }
-    }
 }
 </script>
 

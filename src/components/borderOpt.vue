@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="w-1/4 px-1">
-                    <Dropdown label="Style" :value="btnStyle.borderStyle" @change="onChangeChild" unitType="borderStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                    <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                 </div>
 
                 <div class="w-1/4 px-1">
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="w-1/4 px-1">
-                        <Dropdown label="Style" :value="btnStyle.borderTopStyle" @change="onChangeChild" unitType="borderTopStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderTopStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
                     <div class="w-1/4 px-1">
@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="w-1/4 px-1">
-                        <Dropdown label="Style" :value="btnStyle.borderRightStyle" @change="onChangeChild" unitType="borderRightStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderRightStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
                     <div class="w-1/4 px-1">
@@ -177,7 +177,7 @@
                     </div>
 
                     <div class="w-1/4 px-1">
-                        <Dropdown label="Style" :value="btnStyle.borderBottomStyle" @change="onChangeChild" unitType="borderBottomStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderBottomStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
                     <div class="w-1/4 px-1">
@@ -225,7 +225,7 @@
                     </div>
 
                     <div class="w-1/4 px-1">
-                        <Dropdown label="Style" :value="btnStyle.borderLeftStyle" @change="onChangeChild" unitType="borderLeftStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
+                        <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderLeftStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
                     <div class="w-1/4 px-1">

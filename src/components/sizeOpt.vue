@@ -30,7 +30,7 @@
         </div>
 
         <div class="w-1/2 px-3" v-show="enableWdth">
-            <Dropdown label="Unit" :value="units.width" @change="onChangeChild" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
 
         <div class="w-1/2 px-3" v-show="enableWdth">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="w-1/2 px-3" v-show="enableWdth">
-            <Dropdown label="Unit" :value="units.height" @change="onChangeChild" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+            <Dropdown label="Unit" :obj="units" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
         </div>
     </div>
 </template>
@@ -69,9 +69,6 @@ export default {
         }
     },
     methods: {
-        onChangeChild(value) {
-            this.$emit('dropdownChange',value)
-        },
         informUserAboutPadding() {
             this.paddingAlert = true;
         },

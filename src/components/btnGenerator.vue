@@ -5,58 +5,17 @@
     <div class="px-4 flex flex-wrap w-full">
         <div class="controls-container">
 
-            <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild"></padding-opt>
+            <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild" />
 
             <size-opt :btnStyle="btnStyle"
                       :units="units"
                       :enableWidth="enableWidth"
                       @enableSize="enableSize"
-                      @dropdownChange="onChangeChild">
-            </size-opt>
+                      @dropdownChange="onChangeChild" />
 
-            <div class="pb-4 flex flex-wrap">
-                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                    <p class="font-bold">Font</p>
-                </div>
-
-                <div class="w-1/4 px-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fontSize"
-                        type="number"
-                        placeholder="width"
-                        v-model="btnStyle.fontSize">
-                    <Dropdown label="Unit" :value="units.fontSize" @change="onChangeChild" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"></Dropdown>
-                </div>
-
-                <div class="w-1/4 px-3">
-                    <Dropdown label="Text align" :value="btnStyle.textAlign" @change="onChangeChild" unitType="textAlign" :options="['left','right','center','justify']"></Dropdown>
-                </div>
-
-                <div class="w-1/4 px-3">
-                    <Dropdown label="Style" :value="btnStyle.fontStyle" @change="onChangeChild" unitType="fontStyle" :options="['normal','italic','oblique']"></Dropdown>
-
-                    <label v-show="btnStyle.fontStyle === 'oblique'" class="block text-gray-700 text-sm font-bold mb-2" for="fontStyleDeg">Deg</label>
-                    <input v-show="btnStyle.fontStyle === 'oblique'"
-                           type="text"
-                           id="fontStyleDeg"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                           placeholder="Degree" v-model="units.fontStyle">
-
-                </div>
-
-                <div class="w-1/4 px-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fontStretch"
-                        type="number"
-                        placeholder="width"
-                        v-model="btnStyle.fontStretch">
-                    <Dropdown label="Unit" :value="units.fontStretch" @change="onChangeChild" unitType="fontStretch" :options="['%']"></Dropdown>
-                </div>
-            </div>
+            <font-opt :btnStyle="btnStyle"
+                      :units="units"
+                      @dropdownChange="onChangeChild"/>
 
             <div class="pb-4 flex flex-wrap">
                 <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
@@ -74,8 +33,7 @@
             <border-opt :btnStyle="btnStyle"
                         :units="units"
                         @enableAdvanced="enableAdvanced"
-                        @dropdownChange="onChangeChild">
-            </border-opt>
+                        @dropdownChange="onChangeChild" />
 
             <div class="pb-4 flex flex-wrap">
                 <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
@@ -96,17 +54,18 @@
 </template>
 
 <script>
-import Dropdown from "@/components/dropdown";
+
 import PaddingOpt from "@/components/paddingOpt";
 import SizeOpt from "@/components/sizeOpt";
 import BorderOpt from "@/components/borderOpt";
 import PreviewBtn from "@/components/previewBtn";
 import HeaderComponent from "@/components/headerComponent";
 import FooterComponent from "@/components/footerComponent";
+import FontOpt from "@/components/fontOpt";
 
 export default {
     name: "btnGenerator",
-    components: {FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt, Dropdown},
+    components: {FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
     data: function() {
         return {
             btnStyle: {
@@ -115,6 +74,7 @@ export default {
                 fontSize: "16",
                 fontStretch: '100',
                 fontStyle: 'normal',
+                fontWeight: 'normal',
                 textAlign: "center",
                 paddingTop: '15',
                 paddingRight: '15',
@@ -162,7 +122,7 @@ export default {
                 borderWidth: 'px',
                 borderRadius: 'px',
                 fontStretch: '%',
-                fontStyle: 'deg'
+                fontStyle: '40'
 
             },
             enableAdvancedBorder: false,
@@ -172,18 +132,11 @@ export default {
     },
     computed: {
         style() {
-
-            let width = `${this.btnStyle.width}${this.units.width}`;
-            let height = `${this.btnStyle.height}${this.units.height}`;
-            if(!this.enableWidth) {
-                width = '';
-                height = '';
-            }
-
             let newStyle = {
-                width: width,
-                height: height,
+                width: `${this.btnStyle.width}${this.units.width}`,
+                height: `${this.btnStyle.height}${this.units.height}`,
                 fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
+                fontWeight: `${this.btnStyle.fontWeight}`,
                 fontStretch: `${this.btnStyle.fontStretch}${this.units.fontStretch}`,
                 fontStyle: `${this.btnStyle.fontStyle}`,
                 textAlign: `${this.btnStyle.textAlign}`,
@@ -193,6 +146,15 @@ export default {
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
                 color: "black",
             };
+
+            if(this.btnStyle.fontStyle === 'oblique') {
+                newStyle.fontStyle = `${this.btnStyle.fontStyle} ${this.units.fontStyle}deg`;
+            }
+
+            if(!this.enableWidth) {
+                delete newStyle.width;
+                delete newStyle.height;
+            }
 
             if(this.enableAdvancedBorder) {
                 delete newStyle.borderRadius;
@@ -221,13 +183,15 @@ export default {
     },
     methods: {
         onChangeChild(value) {
-            let valueKey = Object.keys(value)[0];
+            console.log(value);
+            /*let valueKey = Object.keys(value)[0];
             let unitsKeys = Object.keys(this.units);
+
             if(unitsKeys.find(element => element === valueKey)) {
                 Object.assign(this.units, value);
             } else {
                 Object.assign(this.btnStyle, value);
-            }
+            }*/
         },
         enableSize(value) {
             this.enableWidth = value;
