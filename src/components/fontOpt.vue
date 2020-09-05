@@ -1,10 +1,10 @@
 <template>
     <div class="pb-4 flex flex-wrap">
-        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-1 py-1 w-full mb-2">
             <p class="font-bold">Font</p>
         </div>
 
-        <div class="w-1/4 px-3">
+        <div class="w-1/4 px-1">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -15,7 +15,7 @@
             <Dropdown label="Unit" :obj="units" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"/>
         </div>
 
-        <div class="w-1/4 px-3">
+        <div class="w-1/4 px-1">
             <Dropdown label="Text align" :obj="btnStyle" unitType="textAlign" :options="['left','right','center','justify']"/>
 
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fontWeight">Weight</label>
@@ -27,7 +27,7 @@
                 v-model="btnStyle.fontWeight">
         </div>
 
-        <div class="w-1/4 px-3">
+        <div class="w-1/4 px-1">
             <Dropdown label="Style" :obj="btnStyle" unitType="fontStyle" :options="['normal','italic','oblique']"/>
 
             <label v-show="btnStyle.fontStyle === 'oblique'" class="block text-gray-700 text-sm font-bold mb-2" for="fontStyleDeg">Deg</label>
@@ -39,7 +39,7 @@
 
         </div>
 
-        <div class="w-1/4 px-3">
+        <div class="w-1/4 px-1">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

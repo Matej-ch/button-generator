@@ -1,6 +1,6 @@
 <template>
     <div class="pb-4 flex flex-wrap">
-        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-1 py-1 w-full mb-2">
             <p class="font-bold flex">
                 Size
                 <span class="ml-auto">

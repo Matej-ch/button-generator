@@ -1,5 +1,5 @@
 <template>
-<div class="flex flex-col h-screen justify-between">
+<div class="flex flex-col h-screen justify-between overflow-auto">
     <header-component/>
 
     <div class="px-4 flex flex-wrap w-full">
@@ -22,14 +22,8 @@
                         @enableAdvanced="enableAdvancedBorder"
                         @dropdownChange="onChangeChild" />
 
-            <div class="pb-4 flex flex-wrap">
-                <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-4 py-1 w-full mb-2">
-                    <p class="font-bold">Shadows</p>
-                </div>
+            <shadow-opt :btnStyle="btnStyle"/>
 
-                <div>Box shadow</div>
-                <div>text shadow</div>
-            </div>
         </div>
 
         <preview-btn :btnStyle="style"></preview-btn>
@@ -50,10 +44,13 @@ import HeaderComponent from "@/components/headerComponent";
 import FooterComponent from "@/components/footerComponent";
 import FontOpt from "@/components/fontOpt";
 import ColorOpt from "@/components/colorOpt";
+import ShadowOpt from "@/components/shadowOpt";
 
 export default {
     name: "btnGenerator",
-    components: {ColorOpt, FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
+    components: {
+        ShadowOpt,
+        ColorOpt, FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
     data: function() {
         return {
             btnStyle: {
@@ -98,6 +95,8 @@ export default {
                 borderTopRightRadius: '',
                 borderBottomRightRadius: '',
                 borderBottomLeftRadius: '',
+                textShadow: '',
+                boxShadow: '',
 
             },
             units: {
@@ -135,6 +134,8 @@ export default {
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
                 color: this.btnStyle.color,
                 backgroundColor: this.btnStyle.backgroundColor,
+                textShadow: this.btnStyle.textShadow,
+                boxShadow: this.btnStyle.boxShadow,
             };
 
             if(this.btnStyle.fontStyle === 'oblique') {
