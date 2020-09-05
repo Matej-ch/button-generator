@@ -10,29 +10,16 @@
             <size-opt :btnStyle="btnStyle"
                       :units="units"
                       :enableWidth="enableWidth"
-                      @enableSize="enableSize"
-                      @dropdownChange="onChangeChild" />
+                      @enableSize="enableSize"/>
 
             <font-opt :btnStyle="btnStyle"
-                      :units="units"
-                      @dropdownChange="onChangeChild"/>
+                      :units="units"/>
 
-            <div class="pb-4 flex flex-wrap">
-                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-1 w-full mb-2">
-                    <p class="font-bold flex">
-                        Colors
-                        <span class="ml-auto">
-                            <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvancedColor = !enableAdvancedColor">
-                            <span class="text-sm">Advanced</span>
-                        </span>
-                    </p>
-                </div>
-                background, color, gradient
-            </div>
+            <color-opt  :btnStyle="btnStyle" @enableColor="enableAdvancedColor" />
 
             <border-opt :btnStyle="btnStyle"
                         :units="units"
-                        @enableAdvanced="enableAdvanced"
+                        @enableAdvanced="enableAdvancedBorder"
                         @dropdownChange="onChangeChild" />
 
             <div class="pb-4 flex flex-wrap">
@@ -62,10 +49,11 @@ import PreviewBtn from "@/components/previewBtn";
 import HeaderComponent from "@/components/headerComponent";
 import FooterComponent from "@/components/footerComponent";
 import FontOpt from "@/components/fontOpt";
+import ColorOpt from "@/components/colorOpt";
 
 export default {
     name: "btnGenerator",
-    components: {FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
+    components: {ColorOpt, FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
     data: function() {
         return {
             btnStyle: {
@@ -81,6 +69,7 @@ export default {
                 paddingBottom: '15',
                 paddingLeft: '15',
                 color: "black",
+                backgroundColor:'white',
                 borderWidth: '2',
                 borderStyle: 'solid',
                 borderRadius: "4",
@@ -125,8 +114,8 @@ export default {
                 fontStyle: '40'
 
             },
-            enableAdvancedBorder: false,
-            enableAdvancedColor: false,
+            advancedBorder: false,
+            advancedColor: false,
             enableWidth: false
         };
     },
@@ -144,7 +133,8 @@ export default {
                 paddingRight: `${this.btnStyle.paddingRight}${this.units.paddingRight}`,
                 paddingBottom: `${this.btnStyle.paddingBottom}${this.units.paddingBottom}`,
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
-                color: "black",
+                color: this.btnStyle.color,
+                backgroundColor: this.btnStyle.backgroundColor,
             };
 
             if(this.btnStyle.fontStyle === 'oblique') {
@@ -156,7 +146,7 @@ export default {
                 delete newStyle.height;
             }
 
-            if(this.enableAdvancedBorder) {
+            if(this.advancedBorder) {
                 delete newStyle.borderRadius;
 
                 newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth}${this.btnStyle.borderRightWidth}${this.units.borderWidth}
@@ -196,8 +186,11 @@ export default {
         enableSize(value) {
             this.enableWidth = value;
         },
-        enableAdvanced(value) {
-            this.enableAdvancedBorder = value;
+        enableAdvancedBorder(value) {
+            this.advancedBorder = value;
+        },
+        enableAdvancedColor(value) {
+            this.advancedColor = value;
         }
     }
 }
