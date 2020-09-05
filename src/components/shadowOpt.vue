@@ -20,6 +20,7 @@
                     id="textShadowOffsetX"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="textShadowStyle.offsetX">
             </div>
 
@@ -30,6 +31,7 @@
                     id="textShadowOffsetY"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="textShadowStyle.offsetY">
             </div>
 
@@ -40,6 +42,7 @@
                     id="textShadowBlurRadius"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="textShadowStyle.blurRadius">
             </div>
 
@@ -50,6 +53,7 @@
                     id="textShadowColor"
                     type="color"
                     placeholder="text shadow color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="textShadowStyle.color">
             </div>
 
@@ -70,6 +74,7 @@
                     id="boxShadowOffsetX"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="boxShadowStyle.offsetX">
             </div>
 
@@ -80,6 +85,7 @@
                     id="boxShadowOffsetY"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="boxShadowStyle.offsetY">
             </div>
 
@@ -90,6 +96,7 @@
                     id="boxShadowBlurRadius"
                     type="number"
                     placeholder="background color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="boxShadowStyle.blurRadius">
             </div>
 
@@ -100,6 +107,7 @@
                     id="boxShadowColor"
                     type="color"
                     placeholder="box shadow color"
+                    @click="updateStyle" @keyup="updateStyle"
                     v-model="boxShadowStyle.color">
             </div>
         </div>
@@ -141,6 +149,15 @@ export default {
 
         enableBoxShadow() {
             this.boxShadow = !this.boxShadow;
+
+            if (this.boxShadow) {
+                this.btnStyle.boxShadow = `${this.boxShadowStyle.offsetX}px ${this.boxShadowStyle.offsetY}px ${this.boxShadowStyle.blurRadius}px ${this.boxShadowStyle.color}`;
+            }
+        },
+        updateStyle() {
+            if (this.textShadow) {
+                this.btnStyle.textShadow = `${this.textShadowStyle.offsetX}px ${this.textShadowStyle.offsetY}px ${this.textShadowStyle.blurRadius}px ${this.textShadowStyle.color}`;
+            }
 
             if (this.boxShadow) {
                 this.btnStyle.boxShadow = `${this.boxShadowStyle.offsetX}px ${this.boxShadowStyle.offsetY}px ${this.boxShadowStyle.blurRadius}px ${this.boxShadowStyle.color}`;
