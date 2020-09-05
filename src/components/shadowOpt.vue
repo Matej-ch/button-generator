@@ -53,7 +53,7 @@
                     id="textShadowColor"
                     type="color"
                     placeholder="text shadow color"
-                    @click="updateStyle" @keyup="updateStyle"
+                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
                     v-model="textShadowStyle.color">
             </div>
 
@@ -107,7 +107,7 @@
                     id="boxShadowColor"
                     type="color"
                     placeholder="box shadow color"
-                    @click="updateStyle" @keyup="updateStyle"
+                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
                     v-model="boxShadowStyle.color">
             </div>
         </div>
