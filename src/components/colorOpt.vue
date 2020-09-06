@@ -4,19 +4,20 @@
             <p class="font-bold flex">
                 Colors
                 <span class="ml-auto">
-                    <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvancedColor = !enableAdvancedColor">
+                    <input class="mr-2 leading-tight" type="checkbox" @click="enableAdvColor = !enableAdvColor">
                     <span class="text-sm">Advanced</span>
                 </span>
             </p>
         </div>
 
         <div class="w-1/2 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor">Background</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor" v-show="!enableAdvColor">Background</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="backgroundColor"
                 type="color"
                 placeholder="background color"
+                v-show="!enableAdvColor"
                 v-model="btnStyle.backgroundColor">
         </div>
 
@@ -30,6 +31,29 @@
                 v-model="btnStyle.color">
         </div>
 
+        <transition name="fade" mode="out-in">
+            <div class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
+                <div class="px-1 w-1/3">
+                    <input class="mr-2 leading-tight" type="radio" id="linearGradient" value="linear" v-model="gradientType" :checked="switchOptions">
+                    <label for="linearGradient">Liner gradient</label>
+                </div>
+
+                <div class="px-1 w-1/3">
+                    <input class="mr-2 leading-tight" type="radio" id="radialGradient" value="radial" v-model="gradientType" :checked="switchOptions">
+                    <label for="radialGradient">Radial Gradient</label>
+                </div>
+
+                <div class="px-1 w-1/3">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option v-for="(option,key) in this.switchOptions" :key="key" :value="key">{{ option }}</option>
+                    </select>
+                </div>
+
+            </div>
+        </transition>
+
+
     </div>
 </template>
 
@@ -40,11 +64,51 @@ name: "colorOpt",
         btnStyle: Object,
         advancedColor: Boolean
     },
+    data: function () {
+        return {
+            gradientType: 'linear',
+            enableAdvColor: this.advancedColor,
+            radialOptions: {
+                'center': 'Center',
+                'top': 'Top',
+                'right top': 'Top-Right',
+                'right': 'Right',
+                'right bottom': 'Bottom-Right',
+                'bottom': 'Bottom',
+                'left bottom': 'Bottom-Left',
+                'left': 'Left',
+                'left top': 'Top-Left',
+            },
+            linearOptions: {
+                '180': '↓ Top to Bottom',
+                '225': '↙ Top-Right to Bottom-Left',
+                '270': '→ Right to Left',
+                '315': '↖ Bottom-Right to Top-Left',
+                '0': '↑ Bottom to Top',
+                '45': '↗ Bottom-Left to Top-Right',
+                '90': '← Left to Right',
+                '135': '↘ Top-Left to Bottom-Right',
+            },
+            color: {
+
+            }
+        }
+    },
+    computed: {
+        switchOptions() {
+            if(this.gradientType === 'linear') {
+                return this.linearOptions
+            } else {
+                return this.radialOptions
+            }
+        }
+    },
     methods: {
         enableAdvancedColor() {
             this.advancedColor = !this.advancedColor;
             this.$emit('enableAdvancedColor',this.advancedColor);
-        }
+        },
+
     },
 }
 </script>

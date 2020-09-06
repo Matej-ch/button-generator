@@ -12,8 +12,7 @@
                       :enableWidth="enableWidth"
                       @enableSize="enableSize"/>
 
-            <font-opt :btnStyle="btnStyle"
-                      :units="units"/>
+            <font-opt :btnStyle="btnStyle" :units="units"/>
 
             <color-opt  :btnStyle="btnStyle" @enableColor="enableAdvancedColor" />
 
