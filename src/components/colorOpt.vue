@@ -49,10 +49,15 @@
                         <option v-for="(option,key) in this.switchOptions" :key="key" :value="key">{{ option }}</option>
                     </select>
                 </div>
-
             </div>
         </transition>
 
+        <transition-group name="fade" mode="out-in" tag="div" class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
+            <div v-for="(color,index) in colors" class="px-1 w-1/6" :key="`color-${index}`">
+                <input type="color" :value="color">
+            </div>
+        </transition-group>
+        <a href="#" class="px-1 w-1/6" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
 
     </div>
 </template>
@@ -89,9 +94,7 @@ name: "colorOpt",
                 '90': '← Left to Right',
                 '135': '↘ Top-Left to Bottom-Right',
             },
-            color: {
-
-            }
+            colors: ['#ffffff','#000000']
         }
     },
     computed: {
@@ -108,6 +111,9 @@ name: "colorOpt",
             this.advancedColor = !this.advancedColor;
             this.$emit('enableAdvancedColor',this.advancedColor);
         },
+        addColorStop() {
+            this.colors.push('#ffffff');
+        }
 
     },
 }
