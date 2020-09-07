@@ -96,6 +96,7 @@ export default {
                 borderBottomLeftRadius: '',
                 textShadow: '',
                 boxShadow: '',
+                backgroundImage: '',
 
             },
             units: {
@@ -135,6 +136,7 @@ export default {
                 backgroundColor: this.btnStyle.backgroundColor,
                 textShadow: this.btnStyle.textShadow,
                 boxShadow: this.btnStyle.boxShadow,
+                backgroundImage: this.btnStyle.backgroundImage
             };
 
             if(this.btnStyle.fontStyle === 'oblique') {

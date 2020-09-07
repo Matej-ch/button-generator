@@ -61,7 +61,6 @@
                 </div>
             </transition-group>
 
-
             <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
                v-show="textShadow"
                href="#"
