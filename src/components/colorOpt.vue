@@ -46,7 +46,7 @@
                 <div class="px-1 w-1/3">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        v-model="angle">
+                        v-model="angle" @change="updateStyle">
                         <option v-for="(option,key) in this.switchOptions" :key="key" :value="key">{{ option }}</option>
                     </select>
                 </div>
@@ -55,7 +55,7 @@
 
         <transition-group name="fade" mode="out-in" tag="div" class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
             <div v-for="(color,index) in colors" class="px-1 w-1/6" :key="`color-${index}`">
-                <input type="color" :value="color">
+                <input type="color" v-model="colors[index]" @click="updateStyle" @keyup="updateStyle" @input="updateStyle">
             </div>
         </transition-group>
         <a href="#" class="px-1 w-1/6" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
@@ -96,13 +96,13 @@ name: "colorOpt",
                 '90': '← Left to Right',
                 '135': '↘ Top-Left to Bottom-Right',
             },
-            colors: ['#ffffff','#000000']
+            colors: {
+                'stop1': '#ffffff',
+                'stop2': '#000000'
+            }
         }
     },
     computed: {
-        /*correctAngle() {
-            return angle
-        },*/
         switchOptions() {
             if(this.gradientType === 'linear-gradient') {
                 return this.linearOptions
@@ -115,17 +115,36 @@ name: "colorOpt",
         enableAdvancedColor() {
             this.enableAdvColor = !this.enableAdvColor;
 
-            if(this.enableAdvColor) {
-                delete this.btnStyle.backgroundColor;
-                this.btnStyle.backgroundImage = `${this.gradientType}(${this.angle}deg,white, black)`;
-            } else {
-                this.btnStyle.backgroundColor = 'white';
-            }
+            this.fullGradient();
 
             this.$emit('enableAdvancedColor',this.enableAdvColor);
         },
         addColorStop() {
-            this.colors.push('#ffffff');
+            let objSize = Object.keys(this.colors).length;
+            let newStop = { [`stop${objSize + 1}`]: '#ffffff'};
+            this.colors = {...this.colors,...newStop };
+
+            this.updateStyle();
+        },
+        updateStyle() {
+            this.fullGradient();
+        },
+        fullGradient () {
+            if(this.enableAdvColor) {
+                delete this.btnStyle.backgroundColor;
+
+                let fullAngle = `${this.angle}deg`;
+                if(this.gradientType === 'radial-gradient') {
+                    fullAngle = `${this.angle}`;
+                }
+
+                let colorsArray = Object.values(this.colors);
+                let colorsString = colorsArray.join(',')
+
+                this.btnStyle.backgroundImage = `${this.gradientType}(${fullAngle},${colorsString})`;
+            } else {
+                this.btnStyle.backgroundColor = 'white';
+            }
         }
 
     },
