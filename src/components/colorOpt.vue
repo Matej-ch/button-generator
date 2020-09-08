@@ -34,12 +34,12 @@
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
                 <div class="px-1 w-1/3">
-                    <input class="mr-2 leading-tight" type="radio" id="linearGradient" value="linear-gradient" v-model="gradientType" :checked="switchOptions">
+                    <input class="mr-2 leading-tight" type="radio" id="linearGradient" value="linear-gradient" v-model="gradientType" :checked="switchOptions" @change="updateGradient">
                     <label for="linearGradient">Liner gradient</label>
                 </div>
 
                 <div class="px-1 w-1/3">
-                    <input class="mr-2 leading-tight" type="radio" id="radialGradient" value="radial-gradient" v-model="gradientType" :checked="switchOptions">
+                    <input class="mr-2 leading-tight" type="radio" id="radialGradient" value="radial-gradient" v-model="gradientType" :checked="switchOptions" @change="updateGradient">
                     <label for="radialGradient">Radial Gradient</label>
                 </div>
 
@@ -76,15 +76,15 @@ name: "colorOpt",
             enableAdvColor: this.advancedColor,
             angle: '180',
             radialOptions: {
-                'center': 'Center',
-                'top': 'Top',
-                'right top': 'Top-Right',
-                'right': 'Right',
-                'right bottom': 'Bottom-Right',
-                'bottom': 'Bottom',
-                'left bottom': 'Bottom-Left',
-                'left': 'Left',
-                'left top': 'Top-Left',
+                'circle at center': 'Center',
+                'circle at top': 'Top',
+                'circle at right top': 'Top-Right',
+                'circle at right': 'Right',
+                'circle at right bottom': 'Bottom-Right',
+                'circle at bottom': 'Bottom',
+                'circle at left bottom': 'Bottom-Left',
+                'circle at left': 'Left',
+                'circle at left top': 'Top-Left',
             },
             linearOptions: {
                 '180': '↓ Top to Bottom',
@@ -137,6 +137,7 @@ name: "colorOpt",
                 if(this.gradientType === 'radial-gradient') {
                     fullAngle = `${this.angle}`;
                 }
+                console.log(fullAngle);
 
                 let colorsArray = Object.values(this.colors);
                 let colorsString = colorsArray.join(',')
@@ -145,6 +146,10 @@ name: "colorOpt",
             } else {
                 this.btnStyle.backgroundColor = 'white';
             }
+        },
+        updateGradient() {
+            this.angle = 'circle at center';
+            this.updateStyle();
         }
 
     },
