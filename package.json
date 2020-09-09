@@ -1,7 +1,18 @@
 {
-  "name": "button-generator",
-  "version": "0.1.0",
+  "name": "css-button-generator",
+  "description": "Css button generator created with vue.js",
+  "author": "Matej Ch",
+  "homepage": "",
+  "license": "MIT",
+  "version": "0.9.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matej-ch/button-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Matej-ch/button-generator/issues"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -39,5 +50,19 @@
     "> 1%",
     "last 2 versions",
     "not dead"
+  ],
+  "tags": [
+    "vue",
+    "vue.js",
+    "button-generator",
+    "css-button",
+    "css-generator"
+  ],
+  "keywords": [
+    "vue",
+    "vue.js",
+    "button-generator",
+    "css-button",
+    "css-generator"
   ]
 }
