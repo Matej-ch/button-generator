@@ -2,8 +2,8 @@
 <div class="flex flex-col h-screen justify-between overflow-auto">
     <header-component/>
 
-    <div class="px-4 flex flex-wrap w-full">
-        <div class="controls-container">
+    <div class="flex flex-wrap w-full lg:px-4 px-1">
+        <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
             <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild" />
 
@@ -197,13 +197,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    .controls-container {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        flex: 1;
-        align-content: center;
-    }
-</style>
