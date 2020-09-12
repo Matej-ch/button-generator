@@ -5,11 +5,14 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
+                <toggle-icon :state="toggles.size" stateKey="size" @toggleState="toggleState" />
+            </span>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="fontSize"
-                type="number"
+                :type="toggles.size ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.fontSize">
             <Dropdown label="Unit" :obj="units" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"/>
@@ -40,11 +43,14 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
+                <toggle-icon :state="toggles.stretch" stateKey="stretch" @toggleState="toggleState" />
+            </span>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="fontStretch"
-                type="number"
+                :type="toggles.stretch ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.fontStretch">
             <Dropdown label="Unit" :obj="units" unitType="fontStretch" :options="['%']"/>
@@ -54,12 +60,27 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
+import ToggleIcon from "@/components/toggleIcon";
+
 export default {
     name: "fontOpt",
-    components: {Dropdown},
+    components: {Dropdown,ToggleIcon},
     props: {
         btnStyle: Object,
         units: Object,
+    },
+    data: function (){
+        return {
+            toggles: {
+                size: false,
+                stretch: false,
+            }
+        }
+    },
+    methods: {
+        toggleState(obj) {
+            this.toggles = {... this.toggles,...obj};
+        }
     },
 }
 </script>

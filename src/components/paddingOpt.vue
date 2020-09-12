@@ -13,7 +13,7 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingTop"
-                type="number"
+                :type="toggles.top ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.paddingTop"
                 tabindex="1">
@@ -28,7 +28,7 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingRight"
-                type="number"
+                :type="toggles.right ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.paddingRight"
                 tabindex="2">
@@ -44,7 +44,7 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingBottom"
-                type="number"
+                :type="toggles.bottom ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.paddingBottom"
                 tabindex="3">
@@ -60,7 +60,7 @@
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingLeft"
-                type="number"
+                :type="toggles.left ? 'range' : 'number'"
                 placeholder="width"
                 v-model="btnStyle.paddingLeft"
                 tabindex="4">

@@ -19,11 +19,15 @@
         </transition>
 
         <div class="w-1/2 px-3" v-show="enableWdth">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
+                <toggle-icon :state="toggles.width" stateKey="width" @toggleState="toggleState" />
+            </span>
+
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                    @click="informUserAboutPadding"
                    id="width"
-                   type="number"
+                   :type="toggles.width ? 'range' : 'number'"
                    placeholder="width" v-model="btnStyle.width"
                    :class="{'cursor-not-allowed' : !enableWdth}"
                    :disabled="!enableWdth">
@@ -34,11 +38,14 @@
         </div>
 
         <div class="w-1/2 px-3" v-show="enableWdth">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
+                <toggle-icon :state="toggles.height" stateKey="height" @toggleState="toggleState" />
+            </span>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                    @click="informUserAboutPadding"
                    id="height"
-                   type="number"
+                   :type="toggles.height ? 'range' : 'number'"
                    placeholder="height"
                    v-model="btnStyle.height"
                    :class="{'cursor-not-allowed' : !enableWdth}"
@@ -53,10 +60,11 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
+import ToggleIcon from "@/components/toggleIcon";
 
 export default {
     name: "sizeOpt",
-    components: {Dropdown},
+    components: {Dropdown,ToggleIcon},
     props: {
         btnStyle: Object,
         units: Object,
@@ -65,7 +73,11 @@ export default {
     data: function (){
         return {
             paddingAlert: false,
-            enableWdth: this.enableWidth
+            enableWdth: this.enableWidth,
+            toggles: {
+                width: false,
+                height: false,
+            }
         }
     },
     methods: {
@@ -76,6 +88,9 @@ export default {
             this.enableWdth = !this.enableWdth;
             this.paddingAlert = !this.paddingAlert;
             this.$emit('enableSize',this.enableWdth);
+        },
+        toggleState(obj) {
+            this.toggles = {... this.toggles,...obj};
         }
     },
 

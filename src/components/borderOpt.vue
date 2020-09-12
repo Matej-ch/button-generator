@@ -12,21 +12,29 @@
         <transition name="fade" mode="out-in">
             <div v-if="!enableAdvancedBorder" v-show="!enableAdvancedBorder" class="w-full flex flex-wrap">
                 <div class="w-1/4 px-1">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="borderWidth">Width</label>
+                    <span class="flex justify-between">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderWidth">Width</label>
+                        <toggle-icon :state="toggles.width" stateKey="width" @toggleState="toggleState" />
+                    </span>
+
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="borderWidth"
-                        type="number"
+                        :type="toggles.width ? 'range' : 'number'"
                         placeholder="width"
                         v-model="btnStyle.borderWidth">
                 </div>
 
                 <div class="w-1/4 px-1">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadius">Radius</label>
+                    <span class="flex justify-between">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadius">Radius</label>
+                        <toggle-icon :state="toggles.radius" stateKey="radius" @toggleState="toggleState" />
+                    </span>
+
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="borderRadius"
-                        type="number"
+                        :type="toggles.radius ? 'range' : 'number'"
                         placeholder="radius"
                         v-model="btnStyle.borderRadius">
                 </div>
@@ -51,11 +59,15 @@
                 <div class="flex flex-wrap py-3">
                     <h4 class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
                     <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopWidth">Width</label>
+                        <span class="flex justify-between">
+                            <label class="text-gray-700 text-sm font-bold mb-2" for="borderTopWidth">Width</label>
+                            <toggle-icon :state="toggles.widthTop" stateKey="widthTop" @toggleState="toggleState" />
+                        </span>
+
                         <input
                             class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="borderTopWidth"
-                            type="number"
+                            :type="toggles.widthTop ? 'range' : 'number'"
                             placeholder="top width"
                             v-model="btnStyle.borderTopWidth">
                     </div>
@@ -99,11 +111,15 @@
                     <h4 class="bg-pink-100 border-l-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
 
                     <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightWidth">Width</label>
+                        <span class="flex justify-between">
+                            <label class="text-gray-700 text-sm font-bold mb-2" for="borderRightWidth">Width</label>
+                            <toggle-icon :state="toggles.widthRight" stateKey="widthRight" @toggleState="toggleState" />
+                        </span>
+
                         <input
                             class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="borderRightWidth"
-                            type="number"
+                            :type="toggles.widthRight ? 'range' : 'number'"
                             placeholder="right width"
                             v-model="btnStyle.borderRightWidth">
                     </div>
@@ -147,11 +163,15 @@
                     <h4 class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
 
                     <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomWidth">Width</label>
+                        <span class="flex justify-between">
+                            <label class="text-gray-700 text-sm font-bold mb-2" for="borderBottomWidth">Width</label>
+                            <toggle-icon :state="toggles.widthBottom" stateKey="widthBottom" @toggleState="toggleState" />
+                        </span>
+
                         <input
                             class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="borderBottomWidth"
-                            type="number"
+                            :type="toggles.widthBottom ? 'range' : 'number'"
                             placeholder="top width"
                             v-model="btnStyle.borderBottomWidth">
                     </div>
@@ -195,11 +215,16 @@
                     <h4 class="bg-teal-100 border-l-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
 
                     <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftWidth">Width</label>
+
+                        <span class="flex justify-between">
+                            <label class="text-gray-700 text-sm font-bold mb-2" for="borderLeftWidth">Width</label>
+                            <toggle-icon :state="toggles.widthLeft" stateKey="widthLeft" @toggleState="toggleState" />
+                        </span>
+
                         <input
                             class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="borderLeftWidth"
-                            type="number"
+                            :type="toggles.widthLeft ? 'range' : 'number'"
                             placeholder="top width"
                             v-model="btnStyle.borderLeftWidth">
                     </div>
@@ -245,10 +270,11 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
+import ToggleIcon from "@/components/toggleIcon";
 
 export default {
     name: "borderOpt",
-    components: {Dropdown},
+    components: {Dropdown,ToggleIcon},
     props: {
         btnStyle: Object,
         units: Object,
@@ -256,7 +282,15 @@ export default {
     },
     data: function (){
         return {
-            enableAdvancedBorder: this.enableAdvancedBorder
+            enableAdvancedBorder: this.enableAdvancedBorder,
+            toggles: {
+                width: false,
+                radius: false,
+                widthTop: false,
+                widthRight: false,
+                widthBottom: false,
+                widthLeft: false,
+            }
         }
     },
     methods: {
@@ -288,6 +322,9 @@ export default {
 
             this.$emit('enableAdvanced',this.enableAdvancedBorder);
         },
+        toggleState(obj) {
+            this.toggles = {... this.toggles,...obj};
+        }
     }
 }
 </script>
