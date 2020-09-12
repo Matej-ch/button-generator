@@ -5,7 +5,11 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingTop">Top</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="paddingTop">Top</label>
+                <toggle-icon :state="toggles.top" stateKey="top" @toggleState="toggleState" />
+            </span>
+
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingTop"
@@ -17,7 +21,10 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingRight">Right</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="paddingRight">Right</label>
+                <toggle-icon :state="toggles.right" stateKey="right" @toggleState="toggleState"/>
+            </span>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingRight"
@@ -29,7 +36,11 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingBottom">Bottom</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="paddingBottom">Bottom</label>
+                <toggle-icon :state="toggles.bottom" stateKey="bottom" @toggleState="toggleState"/>
+            </span>
+
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingBottom"
@@ -41,7 +52,11 @@
         </div>
 
         <div class="w-1/4 px-1">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="paddingLeft">Left</label>
+            <span class="flex justify-between">
+                <label class="text-gray-700 text-sm font-bold mb-2" for="paddingLeft">Left</label>
+                <toggle-icon :state="toggles.left" stateKey="left" @toggleState="toggleState" />
+            </span>
+
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="paddingLeft"
@@ -57,14 +72,30 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
+import ToggleIcon from "@/components/toggleIcon";
 
 export default {
     name: "paddingOpt",
-    components: {Dropdown},
+    components: {ToggleIcon, Dropdown},
     props: {
         btnStyle: Object,
         units: Object,
     },
+    data: function () {
+        return {
+            toggles: {
+                top: false,
+                right: false,
+                bottom: false,
+                left: false,
+            }
+        }
+    },
+    methods: {
+        toggleState(obj) {
+            this.toggles = {... this.toggles,...obj};
+        }
+    }
 }
 </script>
 
