@@ -15,3 +15,13 @@ name: "previewBtn",
     props: {btnStyle:Object}
 }
 </script>
+
+<style scoped>
+button:hover {
+    filter: brightness(120%) saturate(120%);
+}
+
+button:active {
+    filter: saturate(120%);
+}
+</style>
