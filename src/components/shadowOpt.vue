@@ -1,143 +1,174 @@
 <template>
     <div class="pb-4 flex flex-wrap">
-        <div class="bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-1 py-1 w-full mb-2">
-            <p class="font-bold">Shadows</p>
-        </div>
-
-        <div class="w-full flex flex-wrap pb-6">
-            <h4 class="flex w-full px-1">
-                <span class="font-bold">Text shadow</span>
-                <span class="ml-auto">
-                    <input class="mr-2 leading-tight" type="checkbox" @click="enableTextShadow()">
-                    <span class="text-sm">Enable</span>
-                </span>
-            </h4>
-
-            <transition-group name="fade">
-                <div v-for="(textShadowStyle,index) in textShadowStyles" :key="`text-shadow-${index}`" class="w-full flex flex-wrap" v-show="textShadow">
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetX">Offset x</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="textShadowOffsetX"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="textShadowStyle.offsetX">
-                    </div>
-
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetY">Offset y</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="textShadowOffsetY"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="textShadowStyle.offsetY">
-                    </div>
-
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowBlurRadius">Blur radius</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="textShadowBlurRadius"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="textShadowStyle.blurRadius">
-                    </div>
-
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColor">Color</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="textShadowColor"
-                            type="color"
-                            placeholder="text shadow color"
-                            @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
-                            v-model="textShadowStyle.color">
-                    </div>
-                </div>
-            </transition-group>
-
-            <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
-               v-show="textShadow"
-               href="#"
-               @click.prevent="addTextShadow"
-               title="Add another text shadow">➕
+        <div class="flex bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-1 py-1 w-full mb-2">
+            <a href="#" @click.prevent="closePadding = !closePadding">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z"/>
+                    <path d="M18 15l-6-6l-6 6h12" :transform="closePadding === false ? 'rotate(180 12 12)' : 'rotate(90 12 12)'" />
+                </svg>
             </a>
+            <p class="font-bold">
+                Shadows
+            </p>
         </div>
 
-        <div class="w-full flex flex-wrap">
-            <h4 class="flex w-full px-1"><span class="font-bold">Box shadow</span>
-                <span class="ml-auto">
-                    <input class="mr-2 leading-tight" type="checkbox" @click="enableBoxShadow()">
-                    <span class="text-sm">Enable</span>
-                </span>
-            </h4>
+        <transition name="fade" mode="out-in">
+            <div class="flex flex-wrap w-full" v-show="!closePadding">
+                <div class="w-full flex flex-wrap pb-6">
+                    <h4 class="flex w-full px-1">
+                        <span class="font-bold">Text shadow</span>
+                        <span class="ml-auto">
+                            <input class="mr-2 leading-tight" type="checkbox" @click="enableTextShadow()">
+                            <span class="text-sm">Enable</span>
+                        </span>
+                    </h4>
 
-            <transition-group name="fade">
-                <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`" class="w-full flex flex-wrap" v-show="boxShadow">
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetX">Offset x</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="boxShadowOffsetX"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="boxShadowStyle.offsetX">
-                    </div>
+                    <transition-group name="fade">
+                        <div v-for="(textShadowStyle,index) in textShadowStyles" :key="`text-shadow-${index}`" class="w-full flex flex-wrap" v-show="textShadow">
+                            <div class="w-1/4 px-1">
 
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetY">Offset y</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="boxShadowOffsetY"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="boxShadowStyle.offsetY">
-                    </div>
+                                <span class="flex justify-between">
+                                    <label class="text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetX">Offset x</label>
+                                    <toggle-icon :state="togglesText[index].textOffsetX" stateKey="textOffsetX" @toggleState="toggleState" />
+                                </span>
 
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowBlurRadius">Blur radius</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="boxShadowBlurRadius"
-                            type="number"
-                            placeholder="background color"
-                            @click="updateStyle" @keyup="updateStyle"
-                            v-model="boxShadowStyle.blurRadius">
-                    </div>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="textShadowOffsetX"
+                                    :type="togglesText[index].textOffsetX ? 'range' : 'number'"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="textShadowStyle.offsetX">
+                            </div>
 
-                    <div class="w-1/4 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
-                        <input
-                            class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="boxShadowColor"
-                            type="color"
-                            placeholder="box shadow color"
-                            @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
-                            v-model="boxShadowStyle.color">
-                    </div>
+                            <div class="w-1/4 px-1">
+                                <span class="flex justify-between">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetY">Offset y</label>
+                                    <toggle-icon :state="togglesText[index].textOffsetY" stateKey="textOffsetY" @toggleState="toggleState" />
+                                </span>
+
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="textShadowOffsetY"
+                                    :type="togglesText[index].textOffsetY ? 'range' : 'number'"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="textShadowStyle.offsetY">
+                            </div>
+
+                            <div class="w-1/4 px-1">
+                                <span class="flex justify-between">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowBlurRadius">Blur radius</label>
+                                    <toggle-icon :state="togglesText[index].textBlurRadius" stateKey="textBlurRadius" @toggleState="toggleState" />
+                                </span>
+
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="textShadowBlurRadius"
+                                    :type="togglesText[index].textBlurRadius ? 'range' : 'number'"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="textShadowStyle.blurRadius">
+                            </div>
+
+                            <div class="w-1/4 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColor">Color</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="textShadowColor"
+                                    type="color"
+                                    placeholder="text shadow color"
+                                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
+                                    v-model="textShadowStyle.color">
+                            </div>
+                        </div>
+                    </transition-group>
+
+                    <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
+                       v-show="textShadow"
+                       href="#"
+                       @click.prevent="addTextShadow"
+                       title="Add another text shadow">➕
+                    </a>
                 </div>
-            </transition-group>
 
-            <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
-               v-show="boxShadow"
-               href="#"
-               title="Add another box shadow"
-               @click.prevent="addBoxShadow">➕</a>
+                <div class="w-full flex flex-wrap">
+                    <h4 class="flex w-full px-1"><span class="font-bold">Box shadow</span>
+                        <span class="ml-auto">
+                            <input class="mr-2 leading-tight" type="checkbox" @click="enableBoxShadow()">
+                            <span class="text-sm">Enable</span>
+                        </span>
+                    </h4>
 
-        </div>
+                    <transition-group name="fade">
+                        <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`" class="w-full flex flex-wrap" v-show="boxShadow">
+                            <div class="w-1/4 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetX">Offset x</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="boxShadowOffsetX"
+                                    type="number"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="boxShadowStyle.offsetX">
+                            </div>
+
+                            <div class="w-1/4 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetY">Offset y</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="boxShadowOffsetY"
+                                    type="number"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="boxShadowStyle.offsetY">
+                            </div>
+
+                            <div class="w-1/4 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowBlurRadius">Blur radius</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="boxShadowBlurRadius"
+                                    type="number"
+                                    placeholder="background color"
+                                    @click="updateStyle" @keyup="updateStyle"
+                                    v-model="boxShadowStyle.blurRadius">
+                            </div>
+
+                            <div class="w-1/4 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="boxShadowColor"
+                                    type="color"
+                                    placeholder="box shadow color"
+                                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
+                                    v-model="boxShadowStyle.color">
+                            </div>
+                        </div>
+                    </transition-group>
+
+                    <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
+                       v-show="boxShadow"
+                       href="#"
+                       title="Add another box shadow"
+                       @click.prevent="addBoxShadow">➕</a>
+
+                </div>
+            </div>
+        </transition>
+
+
     </div>
 </template>
 
 <script>
+
+import ToggleIcon from "@/components/toggleIcon";
+
 export default {
     name: "shadowOpt",
+    components: {ToggleIcon},
     props: {
         btnStyle: Object,
     },
@@ -156,10 +187,27 @@ export default {
                 offsetY: '1',
                 blurRadius: '2',
                 color: 'black'
-            }]
+            }],
+            togglesText: [{
+                textOffsetX: false,
+                textOffsetY: false,
+                textBlurRadius: false,
+
+            }],
+            togglesBox: [{
+                boxOffsetX: false,
+                boxOffsetY: false,
+                boxBlurRadius: false,
+            }],
+            closePadding: false,
         }
     },
     methods: {
+        toggleState(obj) {
+            console.log(obj);
+            //this.togglesText[0] = {... this.togglesText[0],...obj};
+
+        },
         enableTextShadow() {
             this.textShadow = !this.textShadow;
 

@@ -1,5 +1,5 @@
 <template>
-    <span @click="toggleState">
+    <span @click="toggleState" :title="this.realState === true ? 'Switch to input' : 'Switch to range'">
         <svg v-show="!realState" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#F44336" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z"/>
             <circle cx="8" cy="12" r="2" />
