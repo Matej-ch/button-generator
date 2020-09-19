@@ -13,25 +13,25 @@
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full" v-show="!closePadding">
                 <div class="w-1/4 px-1">
-                    <span class="flex justify-between">
-                        <label class="text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
-                        <toggle-icon :state="toggles.size" stateKey="size" @toggleState="toggleState" />
-                    </span>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fontSize"
-                        :type="toggles.size ? 'range' : 'number'"
-                        placeholder="width"
-                        v-model="btnStyle.fontSize">
+
+                    <number-input label="Size"
+                                  :min=1 :max=200
+                                  :step="units.fontSize === 'px' || units.fontSize === 'pt' ? 1 : 0.1"
+                                  v-model="btnStyle.fontSize" />
+
+                    <div class="py-2" />
+
                     <Dropdown label="Unit" :obj="units" unitType="fontSize" :options="['px','pt','pc','em','ex','rem','%']"/>
                 </div>
 
                 <div class="w-1/4 px-1">
                     <Dropdown label="Text align" :obj="btnStyle" unitType="textAlign" :options="['left','right','center','justify']"/>
 
+                    <div class="py-2" />
+
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="fontWeight">Weight</label>
                     <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="fontWeight"
                         type="text"
                         placeholder="width"
@@ -40,6 +40,8 @@
 
                 <div class="w-1/4 px-1">
                     <Dropdown label="Style" :obj="btnStyle" unitType="fontStyle" :options="['normal','italic','oblique']"/>
+
+                    <div class="py-2" />
 
                     <label v-show="btnStyle.fontStyle === 'oblique'" class="block text-gray-700 text-sm font-bold mb-2" for="fontStyleDeg">Deg</label>
                     <input v-show="btnStyle.fontStyle === 'oblique'"
@@ -51,17 +53,12 @@
                 </div>
 
                 <div class="w-1/4 px-1">
-                    <span class="flex justify-between">
-                        <label class="text-gray-700 text-sm font-bold mb-2" for="fontStretch">Stretch</label>
-                        <toggle-icon :state="toggles.stretch" stateKey="stretch" @toggleState="toggleState" />
-                    </span>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fontStretch"
-                        :type="toggles.stretch ? 'range' : 'number'"
-                        placeholder="width"
-                        v-model="btnStyle.fontStretch">
-                    <Dropdown label="Unit" :obj="units" unitType="fontStretch" :options="['%']"/>
+                    <Dropdown label="Stretch"
+                              :obj="btnStyle"
+                              unitType="fontStretch"
+                              :options="['ultra-condensed','extra-condensed','condensed','semi-condensed','normal','semi-expanded','expanded','extra-expanded','ultra-expanded']"/>
+
+                    <div class="py-2" />
                 </div>
             </div>
         </transition>
@@ -70,29 +67,20 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
-import ToggleIcon from "@/components/toggleIcon";
-
+import NumberInput from "@/components/numberInput";
 export default {
     name: "fontOpt",
-    components: {Dropdown,ToggleIcon},
+    components: {Dropdown,NumberInput},
     props: {
         btnStyle: Object,
         units: Object,
     },
     data: function (){
         return {
-            toggles: {
-                size: false,
-                stretch: false,
-            },
             closePadding: false
         }
     },
-    methods: {
-        toggleState(obj) {
-            this.toggles = {... this.toggles,...obj};
-        }
-    },
+    methods: {},
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="control-item number w-full">
-        <span class="text-gray-700 text-sm font-bold mb-2">{{label}}</span>
+        <span class="text-gray-700 text-sm font-bold mb-2 block">{{label}}</span>
         <div class="control">
             <slider-input
                 v-show="hasSlider"

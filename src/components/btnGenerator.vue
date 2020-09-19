@@ -56,7 +56,7 @@ export default {
                 width: "100",
                 height: "50",
                 fontSize: "16",
-                fontStretch: '100',
+                fontStretch: 'normal',
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 textAlign: "center",
@@ -109,7 +109,6 @@ export default {
                 paddingLeft: 'px',
                 borderWidth: 'px',
                 borderRadius: 'px',
-                fontStretch: '%',
                 fontStyle: '40'
 
             },
@@ -125,7 +124,7 @@ export default {
                 height: `${this.btnStyle.height}${this.units.height}`,
                 fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
                 fontWeight: `${this.btnStyle.fontWeight}`,
-                fontStretch: `${this.btnStyle.fontStretch}${this.units.fontStretch}`,
+                fontStretch: `${this.btnStyle.fontStretch}`,
                 fontStyle: `${this.btnStyle.fontStyle}`,
                 textAlign: `${this.btnStyle.textAlign}`,
                 paddingTop: `${this.btnStyle.paddingTop}${this.units.paddingTop}`,

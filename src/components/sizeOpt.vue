@@ -19,7 +19,7 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <div class="flex flex-wrap" v-show="!closePadding || enableWdth">
+            <div class="flex flex-wrap w-full" v-show="!closePadding || enableWdth">
                 <transition name="fade">
                     <div class="w-full flex items-center bg-red-500 text-white text-sm font-bold px-3 py-2 mb-4" role="alert" v-show="paddingAlert">
                         <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -28,38 +28,35 @@
                     </div>
                 </transition>
 
-                <div class="w-1/2 px-3">
+                <div class="w-1/2 px-1">
 
                     <number-input label="Width"
                                   :min=0
                                   :max=200
-                                  :step=1
-                                  :value=100
+                                  :step="units.width === 'px' || units.width === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.width" />
                 </div>
 
-                <div class="w-1/2 px-3">
+                <div class="w-1/2 px-1">
                     <Dropdown label="Unit" :obj="units" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
-                <div class="w-1/2 px-3">
+                <div class="py-2 w-full" />
 
-                    <number-input label="Width"
+                <div class="w-1/2 px-1">
+
+                    <number-input label="Height"
                                   :min=0
                                   :max=200
-                                  :step=1
-                                  :value=50
+                                  :step="units.height === 'px' || units.height === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.height" />
                 </div>
 
-                <div class="w-1/2 px-3">
+                <div class="w-1/2 px-1">
                     <Dropdown label="Unit" :obj="units" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
             </div>
         </transition>
-
-
-
     </div>
 </template>
 

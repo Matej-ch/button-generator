@@ -16,28 +16,48 @@
             <div class="flex flex-wrap w-full" v-show="!closePadding">
                 <div class="w-1/4 px-1">
 
-                    <number-input label="Top" :min=0 :max=100 :step=1 :value=15 v-model="btnStyle.paddingTop" />
+                    <number-input label="Top"
+                                  :min=0 :max=100
+                                  :step="units.paddingTop === 'px' || units.paddingTop === 'pt' ? 1 : 0.1"
+                                  v-model="btnStyle.paddingTop" />
+
+                    <div class="py-2" />
 
                     <Dropdown label="Unit" :obj="units" unitType="paddingTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
                 <div class="w-1/4 px-1">
 
-                    <number-input label="Right" :min=0 :max=100 :step=1 :value=15 v-model="btnStyle.paddingRight" />
+                    <number-input label="Right"
+                                  :min=0 :max=100
+                                  :step="units.paddingRight === 'px' || units.paddingRight === 'pt' ? 1 : 0.1"
+                                  v-model="btnStyle.paddingRight" />
+
+                    <div class="py-2" />
 
                     <Dropdown label="Unit" :obj="units" unitType="paddingRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
                 <div class="w-1/4 px-1">
 
-                    <number-input label="Bottom" :min=0 :max=100 :step=1 :value=15 v-model="btnStyle.paddingBottom" />
+                    <number-input label="Bottom"
+                                  :min=0 :max=100
+                                  :step="units.paddingBottom === 'px' || units.paddingBottom === 'pt' ? 1 : 0.1"
+                                  v-model="btnStyle.paddingBottom" />
+
+                    <div class="py-2" />
 
                     <Dropdown label="Unit" :obj="units" unitType="paddingBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
                 <div class="w-1/4 px-1">
 
-                    <number-input label="Left" :min=0 :max=100 :step=1 :value=15 v-model="btnStyle.paddingLeft" />
+                    <number-input label="Left"
+                                  :min=0 :max=100
+                                  :step="units.paddingLeft === 'px' || units.paddingLeft === 'pt' ? 1 : 0.1"
+                                  v-model="btnStyle.paddingLeft" />
+
+                    <div class="py-2" />
 
                     <Dropdown label="Unit" :obj="units" unitType="paddingLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
