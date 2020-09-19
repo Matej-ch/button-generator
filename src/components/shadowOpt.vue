@@ -23,49 +23,30 @@
                         </span>
                     </h4>
 
-                    <transition-group name="fade">
+                    <transition-group name="fade" tag="div" class="flex w-full flex-wrap">
                         <div v-for="(textShadowStyle,index) in textShadowStyles" :key="`text-shadow-${index}`" class="w-full flex flex-wrap" v-show="textShadow">
                             <div class="w-1/4 px-1">
-
-                                <span class="flex justify-between">
-                                    <label class="text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetX">Offset x</label>
-                                </span>
-
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="textShadowOffsetX"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="textShadowStyle.offsetX">
+                                <number-input label="Offset x"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="textShadowStyle.offsetX"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
-                                <span class="flex justify-between">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetY">Offset y</label>
-                                </span>
-
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="textShadowOffsetY"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="textShadowStyle.offsetY">
+                                <number-input label="Offset y"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="textShadowStyle.offsetY"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
-                                <span class="flex justify-between">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowBlurRadius">Blur radius</label>
-                                </span>
-
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="textShadowBlurRadius"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="textShadowStyle.blurRadius">
+                                <number-input label="Blur radius"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="textShadowStyle.blurRadius"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
@@ -90,46 +71,37 @@
                 </div>
 
                 <div class="w-full flex flex-wrap">
-                    <h4 class="flex w-full px-1"><span class="font-bold">Box shadow</span>
+                    <h4 class="flex flex-wrap w-full px-1"><span class="font-bold">Box shadow</span>
                         <span class="ml-auto">
                             <input class="mr-2 leading-tight" type="checkbox" @click="enableBoxShadow()">
                             <span class="text-sm">Enable</span>
                         </span>
                     </h4>
 
-                    <transition-group name="fade">
+                    <transition-group name="fade" tag="div" class="flex flex-wrap w-full">
                         <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`" class="w-full flex flex-wrap" v-show="boxShadow">
                             <div class="w-1/4 px-1">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetX">Offset x</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="boxShadowOffsetX"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="boxShadowStyle.offsetX">
+                                <number-input label="Offset x"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="boxShadowStyle.offsetX"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowOffsetY">Offset y</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="boxShadowOffsetY"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="boxShadowStyle.offsetY">
+                                <number-input label="Offset y"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="boxShadowStyle.offsetY"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowBlurRadius">Blur radius</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="boxShadowBlurRadius"
-                                    type="number"
-                                    placeholder="background color"
-                                    @click="updateStyle" @keyup="updateStyle"
-                                    v-model="boxShadowStyle.blurRadius">
+                                <number-input label="Blur radius"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="boxShadowStyle.blurRadius"
+                                              @change="updateStyle"/>
                             </div>
 
                             <div class="w-1/4 px-1">
@@ -160,9 +132,10 @@
 </template>
 
 <script>
-
+import NumberInput from "@/components/numberInput";
 export default {
     name: "shadowOpt",
+    components: {NumberInput},
     props: {
         btnStyle: Object,
     },

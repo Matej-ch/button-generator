@@ -5,7 +5,7 @@
     <div class="flex flex-wrap w-full lg:px-4 px-1">
         <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
-            <padding-opt :btnStyle="btnStyle" :units="units" @dropdownChange="onChangeChild" />
+            <padding-opt :btnStyle="btnStyle" :units="units" />
 
             <size-opt :btnStyle="btnStyle"
                       :units="units"
@@ -19,7 +19,7 @@
             <border-opt :btnStyle="btnStyle"
                         :units="units"
                         @enableAdvanced="enableAdvancedBorder"
-                        @dropdownChange="onChangeChild" />
+            />
 
             <shadow-opt :btnStyle="btnStyle"/>
 
@@ -173,17 +173,6 @@ export default {
         }
     },
     methods: {
-        onChangeChild(value) {
-            console.log(value);
-            /*let valueKey = Object.keys(value)[0];
-            let unitsKeys = Object.keys(this.units);
-
-            if(unitsKeys.find(element => element === valueKey)) {
-                Object.assign(this.units, value);
-            } else {
-                Object.assign(this.btnStyle, value);
-            }*/
-        },
         enableSize(value) {
             this.enableWidth = value;
         },
