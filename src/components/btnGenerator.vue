@@ -2,6 +2,8 @@
 <div class="flex flex-col h-screen justify-between overflow-auto">
     <header-component/>
 
+    <number-input label="Top" :min=0 :max=100 :step=1 :value=15 />
+
     <div class="flex flex-wrap w-full lg:px-4 px-1">
         <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
@@ -44,10 +46,12 @@ import FooterComponent from "@/components/footerComponent";
 import FontOpt from "@/components/fontOpt";
 import ColorOpt from "@/components/colorOpt";
 import ShadowOpt from "@/components/shadowOpt";
+import numberInput from "@/components/numberInput";
 
 export default {
     name: "btnGenerator",
     components: {
+        numberInput,
         ShadowOpt,
         ColorOpt, FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
     data: function() {

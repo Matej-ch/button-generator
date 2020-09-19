@@ -11,7 +11,7 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <div class="flex flex-wrap" v-show="!closePadding">
+            <div class="flex flex-wrap w-full" v-show="!closePadding">
                 <div class="w-1/4 px-1">
                     <span class="flex justify-between">
                         <label class="text-gray-700 text-sm font-bold mb-2" for="fontSize">Size</label>
