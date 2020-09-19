@@ -21,7 +21,7 @@
                 <div class="w-1/2 px-1">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor" v-show="!enableAdvColor">Background</label>
                     <input
-                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
                         id="backgroundColor"
                         type="color"
                         placeholder="background color"
@@ -32,7 +32,7 @@
                 <div class="w-1/2 px-1">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="color">Color</label>
                     <input
-                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
                         id="color"
                         type="color"
                         placeholder="color"
@@ -140,6 +140,7 @@ name: "colorOpt",
         updateStyle() {
             this.fullGradient();
         },
+
         fullGradient () {
             if(this.enableAdvColor) {
                 delete this.btnStyle.backgroundColor;
@@ -154,11 +155,18 @@ name: "colorOpt",
 
                 this.btnStyle.backgroundImage = `${this.gradientType}(${fullAngle},${colorsString})`;
             } else {
-                this.btnStyle.backgroundColor = 'white';
+                this.btnStyle.backgroundColor = '#ffffff';
+                this.btnStyle.backgroundImage = '';
+
             }
         },
         updateGradient() {
-            this.angle = 'circle at center';
+            if(this.gradientType === 'linear-gradient') {
+                this.angle = '180';
+            } else {
+                this.angle = 'circle at center';
+            }
+
             this.updateStyle();
         }
 
