@@ -18,6 +18,7 @@ export default {
 
 <style>
 
+@import "~normalize.css";
 @import './assets/styles/main.css';
 @import './assets/styles/tailwind.css';
 
