@@ -29,18 +29,13 @@
                 </transition>
 
                 <div class="w-1/2 px-3">
-                    <span class="flex justify-between">
-                        <label class="text-gray-700 text-sm font-bold mb-2" for="width">Width</label>
-                        <toggle-icon :state="toggles.width" stateKey="width" @toggleState="toggleState" />
-                    </span>
 
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                           @click="informUserAboutPadding"
-                           id="width"
-                           :type="toggles.width ? 'range' : 'number'"
-                           placeholder="width" v-model="btnStyle.width"
-                           :class="{'cursor-not-allowed' : !enableWdth}"
-                           :disabled="!enableWdth">
+                    <number-input label="Width"
+                                  :min=0
+                                  :max=200
+                                  :step=1
+                                  :value=100
+                                  v-model="btnStyle.width" />
                 </div>
 
                 <div class="w-1/2 px-3">
@@ -48,18 +43,13 @@
                 </div>
 
                 <div class="w-1/2 px-3">
-                    <span class="flex justify-between">
-                        <label class="text-gray-700 text-sm font-bold mb-2" for="height">Height</label>
-                        <toggle-icon :state="toggles.height" stateKey="height" @toggleState="toggleState" />
-                    </span>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                           @click="informUserAboutPadding"
-                           id="height"
-                           :type="toggles.height ? 'range' : 'number'"
-                           placeholder="height"
-                           v-model="btnStyle.height"
-                           :class="{'cursor-not-allowed' : !enableWdth}"
-                           :disabled="!enableWdth">
+
+                    <number-input label="Width"
+                                  :min=0
+                                  :max=200
+                                  :step=1
+                                  :value=50
+                                  v-model="btnStyle.height" />
                 </div>
 
                 <div class="w-1/2 px-3">
@@ -75,11 +65,11 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
-import ToggleIcon from "@/components/toggleIcon";
+import NumberInput from "@/components/numberInput";
 
 export default {
     name: "sizeOpt",
-    components: {Dropdown,ToggleIcon},
+    components: {Dropdown,NumberInput},
     props: {
         btnStyle: Object,
         units: Object,
@@ -89,26 +79,16 @@ export default {
         return {
             paddingAlert: false,
             enableWdth: this.enableWidth,
-            toggles: {
-                width: false,
-                height: false,
-            },
             closePadding: true,
         }
     },
     methods: {
-        informUserAboutPadding() {
-            this.paddingAlert = true;
-        },
         enableSize() {
             this.closePadding = !this.closePadding;
             this.enableWdth = !this.enableWdth;
             this.paddingAlert = !this.paddingAlert;
             this.$emit('enableSize',this.enableWdth);
         },
-        toggleState(obj) {
-            this.toggles = {... this.toggles,...obj};
-        }
     },
 
 }
