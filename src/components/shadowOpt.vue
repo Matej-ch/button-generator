@@ -62,7 +62,7 @@
                         </div>
                     </transition-group>
 
-                    <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
+                    <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-100 border border-orange-500 font-bold ml-auto"
                        v-show="textShadow"
                        href="#"
                        @click.prevent="addTextShadow"
@@ -117,7 +117,7 @@
                         </div>
                     </transition-group>
 
-                    <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-500 text-orange-800 font-bold ml-auto"
+                    <a class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold ml-auto"
                        v-show="boxShadow"
                        href="#"
                        title="Add another box shadow"

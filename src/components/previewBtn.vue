@@ -4,7 +4,7 @@
             <div class="border-r border-b border-l border-gray-400 border-t lg:border-gray-400 bg-white rounded p-4 leading-normal w-full max-w-md overflow-auto h-56"
                  style="place-items: center;display: grid;">
 
-                <button :style="btnStyle">Button</button>
+                <button :style="btnStyle" ref="output-btn">Button</button>
             </div>
 
             <div class="flex flex-row py-4 w-full max-w-md justify-between">
@@ -30,7 +30,17 @@ name: "previewBtn",
     props: {btnStyle:Object},
     methods: {
         copyStyle() {
+            //var copyText = document.getElementById("myInput");
 
+            /* Select the text field */
+            //copyText.select();
+            //copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            //document.execCommand("copy");
+
+            /* Alert the copied text */
+            //alert("Copied the text: " + copyText.value);
         },
         showStyle() {
 

@@ -66,7 +66,7 @@
                         <input type="color" v-model="colors[index]" @click="updateStyle" @keyup="updateStyle" @input="updateStyle">
                     </div>
                 </transition-group>
-                <a href="#" class="px-1 w-1/6" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
+                <a href="#" class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold mr-auto" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
 
             </div>
         </transition>
