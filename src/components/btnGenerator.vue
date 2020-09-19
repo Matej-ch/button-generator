@@ -150,8 +150,8 @@ export default {
             if(this.advancedBorder) {
                 delete newStyle.borderRadius;
 
-                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth}${this.btnStyle.borderRightWidth}${this.units.borderWidth}
-                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth}${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
+                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth} ${this.btnStyle.borderRightWidth}${this.units.borderWidth}
+                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth} ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
                 newStyle.borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
                 newStyle.borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
                 newStyle.borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;

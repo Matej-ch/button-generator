@@ -21,31 +21,18 @@
             <div class="flex flex-wrap w-full" v-show="!closePadding">
                 <div v-if="!enableAdvancedBorder" v-show="!enableAdvancedBorder" class="w-full flex flex-wrap">
                     <div class="w-1/4 px-1">
-                        <span class="flex justify-between">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderWidth">Width</label>
-                            <toggle-icon :state="toggles.width" stateKey="width" @toggleState="toggleState" />
-                        </span>
 
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="borderWidth"
-                            :type="toggles.width ? 'range' : 'number'"
-                            placeholder="width"
-                            v-model="btnStyle.borderWidth">
+                        <number-input label="Width"
+                                      :min=0 :max=100
+                                      :step=1
+                                      v-model="btnStyle.borderWidth" />
                     </div>
 
                     <div class="w-1/4 px-1">
-                        <span class="flex justify-between">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadius">Radius</label>
-                            <toggle-icon :state="toggles.radius" stateKey="radius" @toggleState="toggleState" />
-                        </span>
-
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="borderRadius"
-                            :type="toggles.radius ? 'range' : 'number'"
-                            placeholder="radius"
-                            v-model="btnStyle.borderRadius">
+                        <number-input label="Radius"
+                                      :min=0 :max=100
+                                      :step=1
+                                      v-model="btnStyle.borderRadius" />
                     </div>
 
                     <div class="w-1/4 px-1">
@@ -68,36 +55,25 @@
                     <div class="flex flex-wrap py-3">
                         <h4 class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
                         <div class="w-1/4 px-1">
-                            <span class="flex justify-between">
-                                <label class="text-gray-700 text-sm font-bold mb-2" for="borderTopWidth">Width</label>
-                                <toggle-icon :state="toggles.widthTop" stateKey="widthTop" @toggleState="toggleState" />
-                            </span>
-
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderTopWidth"
-                                :type="toggles.widthTop ? 'range' : 'number'"
-                                placeholder="top width"
-                                v-model="btnStyle.borderTopWidth">
+                            <number-input label="Width"
+                                          :min=0 :max=100
+                                          :step=1
+                                          v-model="btnStyle.borderTopWidth" />
                         </div>
 
                         <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopLeftOne">TL 1</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusTopLeftOne"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusTopLeftOne">
+                            <div class="w-1/2">
+                                <number-input label="TL 1"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusTopLeftOne" />
                             </div>
 
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopLeftTwo">TL 2</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusTopLeftTwo"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusTopLeftTwo">
+                            <div class="w-1/2">
+                                <number-input label="TL 2"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusTopLeftTwo" />
                             </div>
                         </div>
 
@@ -108,7 +84,7 @@
                         <div class="w-1/4 px-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColor">Color HEX or name</label>
                             <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="borderTopColor"
                                 type="text"
                                 placeholder="HEX or Name"
@@ -120,36 +96,25 @@
                         <h4 class="bg-pink-100 border-l-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
 
                         <div class="w-1/4 px-1">
-                            <span class="flex justify-between">
-                                <label class="text-gray-700 text-sm font-bold mb-2" for="borderRightWidth">Width</label>
-                                <toggle-icon :state="toggles.widthRight" stateKey="widthRight" @toggleState="toggleState" />
-                            </span>
-
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderRightWidth"
-                                :type="toggles.widthRight ? 'range' : 'number'"
-                                placeholder="right width"
-                                v-model="btnStyle.borderRightWidth">
+                            <number-input label="Width"
+                                          :min=0 :max=100
+                                          :step=1
+                                          v-model="btnStyle.borderRightWidth" />
                         </div>
 
                         <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopRightOne">TR 1</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusTopRightOne"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusTopRightOne">
+                            <div class="w-1/2">
+                                <number-input label="TR 1"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusTopRightOne" />
                             </div>
 
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusTopRightTwo">TR 2</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusTopRightTwo"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusTopRightTwo">
+                            <div class="w-1/2">
+                                <number-input label="TR 2"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusTopRightTwo" />
                             </div>
                         </div>
 
@@ -160,7 +125,7 @@
                         <div class="w-1/4 px-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightColor">Color HEX or name</label>
                             <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="borderRightColor"
                                 type="text"
                                 placeholder="HEX or Name"
@@ -172,36 +137,25 @@
                         <h4 class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
 
                         <div class="w-1/4 px-1">
-                            <span class="flex justify-between">
-                                <label class="text-gray-700 text-sm font-bold mb-2" for="borderBottomWidth">Width</label>
-                                <toggle-icon :state="toggles.widthBottom" stateKey="widthBottom" @toggleState="toggleState" />
-                            </span>
-
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderBottomWidth"
-                                :type="toggles.widthBottom ? 'range' : 'number'"
-                                placeholder="top width"
-                                v-model="btnStyle.borderBottomWidth">
+                            <number-input label="Width"
+                                          :min=0 :max=100
+                                          :step=1
+                                          v-model="btnStyle.borderBottomWidth" />
                         </div>
 
                         <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomRightOne">BR 1</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusBottomRightOne"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusBottomRightOne">
+                            <div class="w-1/2">
+                                <number-input label="BR 1"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusBottomRightOne" />
                             </div>
 
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomRightTwo">BR 2</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusBottomRightTwo"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusBottomRightTwo">
+                            <div class="w-1/2">
+                                <number-input label="BR 2"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusBottomRightTwo" />
                             </div>
                         </div>
 
@@ -212,7 +166,7 @@
                         <div class="w-1/4 px-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomColor">Color HEX or name</label>
                             <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="borderBottomColor"
                                 type="text"
                                 placeholder="HEX or name"
@@ -224,37 +178,25 @@
                         <h4 class="bg-teal-100 border-l-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
 
                         <div class="w-1/4 px-1">
-
-                            <span class="flex justify-between">
-                                <label class="text-gray-700 text-sm font-bold mb-2" for="borderLeftWidth">Width</label>
-                                <toggle-icon :state="toggles.widthLeft" stateKey="widthLeft" @toggleState="toggleState" />
-                            </span>
-
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderLeftWidth"
-                                :type="toggles.widthLeft ? 'range' : 'number'"
-                                placeholder="top width"
-                                v-model="btnStyle.borderLeftWidth">
+                            <number-input label="Width"
+                                          :min=0 :max=100
+                                          :step=1
+                                          v-model="btnStyle.borderLeftWidth" />
                         </div>
 
                         <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomLeftOne">BL 1</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusBottomLeftOne"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusBottomLeftOne">
+                            <div class="w-1/2">
+                                <number-input label="BL 1"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusBottomLeftOne" />
                             </div>
 
-                            <div class="w-1/2 w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRadiusBottomLeftTwo">BL 2</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="borderRadiusBottomLeftTwo"
-                                    type="number"
-                                    v-model="btnStyle.borderRadiusBottomLeftTwo">
+                            <div class="w-1/2">
+                                <number-input label="BL 2"
+                                              :min=0 :max=100
+                                              :step=1
+                                              v-model="btnStyle.borderRadiusBottomLeftTwo" />
                             </div>
                         </div>
 
@@ -265,7 +207,7 @@
                         <div class="w-1/4 px-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftColor">Color HEX or name</label>
                             <input
-                                class="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="borderLeftColor"
                                 type="text"
                                 placeholder="HEX or name"
@@ -280,11 +222,11 @@
 
 <script>
 import Dropdown from "@/components/dropdown";
-import ToggleIcon from "@/components/toggleIcon";
+import NumberInput from "@/components/numberInput";
 
 export default {
     name: "borderOpt",
-    components: {Dropdown,ToggleIcon},
+    components: {Dropdown,NumberInput},
     props: {
         btnStyle: Object,
         units: Object,
@@ -293,14 +235,6 @@ export default {
     data: function (){
         return {
             enableAdvancedBorder: this.enableAdvancedBorder,
-            toggles: {
-                width: false,
-                radius: false,
-                widthTop: false,
-                widthRight: false,
-                widthBottom: false,
-                widthLeft: false,
-            },
             closePadding: false,
         }
     },
@@ -333,9 +267,6 @@ export default {
 
             this.$emit('enableAdvanced',this.enableAdvancedBorder);
         },
-        toggleState(obj) {
-            this.toggles = {... this.toggles,...obj};
-        }
     }
 }
 </script>
