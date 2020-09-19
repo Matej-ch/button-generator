@@ -29,13 +29,12 @@
 
                                 <span class="flex justify-between">
                                     <label class="text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetX">Offset x</label>
-                                    <toggle-icon :state="togglesText[index].textOffsetX" stateKey="textOffsetX" @toggleState="toggleState" />
                                 </span>
 
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="textShadowOffsetX"
-                                    :type="togglesText[index].textOffsetX ? 'range' : 'number'"
+                                    type="number"
                                     placeholder="background color"
                                     @click="updateStyle" @keyup="updateStyle"
                                     v-model="textShadowStyle.offsetX">
@@ -44,13 +43,12 @@
                             <div class="w-1/4 px-1">
                                 <span class="flex justify-between">
                                     <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowOffsetY">Offset y</label>
-                                    <toggle-icon :state="togglesText[index].textOffsetY" stateKey="textOffsetY" @toggleState="toggleState" />
                                 </span>
 
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="textShadowOffsetY"
-                                    :type="togglesText[index].textOffsetY ? 'range' : 'number'"
+                                    type="number"
                                     placeholder="background color"
                                     @click="updateStyle" @keyup="updateStyle"
                                     v-model="textShadowStyle.offsetY">
@@ -59,13 +57,12 @@
                             <div class="w-1/4 px-1">
                                 <span class="flex justify-between">
                                     <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowBlurRadius">Blur radius</label>
-                                    <toggle-icon :state="togglesText[index].textBlurRadius" stateKey="textBlurRadius" @toggleState="toggleState" />
                                 </span>
 
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="textShadowBlurRadius"
-                                    :type="togglesText[index].textBlurRadius ? 'range' : 'number'"
+                                    type="number"
                                     placeholder="background color"
                                     @click="updateStyle" @keyup="updateStyle"
                                     v-model="textShadowStyle.blurRadius">
@@ -164,11 +161,8 @@
 
 <script>
 
-import ToggleIcon from "@/components/toggleIcon";
-
 export default {
     name: "shadowOpt",
-    components: {ToggleIcon},
     props: {
         btnStyle: Object,
     },
@@ -188,31 +182,18 @@ export default {
                 blurRadius: '2',
                 color: 'black'
             }],
-            togglesText: [{
-                textOffsetX: false,
-                textOffsetY: false,
-                textBlurRadius: false,
 
-            }],
-            togglesBox: [{
-                boxOffsetX: false,
-                boxOffsetY: false,
-                boxBlurRadius: false,
-            }],
             closePadding: false,
         }
     },
     methods: {
-        toggleState(obj) {
-            console.log(obj);
-            //this.togglesText[0] = {... this.togglesText[0],...obj};
-
-        },
         enableTextShadow() {
             this.textShadow = !this.textShadow;
 
             if (this.textShadow) {
                 this.updateTextShadow();
+            } else {
+                this.btnStyle.textShadow = '';
             }
         },
 
@@ -221,6 +202,8 @@ export default {
 
             if (this.boxShadow) {
                 this.updateBoxShadow();
+            } else {
+                this.btnStyle.boxShadow = '';
             }
         },
         updateStyle() {

@@ -148,7 +148,6 @@ name: "colorOpt",
                 if(this.gradientType === 'radial-gradient') {
                     fullAngle = `${this.angle}`;
                 }
-                console.log(fullAngle);
 
                 let colorsArray = Object.values(this.colors);
                 let colorsString = colorsArray.join(',')
