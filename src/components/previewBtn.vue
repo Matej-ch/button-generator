@@ -22,17 +22,10 @@
             </div>
 
             <transition name="fade" mode="out-in">
-                <div v-show="showCode" class="flex flex-row py-4 w-full max-w-md justify-between text-xs" ref="textToCopy">
-                    .btn {{btnStyle}}
-
-                    .btn:hover {
-                        filter: brightness(120%) saturate(120%);
-                    }
-
-                    .btn:active {
-                        filter: saturate(120%);
-                    }
-                </div>
+                <pre v-show="showCode" class="flex flex-row py-4 w-full max-w-md justify-between text-xs" ref="textToCopy">.btn {{btnStyle}}
+                    <br>.btn:hover {filter: brightness(120%) saturate(120%);}
+                    <br>.btn:active {filter: saturate(120%);}
+                </pre>
             </transition>
 
         </div>
@@ -45,7 +38,7 @@ name: "previewBtn",
     props: {btnStyle:Object},
     data: function () {
         return {
-            showCode: true
+            showCode: false
         }
     },
     methods: {
