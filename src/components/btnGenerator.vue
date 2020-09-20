@@ -2,7 +2,7 @@
 <div class="flex flex-col h-screen justify-between overflow-auto">
     <header-component/>
 
-    <div class="flex flex-wrap w-full lg:px-4 px-1 h-full">
+    <div class="flex flex-wrap w-full lg:px-4 px-1">
         <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
             <padding-opt :btnStyle="btnStyle" :units="units" />
@@ -30,6 +30,8 @@
         <preview-btn :btnStyle="style"></preview-btn>
     </div>
 
+    <history-btns/>
+
     <footer-component/>
 
 </div>
@@ -47,10 +49,12 @@ import FooterComponent from "@/components/footerComponent";
 import FontOpt from "@/components/fontOpt";
 import ColorOpt from "@/components/colorOpt";
 import ShadowOpt from "@/components/shadowOpt";
+import HistoryBtns from "@/components/btnsHistory";
 
 export default {
     name: "btnGenerator",
     components: {
+        HistoryBtns,
         ShadowOpt, ColorOpt, FontOpt, FooterComponent, HeaderComponent,
         PreviewBtn, BorderOpt, SizeOpt, PaddingOpt,MarginOpt},
     data: function() {

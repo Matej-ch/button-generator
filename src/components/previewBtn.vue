@@ -59,12 +59,25 @@ name: "previewBtn",
             const original = copyBtn.innerText;
             copyBtn.innerText = 'Copied!';
 
+            this.saveLocal();
+
             setTimeout(() => {
                 copyBtn.textContent = original;
             }, 1200);
         },
         showStyle() {
             this.showCode = !this.showCode;
+        },
+        saveLocal() {
+            if(localStorage.getItem('buttons')) {
+                let buttons = JSON.parse(localStorage.getItem('buttons'));
+                buttons.push(this.btnStyle);
+                localStorage.setItem('buttons',JSON.stringify(buttons));
+            } else {
+                localStorage.setItem('buttons',JSON.stringify([this.btnStyle]))
+            }
+
+            console.log(localStorage.getItem('buttons'));
         }
     }
 }
