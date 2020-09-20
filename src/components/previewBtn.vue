@@ -22,7 +22,7 @@
             </div>
 
             <transition name="fade" mode="out-in">
-                <pre v-show="showCode" class="flex flex-row py-4 w-full max-w-md justify-between text-xs" ref="textToCopy">.btn {{btnStyle}}
+                <pre v-show="showCode" class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap" ref="textToCopy">.btn {{btnStyle | convertToCss}}
                     <br>.btn:hover {filter: brightness(120%) saturate(120%);}
                     <br>.btn:active {filter: saturate(120%);}
                 </pre>
