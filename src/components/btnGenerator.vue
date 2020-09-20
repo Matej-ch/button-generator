@@ -7,6 +7,8 @@
 
             <padding-opt :btnStyle="btnStyle" :units="units" />
 
+            <margin-opt :btnStyle="btnStyle" :units="units" />
+
             <size-opt :btnStyle="btnStyle"
                       :units="units"
                       :enableWidth="enableWidth"
@@ -36,6 +38,7 @@
 <script>
 
 import PaddingOpt from "@/components/paddingOpt";
+import MarginOpt from "@/components/marginOpt";
 import SizeOpt from "@/components/sizeOpt";
 import BorderOpt from "@/components/borderOpt";
 import PreviewBtn from "@/components/previewBtn";
@@ -48,8 +51,8 @@ import ShadowOpt from "@/components/shadowOpt";
 export default {
     name: "btnGenerator",
     components: {
-        ShadowOpt,
-        ColorOpt, FontOpt, FooterComponent, HeaderComponent, PreviewBtn, BorderOpt, SizeOpt, PaddingOpt},
+        ShadowOpt, ColorOpt, FontOpt, FooterComponent, HeaderComponent,
+        PreviewBtn, BorderOpt, SizeOpt, PaddingOpt,MarginOpt},
     data: function() {
         return {
             btnStyle: {
@@ -64,6 +67,10 @@ export default {
                 paddingRight: '15',
                 paddingBottom: '15',
                 paddingLeft: '15',
+                marginTop: '0',
+                marginRight: '0',
+                marginBottom: '0',
+                marginLeft: '0',
                 color: "#000000",
                 backgroundColor:'#ffffff',
                 borderWidth: '2',
@@ -107,6 +114,10 @@ export default {
                 paddingRight: 'px',
                 paddingBottom: 'px',
                 paddingLeft: 'px',
+                marginTop: 'px',
+                marginRight: 'px',
+                marginBottom: 'px',
+                marginLeft: 'px',
                 borderWidth: 'px',
                 borderRadius: 'px',
                 fontStyle: '40'
@@ -131,6 +142,10 @@ export default {
                 paddingRight: `${this.btnStyle.paddingRight}${this.units.paddingRight}`,
                 paddingBottom: `${this.btnStyle.paddingBottom}${this.units.paddingBottom}`,
                 paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
+                marginTop: `${this.btnStyle.marginTop}${this.units.marginTop}`,
+                marginRight: `${this.btnStyle.marginRight}${this.units.marginRight}`,
+                marginBottom: `${this.btnStyle.marginBottom}${this.units.marginBottom}`,
+                marginLeft: `${this.btnStyle.marginLeft}${this.units.marginLeft}`,
                 color: this.btnStyle.color,
                 backgroundColor: this.btnStyle.backgroundColor,
                 textShadow: this.btnStyle.textShadow,
