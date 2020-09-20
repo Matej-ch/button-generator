@@ -62,7 +62,7 @@
                 </transition>
 
                 <transition-group name="fade" mode="out-in" tag="div" class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
-                    <div v-for="(color,index) in colors" class="px-1 w-1/6" :key="`color-${index}`">
+                    <div v-for="(color,index) in colors" class="px-1" :key="`color-${index}`">
                         <input type="color" v-model="colors[index]" @click="updateStyle" @keyup="updateStyle" @input="updateStyle">
                     </div>
                 </transition-group>

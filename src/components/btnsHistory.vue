@@ -12,15 +12,8 @@
 <script>
 export default {
     name: "historyBtns",
-    data:function() {
-        return {
-            buttons: []
-        }
-    },
-    mounted() {
-        if(localStorage.buttons) {
-            this.buttons = JSON.parse(localStorage.buttons);
-        }
+    props: {
+        buttons: Array
     },
 }
 </script>

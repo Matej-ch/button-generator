@@ -27,10 +27,10 @@
 
         </div>
 
-        <preview-btn :btnStyle="style"></preview-btn>
+        <preview-btn :btnStyle="style" @save="updateHistory"></preview-btn>
     </div>
 
-    <history-btns/>
+    <history-btns :buttons="buttons"/>
 
     <footer-component/>
 
@@ -57,6 +57,11 @@ export default {
         HistoryBtns,
         ShadowOpt, ColorOpt, FontOpt, FooterComponent, HeaderComponent,
         PreviewBtn, BorderOpt, SizeOpt, PaddingOpt,MarginOpt},
+    mounted() {
+        if(localStorage.buttons) {
+            this.buttons = JSON.parse(localStorage.buttons);
+        }
+    },
     data: function() {
         return {
             btnStyle: {
@@ -129,7 +134,8 @@ export default {
             },
             advancedBorder: false,
             advancedColor: false,
-            enableWidth: false
+            enableWidth: false,
+            buttons: [],
         };
     },
     computed: {
@@ -200,6 +206,9 @@ export default {
         },
         enableAdvancedColor(value) {
             this.advancedColor = value;
+        },
+        updateHistory(style) {
+            this.buttons.push(style);
         }
     }
 }

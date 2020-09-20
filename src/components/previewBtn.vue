@@ -17,7 +17,7 @@
                 <a href="#"
                    @click.prevent="showStyle"
                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    Show style
+                    {{this.showCode ? 'Hide style' : 'Show style'}}
                 </a>
             </div>
 
@@ -61,6 +61,8 @@ name: "previewBtn",
 
             this.saveLocal();
 
+            this.$emit('save',this.btnStyle);
+
             setTimeout(() => {
                 copyBtn.textContent = original;
             }, 1200);
@@ -76,8 +78,6 @@ name: "previewBtn",
             } else {
                 localStorage.setItem('buttons',JSON.stringify([this.btnStyle]))
             }
-
-            console.log(localStorage.getItem('buttons'));
         }
     }
 }
