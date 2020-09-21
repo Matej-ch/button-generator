@@ -2,7 +2,7 @@
 <div class="flex flex-col h-screen justify-between overflow-auto">
     <header-component/>
 
-    <div class="flex flex-wrap w-full lg:px-4 px-1">
+    <div class="flex flex-wrap w-full lg:px-4 px-1 mb-auto">
         <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
             <padding-opt :btnStyle="btnStyle" :units="units" />
