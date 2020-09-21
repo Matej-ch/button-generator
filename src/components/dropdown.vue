@@ -19,7 +19,11 @@
 <script>
 export default {
 name: "dropdown",
-    props: {'obj':Object,'label':String,'unitType':String,'options': Array},
+    props: {
+        obj:Object,
+        label:String,
+        unitType:String,
+        options: Array},
     data() {
         return {
             selectValue: this.obj[this.unitType]

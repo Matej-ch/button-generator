@@ -30,7 +30,7 @@
         <preview-btn :btnStyle="style" @save="updateHistory"></preview-btn>
     </div>
 
-    <history-btns :buttons="buttons"/>
+    <history-btns :buttons="buttons" @clearHistory="clearHistory" />
 
     <footer-component/>
 
@@ -209,6 +209,12 @@ export default {
         },
         updateHistory(style) {
             this.buttons.push(style);
+        },
+        clearHistory() {
+            if(localStorage.buttons) {
+                localStorage.removeItem('buttons');
+                this.buttons = [];
+            }
         }
     }
 }
