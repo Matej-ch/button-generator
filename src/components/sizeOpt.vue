@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-4 flex flex-wrap">
+    <div class="pb-2 flex flex-wrap">
         <div class="flex bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-1 py-1 w-full mb-2">
 
             <a href="#" @click.prevent="closePadding = !closePadding">

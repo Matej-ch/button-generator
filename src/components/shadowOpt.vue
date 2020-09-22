@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-4 flex flex-wrap">
+    <div class="pb-2 flex flex-wrap">
         <div class="flex bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-1 py-1 w-full mb-2">
             <a href="#" @click.prevent="closePadding = !closePadding">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -15,7 +15,7 @@
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full" v-show="!closePadding">
                 <div class="w-full flex flex-wrap pb-6">
-                    <h4 class="flex w-full px-1">
+                    <h4 class="flex w-full px-1 text-gray-800">
                         <span class="font-bold">Text shadow</span>
                         <span class="ml-auto">
                             <input class="mr-2 leading-tight" type="checkbox" @click="enableTextShadow()">
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="w-full flex flex-wrap">
-                    <h4 class="flex flex-wrap w-full px-1"><span class="font-bold">Box shadow</span>
+                    <h4 class="flex flex-wrap w-full px-1 text-gray-800"><span class="font-bold">Box shadow</span>
                         <span class="ml-auto">
                             <input class="mr-2 leading-tight" type="checkbox" @click="enableBoxShadow()">
                             <span class="text-sm">Enable</span>

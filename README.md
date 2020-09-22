@@ -2,6 +2,8 @@
 
 ### Single page button generator
 
+try it here https://matej-ch.github.io/button-generator/
+
 build with vue.js and tailwindcss
 
 You can set every possible css rule for buton there is.

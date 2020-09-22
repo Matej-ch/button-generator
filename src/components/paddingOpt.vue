@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-4 flex flex-wrap">
+    <div class="pb-2 flex flex-wrap">
         <div class="flex bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-1 py-1 w-full mb-2">
             <a href="#" @click.prevent="closePadding = !closePadding">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
