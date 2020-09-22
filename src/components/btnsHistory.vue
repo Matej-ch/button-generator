@@ -1,5 +1,5 @@
 <template>
-<div v-show="buttons.length" class="w-full flex-wrap flex justify-start lg:px-4 px-1">
+<div v-show="buttons.length" class="w-full flex-wrap flex justify-start lg:px-4 px-1 mb-2">
     <h2 class="w-full px-1 py-1 flex">Previous buttons
         <a href="#" class="px-2" @click.prevent="clearHistory">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -12,9 +12,17 @@
             </svg>
         </a>
     </h2>
-    <div v-for="(button,index) in buttons" :key="index" class="px-1 py-3">
+    <div v-for="(button,index) in buttons" :key="index" class="px-3 py-3 overflow-auto h-56 w-56">
         <div :style="button">
             button
+        </div>
+        <div class="py-4">
+            <transition name="fade" mode="out-in">
+                <pre class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap" ref="textToCopy">.btn {{button | convertToCss}}
+                    <br>.btn:hover {filter: brightness(120%) saturate(120%);}
+                    <br>.btn:active {filter: saturate(120%);}
+                </pre>
+            </transition>
         </div>
     </div>
 </div>
