@@ -112,6 +112,11 @@
                                               @change="updateStyle"/>
                             </div>
 
+                            <div class="px-2 text-gray-700 text-sm font-bold mb-2 flex flex-col justify-between">
+                                <label>Inset</label>
+                                <input type="checkbox" v-model="boxShadowStyle.isInset" @click="updateInset(index)">
+                            </div>
+
                             <div class="px-1 flex-1">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
                                 <input
@@ -158,6 +163,7 @@ export default {
                 color: 'black'
             }],
             boxShadowStyles: [{
+                isInset: false,
                 offsetX: '1',
                 offsetY: '1',
                 blurRadius: '2',
@@ -208,7 +214,11 @@ export default {
         updateBoxShadow() {
             let shadows = '';
             this.boxShadowStyles.forEach(style => {
-                shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${style.color},`;
+                let inset = '';
+                if(style.isInset) {
+                    inset = 'inset';
+                }
+                shadows += `${inset} ${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${style.color},`;
             });
             this.btnStyle.boxShadow = shadows.slice(0, -1);
         },
@@ -219,7 +229,11 @@ export default {
         },
 
         addBoxShadow() {
-            this.boxShadowStyles.push({offsetX: '1', offsetY: '1', blurRadius: '2',spreadRadius: '0', color: 'black'});
+            this.boxShadowStyles.push({isInset:false,offsetX: '1', offsetY: '1', blurRadius: '2',spreadRadius: '0', color: 'black'});
+            this.updateBoxShadow();
+        },
+        updateInset(index) {
+            this.boxShadowStyles = this.boxShadowStyles.map((style,ind) => (ind === index) ? {...style, isInset: !style.isInset} : style);
             this.updateBoxShadow();
         }
     }
