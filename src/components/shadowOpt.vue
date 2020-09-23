@@ -79,8 +79,8 @@
                     </h4>
 
                     <transition-group name="fade" tag="div" class="flex flex-wrap w-full">
-                        <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`" class="w-full flex flex-wrap" v-show="boxShadow">
-                            <div class="w-1/4 px-1">
+                        <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`" class="w-full flex justify-start flex-wrap" v-show="boxShadow">
+                            <div class="px-1 flex-1">
                                 <number-input label="Offset x"
                                               :min=-100 :max=100
                                               :step=1
@@ -88,7 +88,7 @@
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
                                 <number-input label="Offset y"
                                               :min=-100 :max=100
                                               :step=1
@@ -96,15 +96,23 @@
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
-                                <number-input label="Blur radius"
+                            <div class="px-1 flex-1">
+                                <number-input label="Blur"
                                               :min=-100 :max=100
                                               :step=1
                                               v-model="boxShadowStyle.blurRadius"
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
+                                <number-input label="Spread"
+                                              :min=-100 :max=100
+                                              :step=1
+                                              v-model="boxShadowStyle.spreadRadius"
+                                              @change="updateStyle"/>
+                            </div>
+
+                            <div class="px-1 flex-1">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
                                 <input
                                     class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -153,6 +161,7 @@ export default {
                 offsetX: '1',
                 offsetY: '1',
                 blurRadius: '2',
+                spreadRadius: '0',
                 color: 'black'
             }],
 
@@ -199,7 +208,7 @@ export default {
         updateBoxShadow() {
             let shadows = '';
             this.boxShadowStyles.forEach(style => {
-                shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.color},`;
+                shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${style.color},`;
             });
             this.btnStyle.boxShadow = shadows.slice(0, -1);
         },
@@ -210,7 +219,7 @@ export default {
         },
 
         addBoxShadow() {
-            this.boxShadowStyles.push({offsetX: '1', offsetY: '1', blurRadius: '2', color: 'black'});
+            this.boxShadowStyles.push({offsetX: '1', offsetY: '1', blurRadius: '2',spreadRadius: '0', color: 'black'});
             this.updateBoxShadow();
         }
     }
