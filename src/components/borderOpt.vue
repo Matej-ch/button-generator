@@ -54,14 +54,14 @@
                     <!-- TOP BORDER -->
                     <div class="flex flex-wrap py-3">
                         <h4 class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
                                           v-model="btnStyle.borderTopWidth" />
                         </div>
 
-                        <div class="w-1/4 px-1 flex">
+                        <div class="flex-1 px-1 flex">
                             <div class="w-1/2">
                                 <number-input label="TL 1"
                                               :min=0 :max=100
@@ -77,11 +77,11 @@
                             </div>
                         </div>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderTopStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColor">Color HEX or name</label>
                             <input
                                 class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

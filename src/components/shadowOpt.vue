@@ -25,7 +25,7 @@
 
                     <transition-group name="fade" tag="div" class="flex w-full flex-wrap">
                         <div v-for="(textShadowStyle,index) in textShadowStyles" :key="`text-shadow-${index}`" class="w-full flex flex-wrap" v-show="textShadow">
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
                                 <number-input label="Offset x"
                                               :min=-100 :max=100
                                               :step=1
@@ -33,7 +33,7 @@
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
                                 <number-input label="Offset y"
                                               :min=-100 :max=100
                                               :step=1
@@ -41,7 +41,7 @@
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
                                 <number-input label="Blur radius"
                                               :min=-100 :max=100
                                               :step=1
@@ -49,7 +49,7 @@
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="w-1/4 px-1">
+                            <div class="px-1 flex-1">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColor">Color</label>
                                 <input
                                     class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

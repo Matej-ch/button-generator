@@ -14,7 +14,7 @@
 
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full bg-gray-100 border-gray-200 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
-                <div class="w-1/4 px-1">
+                <div class="flex-1 px-1">
 
                     <number-input label="Top"
                                   :min=0 :max=100
@@ -26,7 +26,7 @@
                     <Dropdown label="Unit" :obj="units" unitType="marginTop" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
-                <div class="w-1/4 px-1">
+                <div class="flex-1 px-1">
 
                     <number-input label="Right"
                                   :min=0 :max=100
@@ -38,7 +38,7 @@
                     <Dropdown label="Unit" :obj="units" unitType="marginRight" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
-                <div class="w-1/4 px-1">
+                <div class="flex-1 px-1">
 
                     <number-input label="Bottom"
                                   :min=0 :max=100
@@ -50,7 +50,7 @@
                     <Dropdown label="Unit" :obj="units" unitType="marginBottom" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
-                <div class="w-1/4 px-1">
+                <div class="flex-1 px-1">
 
                     <number-input label="Left"
                                   :min=0 :max=100
