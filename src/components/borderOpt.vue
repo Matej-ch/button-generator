@@ -1,6 +1,8 @@
 <template>
     <div class="pb-2 flex flex-wrap">
-        <div class="flex bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-1 py-1 w-full cursor-pointer" @click.prevent="closePadding = !closePadding">
+        <div class="flex bg-blue-100 border-t border-b border-l border-r border-blue-400 text-blue-700 px-1 py-1 w-full cursor-pointer"
+             :class="{'border-b' : closePadding }"
+             @click.prevent="closePadding = !closePadding">
 
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -18,7 +20,7 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <div class="flex flex-wrap w-full bg-gray-100 border-gray-200 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
+            <div class="flex flex-wrap w-full bg-gray-100 border-blue-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
                 <div v-if="!enableAdvancedBorder" v-show="!enableAdvancedBorder" class="w-full flex flex-wrap">
                     <div class="w-1/4 px-1">
 
@@ -53,7 +55,7 @@
                 <div v-else class="w-full">
                     <!-- TOP BORDER -->
                     <div class="flex flex-wrap py-3">
-                        <h4 class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
+                        <h4 class="bg-orange-100 border-t-4 border-orange-500 text-orange-700 p-1 font-bold w-full">Top</h4>
                         <div class="flex-1 px-1">
                             <number-input label="Width"
                                           :min=0 :max=100
@@ -93,7 +95,7 @@
                     </div>
                     <!-- END TOP BORDER -->
                     <div class="flex flex-wrap py-3">
-                        <h4 class="bg-pink-100 border-l-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
+                        <h4 class="bg-pink-100 border-t-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
 
                         <div class="w-1/4 px-1">
                             <number-input label="Width"
@@ -134,7 +136,7 @@
 
                     </div>
                     <div class="flex flex-wrap py-3">
-                        <h4 class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
+                        <h4 class="bg-indigo-100 border-t-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
 
                         <div class="w-1/4 px-1">
                             <number-input label="Width"
@@ -175,7 +177,7 @@
 
                     </div>
                     <div class="flex flex-wrap py-3">
-                        <h4 class="bg-teal-100 border-l-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
+                        <h4 class="bg-teal-100 border-t-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
 
                         <div class="w-1/4 px-1">
                             <number-input label="Width"

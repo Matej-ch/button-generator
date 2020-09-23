@@ -1,6 +1,8 @@
 <template>
     <div class="pb-2 flex flex-wrap">
-        <div class="flex bg-orange-100 border-t border-b border-orange-500 text-orange-700 px-1 py-1 w-full cursor-pointer" @click.prevent="closePadding = !closePadding">
+        <div class="flex bg-orange-100 border-t border-l border-r border-orange-400 text-orange-700 px-1 py-1 w-full cursor-pointer"
+             :class="{'border-b' : closePadding }"
+             @click.prevent="closePadding = !closePadding">
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"/>
@@ -13,7 +15,7 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <div class="flex flex-wrap w-full bg-gray-100 border-gray-200 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
+            <div class="flex flex-wrap w-full bg-gray-100 border-orange-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
                 <div class="w-full flex flex-wrap pb-6">
                     <h4 class="flex w-full px-1 text-gray-800">
                         <span class="font-bold">Text shadow</span>
