@@ -59,6 +59,11 @@
                               :options="['ultra-condensed','extra-condensed','condensed','semi-condensed','normal','semi-expanded','expanded','extra-expanded','ultra-expanded']"/>
 
                     <div class="py-2" />
+
+                    <Dropdown label="Family"
+                              :obj="btnStyle"
+                              unitType="fontFamily"
+                              :options="['Arial','Verdana','serif','sans-serif','monospace','Open Sans']"/>
                 </div>
             </div>
         </transition>
