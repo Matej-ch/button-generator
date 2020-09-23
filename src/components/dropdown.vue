@@ -5,7 +5,7 @@
             <select
                 v-model="selectValue"
                 @change="handleOption"
-                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-1 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="width-unit">
+                class="block appearance-none w-full bg-blue-100 border border-blue-200 text-gray-700 py-1 px-1 pr-8 rounded-sm leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="width-unit">
                 <option v-for="option in options" :value="option" :key="option"> {{option}}</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
