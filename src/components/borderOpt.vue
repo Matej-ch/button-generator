@@ -22,7 +22,7 @@
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full bg-gray-100 border-blue-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
                 <div v-if="!enableAdvancedBorder" v-show="!enableAdvancedBorder" class="w-full flex flex-wrap">
-                    <div class="w-1/4 px-1">
+                    <div class="flex-1 px-1">
 
                         <number-input label="Width"
                                       :min=0 :max=100
@@ -30,21 +30,21 @@
                                       v-model="btnStyle.borderWidth" />
                     </div>
 
-                    <div class="w-1/4 px-1">
+                    <div class="flex-1 px-1">
                         <number-input label="Radius"
                                       :min=0 :max=100
                                       :step=1
                                       v-model="btnStyle.borderRadius" />
                     </div>
 
-                    <div class="w-1/4 px-1">
+                    <div class="flex-1 px-1">
                         <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
-                    <div class="w-1/4 px-1">
+                    <div class="flex-1 px-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="borderColor">Color</label>
                         <input
-                            class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            class="shadow block border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="borderColor"
                             type="color"
                             placeholder="color"

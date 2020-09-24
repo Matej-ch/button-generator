@@ -20,7 +20,7 @@
 
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full bg-gray-100 border-blue-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
-                <div class="w-1/2 px-1">
+                <div class="flex-1 px-1">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor" v-show="!enableAdvColor">Background</label>
                     <input
                         class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
@@ -29,9 +29,11 @@
                         placeholder="background color"
                         v-show="!enableAdvColor"
                         v-model="btnStyle.backgroundColor">
+
+
                 </div>
 
-                <div class="w-1/2 px-1">
+                <div class="flex-1 px-1">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="color">Color</label>
                     <input
                         class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
