@@ -41,14 +41,26 @@
                         <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
-                    <div class="flex-1 px-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borderColor">Color</label>
-                        <input
-                            class="shadow block border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="borderColor"
-                            type="color"
-                            placeholder="color"
-                            v-model="btnStyle.borderColor">
+                    <div class="flex flex-col flex-1">
+                        <div class="flex-1 px-1">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderColor">Color</label>
+                            <input
+                                class="shadow block border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderColor"
+                                type="color"
+                                placeholder="color"
+                                v-model="btnStyle.borderColor">
+                        </div>
+
+                        <div class="flex-1 px-1">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderColorAlpha">Alpha</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="borderColorAlpha"
+                                type="number" step="0.1" min="0" max="1"
+                                placeholder="alpha"
+                                v-model="btnStyle.borderColorAlpha">
+                        </div>
                     </div>
 
                 </div>
@@ -254,10 +266,10 @@ export default {
             this.btnStyle.borderRightStyle = this.btnStyle.borderStyle;
             this.btnStyle.borderBottomStyle = this.btnStyle.borderStyle;
             this.btnStyle.borderLeftStyle = this.btnStyle.borderStyle;
-            this.btnStyle.borderTopColor = 'black';
-            this.btnStyle.borderRightColor = 'black';
-            this.btnStyle.borderBottomColor = 'black';
-            this.btnStyle.borderLeftColor = 'black';
+            this.btnStyle.borderTopColor = '#000000';
+            this.btnStyle.borderRightColor = '#000000';
+            this.btnStyle.borderBottomColor = '#000000';
+            this.btnStyle.borderLeftColor = '#000000';
             this.btnStyle.borderRadiusTopLeftOne = `${this.btnStyle.borderRadius}`;
             this.btnStyle.borderRadiusTopLeftTwo = `${this.btnStyle.borderRadius}`;
             this.btnStyle.borderRadiusTopRightOne = `${this.btnStyle.borderRadius}`;
@@ -267,7 +279,7 @@ export default {
             this.btnStyle.borderRadiusBottomRightOne = `${this.btnStyle.borderRadius}`;
             this.btnStyle.borderRadiusBottomRightTwo = `${this.btnStyle.borderRadius}`;
 
-            this.$emit('enableAdvanced',this.enableAdvancedBorder);
+            this.$emit('enableAdvancedBorder',this.enableAdvancedBorder);
         },
     }
 }

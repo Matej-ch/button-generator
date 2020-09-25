@@ -20,7 +20,7 @@
 
             <border-opt :btnStyle="btnStyle"
                         :units="units"
-                        @enableAdvanced="enableAdvancedBorder"
+                        @enableAdvancedBorder="enableAdvancedBorder"
             />
 
             <shadow-opt :btnStyle="btnStyle"/>
@@ -81,7 +81,7 @@ export default {
                 borderWidth: '2',
                 borderStyle: 'solid',
                 borderRadius: "4",
-                borderColor: 'black',
+                borderColor: '#000000',
                 borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
                 borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
                 borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
@@ -93,7 +93,7 @@ export default {
                 borderBottomRightRadius: '', borderBottomLeftRadius: '',
                 textShadow: '', boxShadow: '',
                 backgroundImage: '',
-                colorAlpha: 1, backgroundColorAlpha: 1
+                colorAlpha: 1, backgroundColorAlpha: 1, borderColorAlpha: 1
 
             },
             units: {
@@ -161,8 +161,7 @@ export default {
             if(this.advancedBorder) {
                 delete newStyle.borderRadius;
 
-                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth} ${this.btnStyle.borderRightWidth}${this.units.borderWidth}
-                ${this.btnStyle.borderBottomWidth}${this.units.borderWidth} ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
+                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth} ${this.btnStyle.borderRightWidth}${this.units.borderWidth} ${this.btnStyle.borderBottomWidth}${this.units.borderWidth} ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
                 newStyle.borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
                 newStyle.borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
                 newStyle.borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
@@ -177,7 +176,7 @@ export default {
                 newStyle.borderWidth = `${this.btnStyle.borderWidth}${this.units.borderWidth}`;
                 newStyle.borderStyle =  this.btnStyle.borderStyle;
                 newStyle.borderRadius = `${this.btnStyle.borderRadius}${this.units.borderRadius}`;
-                newStyle.borderColor =  this.btnStyle.borderColor;
+                newStyle.borderColor = this.convertToRgbaString(this.btnStyle.borderColor, this.btnStyle.borderColorAlpha);
             }
 
             return newStyle;

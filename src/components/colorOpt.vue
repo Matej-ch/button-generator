@@ -101,7 +101,7 @@
                     </div>
                 </transition-group>
 
-                <div class="px-1 mr-auto">
+                <div class="px-1 pt-2 mr-auto">
                     <a href="#" class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold mr-auto" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
                 </div>
             </div>
@@ -219,7 +219,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>
