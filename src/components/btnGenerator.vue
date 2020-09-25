@@ -16,7 +16,7 @@
 
             <font-opt :btnStyle="btnStyle" :units="units"/>
 
-            <color-opt  :btnStyle="btnStyle" @enableColor="enableAdvancedColor" />
+            <color-opt  :btnStyle="btnStyle" @enableAdvancedColor="enableAdvancedColor" />
 
             <border-opt :btnStyle="btnStyle"
                         :units="units"
@@ -75,47 +75,25 @@ export default {
                 fontWeight: 'normal',
                 fontFamily: 'Arial',
                 textAlign: "center",
-                paddingTop: '15',
-                paddingRight: '15',
-                paddingBottom: '15',
-                paddingLeft: '15',
-                marginTop: '0',
-                marginRight: '0',
-                marginBottom: '0',
-                marginLeft: '0',
-                color: "#000000",
-                backgroundColor:'#ffffff',
+                paddingTop: '15', paddingRight: '15', paddingBottom: '15', paddingLeft: '15',
+                marginTop: '0', marginRight: '0', marginBottom: '0', marginLeft: '0',
+                color: "#000000", backgroundColor:'#ffffff',
                 borderWidth: '2',
                 borderStyle: 'solid',
                 borderRadius: "4",
                 borderColor: 'black',
-                borderTopWidth: '',
-                borderRightWidth: '',
-                borderBottomWidth: '',
-                borderLeftWidth: '',
-                borderTopStyle: '',
-                borderRightStyle: '',
-                borderBottomStyle: '',
-                borderLeftStyle: '',
-                borderTopColor: '',
-                borderRightColor: '',
-                borderBottomColor: '',
-                borderLeftColor: '',
-                borderRadiusTopLeftOne: '',
-                borderRadiusTopLeftTwo: '',
-                borderRadiusTopRightOne: '',
-                borderRadiusTopRightTwo: '',
-                borderRadiusBottomLeftOne: '',
-                borderRadiusBottomLeftTwo: '',
-                borderRadiusBottomRightOne: '',
-                borderRadiusBottomRightTwo: '',
-                borderTopLeftRadius: '',
-                borderTopRightRadius: '',
-                borderBottomRightRadius: '',
-                borderBottomLeftRadius: '',
-                textShadow: '',
-                boxShadow: '',
+                borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
+                borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
+                borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
+                borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
+                borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
+                borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
+                borderRadiusBottomRightOne: '', borderRadiusBottomRightTwo: '',
+                borderTopLeftRadius: '', borderTopRightRadius: '',
+                borderBottomRightRadius: '', borderBottomLeftRadius: '',
+                textShadow: '', boxShadow: '',
                 backgroundImage: '',
+                colorAlpha: 1, backgroundColorAlpha: 1
 
             },
             units: {
@@ -160,12 +138,16 @@ export default {
                 marginRight: `${this.btnStyle.marginRight}${this.units.marginRight}`,
                 marginBottom: `${this.btnStyle.marginBottom}${this.units.marginBottom}`,
                 marginLeft: `${this.btnStyle.marginLeft}${this.units.marginLeft}`,
-                color: this.convertToRgbaString(this.btnStyle.color,1),
-                backgroundColor: this.convertToRgbaString(this.btnStyle.backgroundColor,1),
+                color: this.convertToRgbaString(this.btnStyle.color,this.btnStyle.colorAlpha),
                 textShadow: this.btnStyle.textShadow,
                 boxShadow: this.btnStyle.boxShadow,
                 backgroundImage: this.btnStyle.backgroundImage
             };
+
+
+            if(!this.advancedColor) {
+                newStyle.backgroundColor = this.convertToRgbaString(this.btnStyle.backgroundColor,this.btnStyle.backgroundColorAlpha);
+            }
 
             if(this.btnStyle.fontStyle === 'oblique') {
                 newStyle.fontStyle = `${this.btnStyle.fontStyle} ${this.units.fontStyle}deg`;

@@ -20,27 +20,53 @@
 
         <transition name="fade" mode="out-in">
             <div class="flex flex-wrap w-full bg-gray-100 border-blue-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2" v-show="!closePadding">
-                <div class="flex-1 px-1">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor" v-show="!enableAdvColor">Background</label>
-                    <input
-                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
-                        id="backgroundColor"
-                        type="color"
-                        placeholder="background color"
-                        v-show="!enableAdvColor"
-                        v-model="btnStyle.backgroundColor">
 
+                <div class="flex-1 px-1 flex flex-col">
+                    <div class="flex-1 px-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor" v-show="!enableAdvColor">Background</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                            id="backgroundColor"
+                            type="color"
+                            placeholder="background color"
+                            v-show="!enableAdvColor"
+                            v-model="btnStyle.backgroundColor">
+                    </div>
 
+                    <div class="flex-1 px-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColorAlpha" v-show="!enableAdvColor">Alpha</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="backgroundColorAlpha"
+                            type="number"
+                            step=0.1 max="1" min="0"
+                            placeholder="alpha"
+                            v-show="!enableAdvColor"
+                            v-model="btnStyle.backgroundColorAlpha">
+                    </div>
                 </div>
 
-                <div class="flex-1 px-1">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="color">Color</label>
-                    <input
-                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
-                        id="color"
-                        type="color"
-                        placeholder="color"
-                        v-model="btnStyle.color">
+                <div class="flex-1 px-1 flex flex-col">
+                    <div class="flex-1 px-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="color">Color</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                            id="color"
+                            type="color"
+                            placeholder="color"
+                            v-model="btnStyle.color">
+                    </div>
+
+                    <div class="flex-1 px-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="colorAlpha">Alpha</label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="colorAlpha"
+                            type="number"
+                            step=0.1 max="1" min="0"
+                            placeholder="alpha"
+                            v-model="btnStyle.colorAlpha">
+                    </div>
                 </div>
 
                 <transition name="fade" mode="out-in">
@@ -66,20 +92,29 @@
                 </transition>
 
                 <transition-group name="fade" mode="out-in" tag="div" class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
-                    <div v-for="(color,index) in colors" class="px-1" :key="`color-${index}`">
-                        <input type="color" v-model="colors[index]" @click="updateStyle" @keyup="updateStyle" @input="updateStyle">
+                    <div v-for="(color,index) in colors" class="px-1 flex flex-col max-w-sm" :key="`color-${index}`">
+                        <input type="color" v-model="color.stop" @click="updateStyle" @keyup="updateStyle" @input="updateStyle">
+                        <input type="number" v-model="color.alpha" @click="updateStyle" @keyup="updateStyle"
+                               step="0.1" min="0" max="1"
+                               class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                               style="width: 64px">
                     </div>
                 </transition-group>
-                <a href="#" class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold mr-auto" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
 
+                <div class="px-1 mr-auto">
+                    <a href="#" class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold mr-auto" title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
+                </div>
             </div>
         </transition>
     </div>
 </template>
 
 <script>
+import {hexToRgbaMixin} from "@/mixins/hexToRgbaMixin";
+
 export default {
-name: "colorOpt",
+    name: "colorOpt",
+    mixins: [hexToRgbaMixin],
     props: {
         btnStyle: Object,
         advancedColor: Boolean
@@ -111,10 +146,13 @@ name: "colorOpt",
                 '90': '← Left to Right',
                 '135': '↘ Top-Left to Bottom-Right',
             },
-            colors: {
-                'stop1': '#ffffff',
-                'stop2': '#000000'
-            }
+            colors:[{
+                    'stop': '#ffffff',
+                    'alpha': 1
+                }, {
+                    'stop': '#000000',
+                    'alpha': 1
+                }]
         }
     },
     computed: {
@@ -135,9 +173,9 @@ name: "colorOpt",
             this.$emit('enableAdvancedColor',this.enableAdvColor);
         },
         addColorStop() {
-            let objSize = Object.keys(this.colors).length;
-            let newStop = { [`stop${objSize + 1}`]: '#ffffff'};
-            this.colors = {...this.colors,...newStop };
+            let newStop = { stop: '#ffffff',alpha: 1};
+
+            this.colors.push(newStop);
 
             this.updateStyle();
         },
@@ -154,8 +192,12 @@ name: "colorOpt",
                     fullAngle = `${this.angle}`;
                 }
 
-                let colorsArray = Object.values(this.colors);
-                let colorsString = colorsArray.join(',')
+                let colorsString = '';
+                this.colors.forEach(colorObj => {
+                    colorsString += this.convertToRgbaString(colorObj.stop,colorObj.alpha) + ',';
+                });
+
+                colorsString = colorsString.slice(0, -1);
 
                 this.btnStyle.backgroundImage = `${this.gradientType}(${fullAngle},${colorsString})`;
             } else {
