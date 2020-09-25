@@ -45,26 +45,39 @@
 
                             <div class="px-1 flex-1">
                                 <number-input label="Blur radius"
-                                              :min=-100 :max=100
+                                              :min=0 :max=100
                                               :step=1
                                               v-model="textShadowStyle.blurRadius"
                                               @change="updateStyle"/>
                             </div>
 
-                            <div class="px-1 flex-1">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColor">Color</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="textShadowColor"
-                                    type="color"
-                                    placeholder="text shadow color"
-                                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
-                                    v-model="textShadowStyle.color">
+                            <div class="flex">
+                                <div class="px-1 flex-1">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColor">Color</label>
+                                    <input
+                                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="textShadowColor"
+                                        type="color"
+                                        placeholder="text shadow color"
+                                        @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
+                                        v-model="textShadowStyle.color">
+                                </div>
+
+                                <div class="px-1 flex-1">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="textShadowColorAlpha">Alpha</label>
+                                    <input
+                                        class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="textShadowColorAlpha"
+                                        type="number"
+                                        @click="updateStyle" @keyup="updateStyle"
+                                        step="0.1" min="0" max="1" v-model="textShadowStyle.alpha">
+                                </div>
+
                             </div>
                         </div>
                     </transition-group>
 
-                    <div class="px-1 ml-auto">
+                    <div class="px-1 pt-2 ml-auto">
                         <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-100 border border-orange-500 font-bold ml-auto"
                            v-show="textShadow"
                            href="#"
@@ -103,7 +116,7 @@
 
                             <div class="px-1 flex-1">
                                 <number-input label="Blur"
-                                              :min=-100 :max=100
+                                              :min=0 :max=100
                                               :step=1
                                               v-model="boxShadowStyle.blurRadius"
                                               @change="updateStyle"/>
@@ -122,20 +135,32 @@
                                 <input type="checkbox" v-model="boxShadowStyle.isInset" @click="updateInset(index)">
                             </div>
 
-                            <div class="px-1 flex-1">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
-                                <input
-                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="boxShadowColor"
-                                    type="color"
-                                    placeholder="box shadow color"
-                                    @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
-                                    v-model="boxShadowStyle.color">
+                            <div class="flex">
+                                <div class="px-1 flex-1">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColor">Color</label>
+                                    <input
+                                        class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="boxShadowColor"
+                                        type="color"
+                                        placeholder="box shadow color"
+                                        @click="updateStyle" @keyup="updateStyle" @input="updateStyle"
+                                        v-model="boxShadowStyle.color">
+                                </div>
+
+                                <div class="px-1 flex-1">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="boxShadowColorAlpha">Alpha</label>
+                                    <input
+                                        class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="boxShadowColorAlpha"
+                                        type="number"
+                                        @click="updateStyle" @keyup="updateStyle"
+                                        step="0.1" min="0" max="1"  v-model="boxShadowStyle.alpha">
+                                </div>
                             </div>
                         </div>
                     </transition-group>
 
-                    <div class="px-1 ml-auto">
+                    <div class="px-1 pt-2 ml-auto">
                         <a class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold ml-auto"
                            v-show="boxShadow"
                            href="#"
@@ -153,8 +178,10 @@
 
 <script>
 import NumberInput from "@/components/numberInput";
+import {hexToRgbaMixin} from "@/mixins/hexToRgbaMixin";
 export default {
     name: "shadowOpt",
+    mixins: [hexToRgbaMixin],
     components: {NumberInput},
     props: {
         btnStyle: Object,
@@ -167,7 +194,8 @@ export default {
                 offsetX: '1',
                 offsetY: '1',
                 blurRadius: '2',
-                color: 'black'
+                color: '#000000',
+                alpha: 1
             }],
             boxShadowStyles: [{
                 isInset: false,
@@ -175,7 +203,8 @@ export default {
                 offsetY: '1',
                 blurRadius: '2',
                 spreadRadius: '0',
-                color: 'black'
+                color: '#000000',
+                alpha: 1
             }],
 
             closePadding: false,
@@ -214,7 +243,8 @@ export default {
         updateTextShadow() {
             let shadows = '';
             this.textShadowStyles.forEach(style => {
-                shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.color},`;
+                let color = this.convertToRgbaString(style.color,style.alpha);
+                shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${color},`;
             });
             this.btnStyle.textShadow = shadows.slice(0, -1);
         },
@@ -225,18 +255,19 @@ export default {
                 if(style.isInset) {
                     inset = 'inset';
                 }
-                shadows += `${inset} ${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${style.color},`;
+                let color = this.convertToRgbaString(style.color,style.alpha);
+                shadows += `${inset} ${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${color},`;
             });
             this.btnStyle.boxShadow = shadows.slice(0, -1);
         },
 
         addTextShadow() {
-            this.textShadowStyles.push({offsetX: '1', offsetY: '1', blurRadius: '2', color: 'black'});
+            this.textShadowStyles.push({offsetX: '1', offsetY: '1', blurRadius: '2', color: '#000000',alpha:1});
             this.updateTextShadow();
         },
 
         addBoxShadow() {
-            this.boxShadowStyles.push({isInset:false,offsetX: '1', offsetY: '1', blurRadius: '2',spreadRadius: '0', color: 'black'});
+            this.boxShadowStyles.push({isInset:false,offsetX: '1', offsetY: '1', blurRadius: '2',spreadRadius: '0', color: '#000000',alpha:1});
             this.updateBoxShadow();
         },
         updateInset(index) {
