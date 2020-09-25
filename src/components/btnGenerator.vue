@@ -50,9 +50,11 @@ import FontOpt from "@/components/fontOpt";
 import ColorOpt from "@/components/colorOpt";
 import ShadowOpt from "@/components/shadowOpt";
 import HistoryBtns from "@/components/btnsHistory";
+import {hexToRgbaMixin} from "@/mixins/hexToRgbaMixin";
 
 export default {
     name: "btnGenerator",
+    mixins: [hexToRgbaMixin],
     components: {
         HistoryBtns,
         ShadowOpt, ColorOpt, FontOpt, FooterComponent, HeaderComponent,
@@ -158,8 +160,8 @@ export default {
                 marginRight: `${this.btnStyle.marginRight}${this.units.marginRight}`,
                 marginBottom: `${this.btnStyle.marginBottom}${this.units.marginBottom}`,
                 marginLeft: `${this.btnStyle.marginLeft}${this.units.marginLeft}`,
-                color: this.btnStyle.color,
-                backgroundColor: this.btnStyle.backgroundColor,
+                color: this.convertToRgbaString(this.btnStyle.color,1),
+                backgroundColor: this.convertToRgbaString(this.btnStyle.backgroundColor,1),
                 textShadow: this.btnStyle.textShadow,
                 boxShadow: this.btnStyle.boxShadow,
                 backgroundImage: this.btnStyle.backgroundImage
