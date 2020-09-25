@@ -75,15 +75,15 @@
                                           v-model="btnStyle.borderTopWidth" />
                         </div>
 
-                        <div class="flex-1 px-1 flex">
-                            <div class="w-1/2">
+                        <div class="flex-1 px-1 flex flex-col">
+                            <div>
                                 <number-input label="TL 1"
                                               :min=0 :max=100
                                               :step=1
                                               v-model="btnStyle.borderRadiusTopLeftOne" />
                             </div>
 
-                            <div class="w-1/2">
+                            <div>
                                 <number-input label="TL 2"
                                               :min=0 :max=100
                                               :step=1
@@ -95,36 +95,46 @@
                             <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderTopStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
-                        <div class="flex-1 px-1">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColor">Color HEX or name</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderTopColor"
-                                type="text"
-                                placeholder="HEX or Name"
-                                v-model="btnStyle.borderTopColor">
+                        <div class="flex flex-1 flex-col">
+                            <div class="px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColor">Color</label>
+                                <input
+                                    id="borderTopColor"
+                                    type="color"
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                                    v-model="btnStyle.borderTopColor">
+                            </div>
+
+                            <div class="px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderTopColorAlpha">Alpha</label>
+                                <input
+                                    id="borderTopColorAlpha"
+                                    type="number" step="0.1" min="0" max="1"
+                                    v-model="btnStyle.borderTopColorAlpha">
+                            </div>
                         </div>
+
                     </div>
                     <!-- END TOP BORDER -->
                     <div class="flex flex-wrap py-3">
                         <h4 class="bg-pink-100 border-t-4 border-pink-500 text-pink-700 p-1 font-bold w-full">Right</h4>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
                                           v-model="btnStyle.borderRightWidth" />
                         </div>
 
-                        <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2">
+                        <div class="flex-1 px-1 flex flex-col">
+                            <div>
                                 <number-input label="TR 1"
                                               :min=0 :max=100
                                               :step=1
                                               v-model="btnStyle.borderRadiusTopRightOne" />
                             </div>
 
-                            <div class="w-1/2">
+                            <div>
                                 <number-input label="TR 2"
                                               :min=0 :max=100
                                               :step=1
@@ -132,40 +142,49 @@
                             </div>
                         </div>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderRightStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
-                        <div class="w-1/4 px-1">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightColor">Color HEX or name</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderRightColor"
-                                type="text"
-                                placeholder="HEX or Name"
-                                v-model="btnStyle.borderRightColor">
+                        <div class="flex flex-1 flex-col">
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightColor">Color</label>
+                                <input
+                                    id="borderRightColor"
+                                    type="color"
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                                    v-model="btnStyle.borderRightColor">
+                            </div>
+
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderRightColorAlpha">Alpha</label>
+                                <input
+                                    id="borderRightColorAlpha"
+                                    type="number" step="0.1" min="0" max="1"
+                                    v-model="btnStyle.borderRightColorAlpha">
+                            </div>
                         </div>
 
                     </div>
                     <div class="flex flex-wrap py-3">
                         <h4 class="bg-indigo-100 border-t-4 border-indigo-500 text-indigo-700 p-1 font-bold w-full">Bottom</h4>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
                                           v-model="btnStyle.borderBottomWidth" />
                         </div>
 
-                        <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2">
+                        <div class="flex-1 px-1 flex flex-col">
+                            <div>
                                 <number-input label="BR 1"
                                               :min=0 :max=100
                                               :step=1
                                               v-model="btnStyle.borderRadiusBottomRightOne" />
                             </div>
 
-                            <div class="w-1/2">
+                            <div>
                                 <number-input label="BR 2"
                                               :min=0 :max=100
                                               :step=1
@@ -173,40 +192,49 @@
                             </div>
                         </div>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderBottomStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
-                        <div class="w-1/4 px-1">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomColor">Color HEX or name</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderBottomColor"
-                                type="text"
-                                placeholder="HEX or name"
-                                v-model="btnStyle.borderBottomColor">
+                        <div class="flex flex-1 flex-col">
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomColor">Color</label>
+                                <input
+                                    id="borderBottomColor"
+                                    type="color"
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                                    v-model="btnStyle.borderBottomColor">
+                            </div>
+
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderBottomColorAlpha">Alpha</label>
+                                <input
+                                    id="borderBottomColorAlpha"
+                                    type="number" step="0.1" min="0" max="1"
+                                    v-model="btnStyle.borderBottomColorAlpha">
+                            </div>
                         </div>
 
                     </div>
                     <div class="flex flex-wrap py-3">
                         <h4 class="bg-teal-100 border-t-4 border-teal-500 text-teal-700 p-1 font-bold w-full">Left</h4>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
                                           v-model="btnStyle.borderLeftWidth" />
                         </div>
 
-                        <div class="w-1/4 px-1 flex">
-                            <div class="w-1/2">
+                        <div class="flex-1 px-1 flex flex-col">
+                            <div>
                                 <number-input label="BL 1"
                                               :min=0 :max=100
                                               :step=1
                                               v-model="btnStyle.borderRadiusBottomLeftOne" />
                             </div>
 
-                            <div class="w-1/2">
+                            <div>
                                 <number-input label="BL 2"
                                               :min=0 :max=100
                                               :step=1
@@ -214,19 +242,29 @@
                             </div>
                         </div>
 
-                        <div class="w-1/4 px-1">
+                        <div class="flex-1 px-1">
                             <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderLeftStyle" :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
-                        <div class="w-1/4 px-1">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftColor">Color HEX or name</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="borderLeftColor"
-                                type="text"
-                                placeholder="HEX or name"
-                                v-model="btnStyle.borderLeftColor">
+                        <div class="flex flex-1 flex-col">
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftColor">Color</label>
+                                <input
+                                    id="borderLeftColor"
+                                    type="color"
+                                    class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
+                                    v-model="btnStyle.borderLeftColor">
+                            </div>
+
+                            <div class="flex-1 px-1">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="borderLeftColorAlpha">Alpha</label>
+                                <input
+                                    id="borderLeftColorAlpha"
+                                    type="number" step="0.1" min="0" max="1"
+                                    v-model="btnStyle.borderLeftColorAlpha">
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>

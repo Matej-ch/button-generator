@@ -20,14 +20,13 @@
 
             <border-opt :btnStyle="btnStyle"
                         :units="units"
-                        @enableAdvancedBorder="enableAdvancedBorder"
-            />
+                        @enableAdvancedBorder="enableAdvancedBorder" />
 
             <shadow-opt :btnStyle="btnStyle"/>
 
         </div>
 
-        <preview-btn :btnStyle="style" @save="updateHistory"></preview-btn>
+        <preview-btn :btnStyle="style" @save="updateHistory" />
     </div>
 
     <history-btns :buttons="buttons" @clearHistory="clearHistory" />
@@ -85,6 +84,7 @@ export default {
                 borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
                 borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
                 borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
+                borderTopColorAlpha: 1, borderRightColorAlpha: 1, borderBottomColorAlpha: 1, borderLeftColorAlpha: 1,
                 borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
                 borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
                 borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
@@ -163,7 +163,12 @@ export default {
 
                 newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth} ${this.btnStyle.borderRightWidth}${this.units.borderWidth} ${this.btnStyle.borderBottomWidth}${this.units.borderWidth} ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
                 newStyle.borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
-                newStyle.borderColor = `${this.btnStyle.borderTopColor} ${this.btnStyle.borderRightColor} ${this.btnStyle.borderBottomColor} ${this.btnStyle.borderLeftColor}`;
+
+                const top = this.convertToRgbaString(this.btnStyle.borderTopColor,this.btnStyle.borderTopColorAlpha);
+                const right = this.convertToRgbaString(this.btnStyle.borderRightColor,this.btnStyle.borderRightColorAlpha);
+                const bottom = this.convertToRgbaString(this.btnStyle.borderBottomColor,this.btnStyle.borderBottomColorAlpha);
+                const left = this.convertToRgbaString(this.btnStyle.borderLeftColor,this.btnStyle.borderLeftColorAlpha);
+                newStyle.borderColor = `${top} ${right} ${bottom} ${left}`;
                 newStyle.borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
                 newStyle.borderTopRightRadius = `${this.btnStyle.borderRadiusTopRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopRightTwo}${this.units.borderRadius}`;
                 newStyle.borderBottomRightRadius = `${this.btnStyle.borderRadiusBottomRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomRightTwo}${this.units.borderRadius}`;
