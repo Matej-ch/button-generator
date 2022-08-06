@@ -61,7 +61,7 @@
 
                     <div class="py-2" />
 
-                    <Dropdown label="Unit" :obj="units" unitType="marginLeft" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+                    <Dropdown label="Unit" :obj="units" unitType="marginLeft" :options="['px','pt','pc','em','ex','rem']"/>
                 </div>
             </div>
         </transition>
@@ -69,21 +69,16 @@
     </div>
 </template>
 
-<script>
-import NumberInput from "@/components/numberInput";
-import Dropdown from "@/components/dropdown";
+<script setup>
 
-export default {
-name: "marginOpt",
-    components: {NumberInput, Dropdown},
-    props: {
-        btnStyle: Object,
-        units: Object,
-    },
-    data: function () {
-        return {
-            closePadding: true
-        }
-    },
-}
+import {ref} from "vue";
+import Dropdown from "./Dropdown.vue";
+import NumberInput from "./NumberInput.vue";
+
+const closePadding = ref(true)
+
+const props = defineProps({
+    btnStyle: Object,
+    units: Object,
+})
 </script>

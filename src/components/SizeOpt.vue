@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="w-1/2 px-1">
-                    <Dropdown label="Unit" :obj="units" unitType="width" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+                    <Dropdown label="Unit" :obj="units" unitType="width" :options="['px','pt','pc','em','ex','rem']"/>
                 </div>
 
                 <div class="py-2 w-full" />
@@ -55,44 +55,37 @@
                 </div>
 
                 <div class="w-1/2 px-1">
-                    <Dropdown label="Unit" :obj="units" unitType="height" :options="['px','pt','pc','em','ex','rem']"></Dropdown>
+                    <Dropdown label="Unit" :obj="units" unitType="height" :options="['px','pt','pc','em','ex','rem']"/>
                 </div>
             </div>
         </transition>
     </div>
 </template>
 
-<script>
-import Dropdown from "@/components/dropdown";
-import NumberInput from "@/components/numberInput";
+<script setup>
 
-export default {
-    name: "sizeOpt",
-    components: {Dropdown,NumberInput},
-    props: {
-        btnStyle: Object,
-        units: Object,
-        enableWidth: Boolean
-    },
-    data: function (){
-        return {
-            paddingAlert: false,
-            enableWdth: this.enableWidth,
-            closePadding: true,
-        }
-    },
-    methods: {
-        enableSize() {
-            this.closePadding = !this.closePadding;
-            this.enableWdth = !this.enableWdth;
-            this.paddingAlert = !this.paddingAlert;
-            this.$emit('enableSize',this.enableWdth);
-        },
-    },
+import {ref} from "vue";
+import Dropdown from "./Dropdown.vue";
+import NumberInput from "./NumberInput.vue";
 
+const emit = defineEmits(['enableSize'])
+
+const props = defineProps({
+    btnStyle: Object,
+    units: Object,
+    enableWidth: Boolean
+})
+
+const paddingAlert = ref(false)
+const enableWdth = ref(props.enableWidth)
+const closePadding = ref(true)
+
+
+function enableSize()
+{
+    closePadding.value = !closePadding.value;
+    enableWdth.value = !enableWdth.value;
+    paddingAlert.value = !paddingAlert.value;
+    emit('enableSize',enableWdth.value);
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -72,23 +72,18 @@
     </div>
 </template>
 
-<script>
-import Dropdown from "@/components/dropdown";
-import NumberInput from "@/components/numberInput";
-export default {
-    name: "fontOpt",
-    components: {Dropdown,NumberInput},
-    props: {
-        btnStyle: Object,
-        units: Object,
-    },
-    data: function (){
-        return {
-            closePadding: false
-        }
-    },
-    methods: {},
-}
+<script setup>
+import {ref} from "vue";
+import Dropdown from "./Dropdown.vue";
+import NumberInput from "./NumberInput.vue";
+
+const closePadding = ref(false)
+
+const props = defineProps({
+    btnStyle: Object,
+    units: Object,
+})
+
 </script>
 
 <style scoped>

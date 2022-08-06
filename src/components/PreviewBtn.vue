@@ -1,8 +1,9 @@
 <template>
     <div class="flex flex-wrap lg:w-1/2 w-full items-center justify-center">
         <div class="max-w-sm w-full lg:max-w-full lg:flex justify-center flex-col items-center">
-            <div class="border-r border-b border-l border-gray-400 border-t lg:border-gray-400 bg-white rounded p-4 leading-normal w-full max-w-md overflow-auto h-56"
-                 style="place-items: center;display: grid;">
+            <div
+                class="border-r border-b border-l border-gray-400 border-t lg:border-gray-400 bg-white rounded p-4 leading-normal w-full max-w-md overflow-auto h-56"
+                style="place-items: center;display: grid;">
 
                 <button :style="btnStyle" ref="outputBtn">Button</button>
             </div>
@@ -22,7 +23,9 @@
             </div>
 
             <transition name="fade" mode="out-in">
-                <pre v-show="showCode" class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap" ref="textToCopy">.btn {{btnStyle | convertToCss}}
+                <pre v-show="showCode"
+                     class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap"
+                     ref="textToCopy">.btn {{$objToCss(btnStyle)}}
                     <br>.btn:hover {filter: brightness(120%) saturate(120%);}
                     <br>.btn:active {filter: saturate(120%);}
                 </pre>
@@ -32,55 +35,57 @@
     </div>
 </template>
 
-<script>
-export default {
-name: "previewBtn",
-    props: {btnStyle:Object},
-    data: function () {
-        return {
-            showCode: false
-        }
-    },
-    methods: {
-        copyStyle() {
+<script setup>
 
-            const selection = window.getSelection();
-            const range = document.createRange();
-            let node = this.$refs.textToCopy;
-            const copyBtn = this.$refs.copyBtn;
+import {ref} from "vue";
 
-            range.selectNodeContents(node);
-            selection.removeAllRanges();
-            selection.addRange(range);
+const emit = defineEmits(['save'])
 
-            document.execCommand('copy');
-            selection.removeAllRanges();
+const props = defineProps({
+    btnStyle: Object
+})
 
-            const original = copyBtn.innerText;
-            copyBtn.innerText = 'Copied!';
+const showCode = ref(false)
 
-            this.saveLocal();
+function copyStyle() {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    let node = this.$refs.textToCopy;
+    const copyBtn = this.$refs.copyBtn;
 
-            this.$emit('save',this.btnStyle);
+    range.selectNodeContents(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
 
-            setTimeout(() => {
-                copyBtn.textContent = original;
-            }, 1200);
-        },
-        showStyle() {
-            this.showCode = !this.showCode;
-        },
-        saveLocal() {
-            if(localStorage.getItem('buttons')) {
-                let buttons = JSON.parse(localStorage.getItem('buttons'));
-                buttons.push(this.btnStyle);
-                localStorage.setItem('buttons',JSON.stringify(buttons));
-            } else {
-                localStorage.setItem('buttons',JSON.stringify([this.btnStyle]))
-            }
-        }
+    document.execCommand('copy');
+    selection.removeAllRanges();
+
+    const original = copyBtn.innerText;
+    copyBtn.innerText = 'Copied!';
+
+    saveLocal();
+
+    emit('save', props.btnStyle);
+
+    setTimeout(() => {
+        copyBtn.textContent = original;
+    }, 1200);
+}
+
+function showStyle() {
+    showCode.value = !showCode.value;
+}
+
+function saveLocal() {
+    if (localStorage.getItem('buttons')) {
+        let buttons = JSON.parse(localStorage.getItem('buttons'));
+        buttons.push(props.btnStyle);
+        localStorage.setItem('buttons', JSON.stringify(buttons));
+    } else {
+        localStorage.setItem('buttons', JSON.stringify([props.btnStyle]))
     }
 }
+
 </script>
 
 <style scoped>

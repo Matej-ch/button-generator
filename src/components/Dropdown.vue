@@ -16,27 +16,23 @@
 
 </template>
 
-<script>
-export default {
-name: "dropdown",
-    props: {
-        obj:Object,
-        label:String,
-        unitType:String,
-        options: Array},
-    data() {
-        return {
-            selectValue: this.obj[this.unitType]
-        }
-    },
-    methods: {
-        handleOption () {
-            this.$emit('change',this.obj[this.unitType] = this.selectValue)
-        }
-    }
+<script setup>
+
+import {ref} from "vue";
+const emit = defineEmits(['change'])
+
+const props = defineProps({
+    obj:Object,
+    label:String,
+    unitType:String,
+    options: Array
+})
+
+const selectValue = ref(props.obj[props.unitType]);
+
+function handleOption()
+{
+    emit('change',props.obj[props.unitType] = selectValue.value)
 }
+
 </script>
-
-<style scoped>
-
-</style>

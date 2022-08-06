@@ -1,211 +1,204 @@
 <template>
-<div class="flex flex-col h-screen justify-between overflow-auto">
-    <header-component/>
+    <div class="flex flex-col h-screen justify-between overflow-auto">
+        <HeaderComponent/>
 
-    <div class="flex flex-wrap w-full lg:px-4 px-1 mb-auto">
-        <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
+        <div class="flex flex-wrap w-full lg:px-4 px-1 mb-auto">
+            <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
-            <padding-opt :btnStyle="btnStyle" :units="units" />
+                <PaddingOpt :btnStyle="btnStyle" :units="units"/>
 
-            <margin-opt :btnStyle="btnStyle" :units="units" />
+                <MarginOpt :btnStyle="btnStyle" :units="units"/>
 
-            <size-opt :btnStyle="btnStyle"
-                      :units="units"
-                      :enableWidth="enableWidth"
-                      @enableSize="enableSize"/>
+                <SizeOpt :btnStyle="btnStyle"
+                         :units="units"
+                         :enableWidth="enableWidth"
+                         @enableSize="enableSize"/>
 
-            <font-opt :btnStyle="btnStyle" :units="units"/>
+                <FontOpt :btnStyle="btnStyle" :units="units"/>
 
-            <color-opt  :btnStyle="btnStyle" @enableAdvancedColor="enableAdvancedColor" />
+                <ColorOpt :btnStyle="btnStyle" @enableAdvancedColor="enableAdvancedColor"/>
 
-            <border-opt :btnStyle="btnStyle"
-                        :units="units"
-                        @enableAdvancedBorder="enableAdvancedBorder" />
+                <BorderOpt :btnStyle="btnStyle"
+                           :units="units"
+                           @enableAdvancedBorder="enableAdvancedBorder"/>
 
-            <shadow-opt :btnStyle="btnStyle"/>
+                <ShadowOpt :btnStyle="btnStyle"/>
 
+            </div>
+
+            <PreviewBtn :btnStyle="style" @save="updateHistory"/>
         </div>
 
-        <preview-btn :btnStyle="style" @save="updateHistory" />
+        <BtnsHistory :buttons="buttons" @clearHistory="clearHistory"/>
+
+        <FooterComponent/>
+
     </div>
-
-    <history-btns :buttons="buttons" @clearHistory="clearHistory" />
-
-    <footer-component/>
-
-</div>
 </template>
 
-<script>
+<script setup>
+import BtnsHistory from "./BtnsHistory";
+import FooterComponent from "./FooterComponent";
+import HeaderComponent from "./HeaderComponent";
+import PreviewBtn from "./PreviewBtn";
+import PaddingOpt from "./PaddingOpt";
+import MarginOpt from "./MarginOpt";
+import SizeOpt from "./SizeOpt";
+import FontOpt from "./FontOpt";
+import ColorOpt from "./colorOpt";
+import BorderOpt from "./BorderOpt";
+import ShadowOpt from "./ShadowOpt";
+import {ref, onMounted} from "vue";
+import {computed} from "vue/dist/vue";
 
-import PaddingOpt from "@/components/paddingOpt";
-import MarginOpt from "@/components/marginOpt";
-import SizeOpt from "@/components/sizeOpt";
-import BorderOpt from "@/components/borderOpt";
-import PreviewBtn from "@/components/previewBtn";
-import HeaderComponent from "@/components/headerComponent";
-import FooterComponent from "@/components/footerComponent";
-import FontOpt from "@/components/fontOpt";
-import ColorOpt from "@/components/colorOpt";
-import ShadowOpt from "@/components/shadowOpt";
-import HistoryBtns from "@/components/btnsHistory";
-import {hexToRgbaMixin} from "@/mixins/hexToRgbaMixin";
+const btnStyle = ref({
+    width: "100",
+    height: "50",
+    fontSize: "16",
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontFamily: 'Arial',
+    textAlign: "center",
+    paddingTop: '15', paddingRight: '15', paddingBottom: '15', paddingLeft: '15',
+    marginTop: '0', marginRight: '0', marginBottom: '0', marginLeft: '0',
+    color: "#000000", backgroundColor: '#ffffff',
+    borderWidth: '2',
+    borderStyle: 'solid',
+    borderRadius: "4",
+    borderColor: '#000000',
+    borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
+    borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
+    borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
+    borderTopColorAlpha: 1, borderRightColorAlpha: 1, borderBottomColorAlpha: 1, borderLeftColorAlpha: 1,
+    borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
+    borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
+    borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
+    borderRadiusBottomRightOne: '', borderRadiusBottomRightTwo: '',
+    borderTopLeftRadius: '', borderTopRightRadius: '',
+    borderBottomRightRadius: '', borderBottomLeftRadius: '',
+    textShadow: '', boxShadow: '',
+    backgroundImage: '',
+    colorAlpha: 1, backgroundColorAlpha: 1, borderColorAlpha: 1
 
-export default {
-    name: "btnGenerator",
-    mixins: [hexToRgbaMixin],
-    components: {
-        HistoryBtns,
-        ShadowOpt, ColorOpt, FontOpt, FooterComponent, HeaderComponent,
-        PreviewBtn, BorderOpt, SizeOpt, PaddingOpt,MarginOpt},
-    mounted() {
-        if(localStorage.buttons) {
-            this.buttons = JSON.parse(localStorage.buttons);
-        }
-    },
-    data: function() {
-        return {
-            btnStyle: {
-                width: "100",
-                height: "50",
-                fontSize: "16",
-                fontStretch: 'normal',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontFamily: 'Arial',
-                textAlign: "center",
-                paddingTop: '15', paddingRight: '15', paddingBottom: '15', paddingLeft: '15',
-                marginTop: '0', marginRight: '0', marginBottom: '0', marginLeft: '0',
-                color: "#000000", backgroundColor:'#ffffff',
-                borderWidth: '2',
-                borderStyle: 'solid',
-                borderRadius: "4",
-                borderColor: '#000000',
-                borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
-                borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
-                borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
-                borderTopColorAlpha: 1, borderRightColorAlpha: 1, borderBottomColorAlpha: 1, borderLeftColorAlpha: 1,
-                borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
-                borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
-                borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
-                borderRadiusBottomRightOne: '', borderRadiusBottomRightTwo: '',
-                borderTopLeftRadius: '', borderTopRightRadius: '',
-                borderBottomRightRadius: '', borderBottomLeftRadius: '',
-                textShadow: '', boxShadow: '',
-                backgroundImage: '',
-                colorAlpha: 1, backgroundColorAlpha: 1, borderColorAlpha: 1
+})
+const units = ref({
+    width: 'px',
+    height: 'px',
+    fontSize: 'px',
+    paddingTop: 'px',
+    paddingRight: 'px',
+    paddingBottom: 'px',
+    paddingLeft: 'px',
+    marginTop: 'px',
+    marginRight: 'px',
+    marginBottom: 'px',
+    marginLeft: 'px',
+    borderWidth: 'px',
+    borderRadius: 'px',
+    fontStyle: '40'
 
-            },
-            units: {
-                width: 'px',
-                height: 'px',
-                fontSize: 'px',
-                paddingTop: 'px',
-                paddingRight: 'px',
-                paddingBottom: 'px',
-                paddingLeft: 'px',
-                marginTop: 'px',
-                marginRight: 'px',
-                marginBottom: 'px',
-                marginLeft: 'px',
-                borderWidth: 'px',
-                borderRadius: 'px',
-                fontStyle: '40'
+})
 
-            },
-            advancedBorder: false,
-            advancedColor: false,
-            enableWidth: false,
-            buttons: [],
-        };
-    },
-    computed: {
-        style() {
-            let newStyle = {
-                width: `${this.btnStyle.width}${this.units.width}`,
-                height: `${this.btnStyle.height}${this.units.height}`,
-                fontSize: `${this.btnStyle.fontSize}${this.units.fontSize}`,
-                fontWeight: `${this.btnStyle.fontWeight}`,
-                fontStretch: `${this.btnStyle.fontStretch}`,
-                fontFamily: `${this.btnStyle.fontFamily}`,
-                fontStyle: `${this.btnStyle.fontStyle}`,
-                textAlign: `${this.btnStyle.textAlign}`,
-                paddingTop: `${this.btnStyle.paddingTop}${this.units.paddingTop}`,
-                paddingRight: `${this.btnStyle.paddingRight}${this.units.paddingRight}`,
-                paddingBottom: `${this.btnStyle.paddingBottom}${this.units.paddingBottom}`,
-                paddingLeft: `${this.btnStyle.paddingLeft}${this.units.paddingLeft}`,
-                marginTop: `${this.btnStyle.marginTop}${this.units.marginTop}`,
-                marginRight: `${this.btnStyle.marginRight}${this.units.marginRight}`,
-                marginBottom: `${this.btnStyle.marginBottom}${this.units.marginBottom}`,
-                marginLeft: `${this.btnStyle.marginLeft}${this.units.marginLeft}`,
-                color: this.convertToRgbaString(this.btnStyle.color,this.btnStyle.colorAlpha),
-                textShadow: this.btnStyle.textShadow,
-                boxShadow: this.btnStyle.boxShadow,
-                backgroundImage: this.btnStyle.backgroundImage
-            };
+const advancedBorder = ref(false)
+const advancedColor = ref(false)
+const enableWidth = ref(false)
+const buttons = ref([])
 
+onMounted(() => {
+    if (localStorage.getItem('buttons')) {
+        buttons.value = JSON.parse(localStorage.getItem('buttons'));
+    }
+})
 
-            if(!this.advancedColor) {
-                newStyle.backgroundColor = this.convertToRgbaString(this.btnStyle.backgroundColor,this.btnStyle.backgroundColorAlpha);
-            }
+function enableSize(value) {
+    enableWidth.value = value;
+}
 
-            if(this.btnStyle.fontStyle === 'oblique') {
-                newStyle.fontStyle = `${this.btnStyle.fontStyle} ${this.units.fontStyle}deg`;
-            }
+function enableAdvancedBorder(value) {
+    advancedBorder.value = value;
+}
 
-            if(!this.enableWidth) {
-                delete newStyle.width;
-                delete newStyle.height;
-            }
+function enableAdvancedColor(value) {
+    advancedColor.value = value;
+}
 
-            if(this.advancedBorder) {
-                delete newStyle.borderRadius;
+function updateHistory(style) {
+    buttons.value.push(style);
+}
 
-                newStyle.borderWidth = `${this.btnStyle.borderTopWidth}${this.units.borderWidth} ${this.btnStyle.borderRightWidth}${this.units.borderWidth} ${this.btnStyle.borderBottomWidth}${this.units.borderWidth} ${this.btnStyle.borderLeftWidth}${this.units.borderWidth}`;
-                newStyle.borderStyle = `${this.btnStyle.borderTopStyle} ${this.btnStyle.borderRightStyle} ${this.btnStyle.borderBottomStyle} ${this.btnStyle.borderLeftStyle}`;
-
-                const top = this.convertToRgbaString(this.btnStyle.borderTopColor,this.btnStyle.borderTopColorAlpha);
-                const right = this.convertToRgbaString(this.btnStyle.borderRightColor,this.btnStyle.borderRightColorAlpha);
-                const bottom = this.convertToRgbaString(this.btnStyle.borderBottomColor,this.btnStyle.borderBottomColorAlpha);
-                const left = this.convertToRgbaString(this.btnStyle.borderLeftColor,this.btnStyle.borderLeftColorAlpha);
-                newStyle.borderColor = `${top} ${right} ${bottom} ${left}`;
-                newStyle.borderTopLeftRadius = `${this.btnStyle.borderRadiusTopLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopLeftTwo}${this.units.borderRadius}`;
-                newStyle.borderTopRightRadius = `${this.btnStyle.borderRadiusTopRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusTopRightTwo}${this.units.borderRadius}`;
-                newStyle.borderBottomRightRadius = `${this.btnStyle.borderRadiusBottomRightOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomRightTwo}${this.units.borderRadius}`;
-                newStyle.borderBottomLeftRadius = `${this.btnStyle.borderRadiusBottomLeftOne}${this.units.borderRadius} ${this.btnStyle.borderRadiusBottomLeftTwo}${this.units.borderRadius}`;
-            } else {
-                delete newStyle.borderTopLeftRadius;
-                delete newStyle.borderTopRightRadius;
-                delete newStyle.borderBottomRightRadius;
-                delete newStyle.borderBottomLeftRadius;
-                newStyle.borderWidth = `${this.btnStyle.borderWidth}${this.units.borderWidth}`;
-                newStyle.borderStyle =  this.btnStyle.borderStyle;
-                newStyle.borderRadius = `${this.btnStyle.borderRadius}${this.units.borderRadius}`;
-                newStyle.borderColor = this.convertToRgbaString(this.btnStyle.borderColor, this.btnStyle.borderColorAlpha);
-            }
-
-            return newStyle;
-        }
-    },
-    methods: {
-        enableSize(value) {
-            this.enableWidth = value;
-        },
-        enableAdvancedBorder(value) {
-            this.advancedBorder = value;
-        },
-        enableAdvancedColor(value) {
-            this.advancedColor = value;
-        },
-        updateHistory(style) {
-            this.buttons.push(style);
-        },
-        clearHistory() {
-            if(localStorage.buttons) {
-                localStorage.removeItem('buttons');
-                this.buttons = [];
-            }
-        }
+function clearHistory() {
+    if (localStorage.getItem('buttons')) {
+        localStorage.removeItem('buttons');
+        buttons.value = [];
     }
 }
+
+const style = computed(() => {
+    let newStyle = {
+        width: `${btnStyle.value.width}${units.value.width}`,
+        height: `${btnStyle.value.height}${units.value.height}`,
+        fontSize: `${btnStyle.value.fontSize}${units.value.fontSize}`,
+        fontWeight: `${btnStyle.value.fontWeight}`,
+        fontStretch: `${btnStyle.value.fontStretch}`,
+        fontFamily: `${btnStyle.value.fontFamily}`,
+        fontStyle: `${btnStyle.value.fontStyle}`,
+        textAlign: `${btnStyle.value.textAlign}`,
+        paddingTop: `${btnStyle.value.paddingTop}${units.value.paddingTop}`,
+        paddingRight: `${btnStyle.value.paddingRight}${units.value.paddingRight}`,
+        paddingBottom: `${btnStyle.value.paddingBottom}${units.value.paddingBottom}`,
+        paddingLeft: `${btnStyle.value.paddingLeft}${units.value.paddingLeft}`,
+        marginTop: `${btnStyle.value.marginTop}${units.value.marginTop}`,
+        marginRight: `${btnStyle.value.marginRight}${units.value.marginRight}`,
+        marginBottom: `${btnStyle.value.marginBottom}${units.value.marginBottom}`,
+        marginLeft: `${btnStyle.value.marginLeft}${units.value.marginLeft}`,
+        color: $hexToRgba(btnStyle.value.color, btnStyle.value.colorAlpha),
+        textShadow: btnStyle.value.textShadow,
+        boxShadow: btnStyle.value.boxShadow,
+        backgroundImage: btnStyle.value.backgroundImage
+    };
+
+
+    if (!advancedColor.value) {
+        newStyle.backgroundColor = $hexToRgba(btnStyle.value.backgroundColor, btnStyle.value.backgroundColorAlpha);
+    }
+
+    if (btnStyle.value.fontStyle === 'oblique') {
+        newStyle.fontStyle = `${btnStyle.value.fontStyle} ${units.value.fontStyle}deg`;
+    }
+
+    if (!enableWidth.value) {
+        delete newStyle.width;
+        delete newStyle.height;
+    }
+
+    if (advancedBorder.value) {
+        delete newStyle.borderRadius;
+
+        newStyle.borderWidth = `${btnStyle.value.borderTopWidth}${units.value.borderWidth} ${btnStyle.value.borderRightWidth}${units.value.borderWidth} ${btnStyle.value.borderBottomWidth}${units.value.borderWidth} ${btnStyle.value.borderLeftWidth}${units.value.borderWidth}`;
+        newStyle.borderStyle = `${btnStyle.value.borderTopStyle} ${btnStyle.value.borderRightStyle} ${btnStyle.value.borderBottomStyle} ${btnStyle.value.borderLeftStyle}`;
+
+        const top = $hexToRgba(btnStyle.value.borderTopColor, btnStyle.value.borderTopColorAlpha);
+        const right = $hexToRgba(btnStyle.value.borderRightColor, btnStyle.value.borderRightColorAlpha);
+        const bottom = $hexToRgba(btnStyle.value.borderBottomColor, btnStyle.value.borderBottomColorAlpha);
+        const left = $hexToRgba(btnStyle.value.borderLeftColor, btnStyle.value.borderLeftColorAlpha);
+        newStyle.borderColor = `${top} ${right} ${bottom} ${left}`;
+        newStyle.borderTopLeftRadius = `${btnStyle.value.borderRadiusTopLeftOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusTopLeftTwo}${units.value.borderRadius}`;
+        newStyle.borderTopRightRadius = `${btnStyle.value.borderRadiusTopRightOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusTopRightTwo}${units.value.borderRadius}`;
+        newStyle.borderBottomRightRadius = `${btnStyle.value.borderRadiusBottomRightOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusBottomRightTwo}${units.value.borderRadius}`;
+        newStyle.borderBottomLeftRadius = `${btnStyle.value.borderRadiusBottomLeftOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusBottomLeftTwo}${units.value.borderRadius}`;
+    } else {
+        delete newStyle.borderTopLeftRadius;
+        delete newStyle.borderTopRightRadius;
+        delete newStyle.borderBottomRightRadius;
+        delete newStyle.borderBottomLeftRadius;
+        newStyle.borderWidth = `${btnStyle.value.borderWidth}${units.value.borderWidth}`;
+        newStyle.borderStyle = btnStyle.value.borderStyle;
+        newStyle.borderRadius = `${btnStyle.value.borderRadius}${units.value.borderRadius}`;
+        newStyle.borderColor = $hexToRgba(btnStyle.value.borderColor, btnStyle.value.borderColorAlpha);
+    }
+
+    return newStyle;
+})
+
 </script>

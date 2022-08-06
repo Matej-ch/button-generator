@@ -5,58 +5,60 @@
       :style="{width: `${width}px`,'background-size': `${bgWidth}% 100%`}"/>
 </template>
 
-<script>
+<script setup>
 
 import {clamp, toNumber} from "lodash";
+import {computed, ref, watch} from "vue";
 
-export default {
-name: "sliderInput",
-    props: {
-        value: [Number, String],
-        min: Number,
-        max: Number,
-        width: Number,
-    },
-    data() {
-        return {
-            currentValue: toNumber(this.value) || 0,
-        }
-    },
-    watch: {
-        value(val) {
-            this.currentValue = toNumber(val);
-        }
-    },
-    computed: {
-        bgWidth() {
-            return clamp(
-                (this.currentValue - this.min) * 100 / (this.max - this.min),
-                0,
-                100,
-            )
-        }
-    },
-    methods: {
-        mouseDownEvent(evt) {
-            this.updateState(evt.pageX)
-            window.addEventListener('mousemove', this.handleMouseMove)
-            window.addEventListener('mouseup', this.handleMouseUp)
-        },
-        handleMouseMove(evt) { this.updateState(evt.pageX) },
-        handleMouseUp(evt) {
-            this.updateState(evt.pageX)
-            window.removeEventListener('mousemove', this.handleMouseMove)
-            window.removeEventListener('mouseup', this.handleMouseUp)
-        },
-        updateState(pageX) {
-            const rect = this.$refs.slider.getBoundingClientRect()
-            const x = pageX - rect.left
-            const width = rect.right - rect.left
-            const value = this.min + clamp(x / width, 0, 1) * (this.max - this.min)
-            this.$emit('updateState', value)
-        },
-    }
+const props = defineProps({
+    value: [Number, String],
+    min: Number,
+    max: Number,
+    width: Number,
+})
+
+const emit = defineEmits(['updateState'])
+
+const slider = ref(null)
+
+const currentValue = ref(toNumber(props.value) || 0)
+
+const bgWidth = computed(() => {
+    return clamp(
+        (currentValue.value - props.min) * 100 / (props.max - props.min),
+        0,
+        100,
+    )
+})
+
+watch(props.value, (val) => {
+    currentValue.value = toNumber(val);
+})
+
+function mouseDownEvent(evt) {
+    updateState(evt.pageX)
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseup', handleMouseUp)
 }
+
+function handleMouseMove(evt) {
+    updateState(evt.pageX)
+}
+
+function handleMouseUp(evt) {
+    updateState(evt.pageX)
+    window.removeEventListener('mousemove', handleMouseMove)
+    window.removeEventListener('mouseup', handleMouseUp)
+}
+
+function updateState(pageX) {
+    const rect = slider.value.getBoundingClientRect()
+    const x = pageX - rect.left
+    const width = rect.right - rect.left
+    const value = props.min + clamp(x / width, 0, 1) * (props.max - props.min)
+    emit('updateState', value)
+}
+
 </script>
 
 <style scoped lang="scss">

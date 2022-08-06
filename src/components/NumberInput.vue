@@ -2,13 +2,13 @@
     <div class="control-item number w-full">
         <span class="text-gray-700 text-sm font-bold mb-2 block">{{label}}</span>
         <div class="control">
-            <slider-input
+            <SliderInput
                 v-show="hasSlider"
                 :min="minValue"
                 :max="maxValue"
                 :value="currentValue"
                 @updateState="sanitizeNumber">
-            </slider-input>
+            </SliderInput>
             <input
                 type="number"
                 ref="input"
@@ -24,72 +24,63 @@
     </div>
 </template>
 
-<script>
+<script setup>
 
-import SliderInput from "@/components/sliderInput";
 import {clamp, toNumber} from "lodash";
-export default {
-name: "numberInput",
-    components: {SliderInput},
-    props: {
-        showSlider: {
-            type: Boolean,
-            default: true,
-        },
-        min: Number,
-        max: Number,
-        step: Number,
-        value: {
-            type: [Number, String],
-            required: true,
-        },
-        label: String,
+import SliderInput from "./SliderInput.vue";
+import {ref} from "vue";
+import {computed, watch} from "vue/dist/vue";
+
+const emit = defineEmits(['change','update:modelValue'])
+
+const props = defineProps({
+    showSlider: {
+        type: Boolean,
+        default: true,
     },
-    model: {
-        prop: 'value',
-        event: 'change',
-    },
-    data() {
-        let minValue = typeof this.min === 'number' ? this.min : Number.NEGATIVE_INFINITY
-        let maxValue = typeof this.max === 'number' ? this.max : Number.POSITIVE_INFINITY
-        return {
-            currentValue: toNumber(this.value),
-            minValue,
-            maxValue,
-        }
-    },
-    computed: {
-        hasSlider() {
-            return this.showSlider
-                && Number.isFinite(this.minValue)
-                && Number.isFinite(this.maxValue)
-        },
-        stepValue() {
-            if (!this.step) {
-                const val = this.maxValue - this.minValue
-                return (10 ** Math.floor(Math.log(Math.abs(val)) / Math.LN10)) / 10
-            }
-            return toNumber(this.step)
-        }
-    },
-    watch: {
-        value(number) { this.currentValue = toNumber(number) },
-    },
-    methods: {
-        sanitizeNumber(number) {
-            const [min, max, step] = [this.minValue, this.maxValue, this.stepValue]
-            let safeNumber = clamp(toNumber(number), min, max)
-            if (step !== 0 && Number.isFinite(step)) {
-                safeNumber = Math.round(safeNumber / step) * step
-            }
-            this.currentValue = safeNumber
-            this.$emit('change', safeNumber)
-        },
-        handleChange(evt) {
-            this.sanitizeNumber(evt.target.value)
-        }
+    min: Number,
+    max: Number,
+    step: Number,
+    label: String,
+    modelValue: String
+})
+
+function sanitizeNumber(number) {
+    const [min, max, step] = [minValue.value, maxValue.value, stepValue]
+    let safeNumber = clamp(toNumber(number), min, max)
+    if (step !== 0 && Number.isFinite(step)) {
+        safeNumber = Math.round(safeNumber / step) * step
     }
+    currentValue.value = safeNumber
+    emit('change', safeNumber)
 }
+
+function handleChange(evt) {
+    sanitizeNumber(evt.target.value)
+}
+
+const minValue = ref(typeof props.min === 'number' ? props.min : Number.NEGATIVE_INFINITY);
+const maxValue = ref(typeof props.max === 'number' ? props.max : Number.POSITIVE_INFINITY);
+const currentValue = ref(toNumber(props.modelValue));
+
+watch(props.modelValue, (number) => {
+    currentValue.value = toNumber(number);
+})
+
+const hasSlider = computed(() => {
+    return props.showSlider
+        && Number.isFinite(minValue.value)
+        && Number.isFinite(maxValue.value)
+})
+
+const stepValue = computed(() => {
+    if (!props.step) {
+        const val = maxValue.value - minValue.value
+        return (10 ** Math.floor(Math.log(Math.abs(val)) / Math.LN10)) / 10
+    }
+    return toNumber(props.step)
+})
+
 </script>
 
 <style scoped lang="scss">

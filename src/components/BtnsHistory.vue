@@ -28,18 +28,18 @@
 </div>
 </template>
 
-<script>
-export default {
-    name: "historyBtns",
-    props: {
-        buttons: Array
-    },
-    methods: {
-        clearHistory() {
-            this.$emit('clearHistory');
-        }
-    }
+<script setup>
+const emit = defineEmits(['clearHistory'])
+
+const props = defineProps({
+    buttons: Array
+})
+
+function clearHistory()
+{
+    emit('clearHistory');
 }
+
 </script>
 
 <style scoped>
