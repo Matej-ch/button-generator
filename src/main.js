@@ -25,6 +25,9 @@ app.config.globalProperties.$filters = {
     }
 }
 
+app.provide('hexToRgba', app.config.globalProperties.$filters.hexToRgba)
+app.provide('objToCss', app.config.globalProperties.$filters.objToCss)
+
 app
     .use(createPinia())
     .mount('#app')

@@ -25,7 +25,7 @@
             <transition name="fade" mode="out-in">
                 <pre v-show="showCode"
                      class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap"
-                     ref="textToCopy">.btn {{$filters.objToCss(btnStyle)}}
+                     ref="textToCopy">.btn {{objToCss(btnStyle)}}
                     <br>.btn:hover {filter: brightness(120%) saturate(120%);}
                     <br>.btn:active {filter: saturate(120%);}
                 </pre>
@@ -37,8 +37,9 @@
 
 <script setup>
 
-import {ref} from "vue";
+import {ref, inject} from "vue";
 
+const objToCss = inject('objToCss')
 const emit = defineEmits(['save'])
 
 const props = defineProps({
