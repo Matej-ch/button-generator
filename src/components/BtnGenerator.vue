@@ -37,19 +37,18 @@
 </template>
 
 <script setup>
-import BtnsHistory from "./BtnsHistory";
-import FooterComponent from "./FooterComponent";
-import HeaderComponent from "./HeaderComponent";
-import PreviewBtn from "./PreviewBtn";
-import PaddingOpt from "./PaddingOpt";
-import MarginOpt from "./MarginOpt";
-import SizeOpt from "./SizeOpt";
-import FontOpt from "./FontOpt";
-import ColorOpt from "./colorOpt";
-import BorderOpt from "./BorderOpt";
-import ShadowOpt from "./ShadowOpt";
-import {ref, onMounted} from "vue";
-import {computed} from "vue/dist/vue";
+import BtnsHistory from "./BtnsHistory.vue";
+import FooterComponent from "./FooterComponent.vue";
+import HeaderComponent from "./HeaderComponent.vue";
+import PreviewBtn from "./PreviewBtn.vue";
+import PaddingOpt from "./PaddingOpt.vue";
+import MarginOpt from "./MarginOpt.vue";
+import SizeOpt from "./SizeOpt.vue";
+import FontOpt from "./FontOpt.vue";
+import ColorOpt from "./colorOpt.vue";
+import BorderOpt from "./BorderOpt.vue";
+import ShadowOpt from "./ShadowOpt.vue";
+import {ref, onMounted, computed, getCurrentInstance} from "vue";
 
 const btnStyle = ref({
     width: "100",
@@ -152,7 +151,7 @@ const style = computed(() => {
         marginRight: `${btnStyle.value.marginRight}${units.value.marginRight}`,
         marginBottom: `${btnStyle.value.marginBottom}${units.value.marginBottom}`,
         marginLeft: `${btnStyle.value.marginLeft}${units.value.marginLeft}`,
-        color: $hexToRgba(btnStyle.value.color, btnStyle.value.colorAlpha),
+        color: getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.color, btnStyle.value.colorAlpha),
         textShadow: btnStyle.value.textShadow,
         boxShadow: btnStyle.value.boxShadow,
         backgroundImage: btnStyle.value.backgroundImage
@@ -160,7 +159,7 @@ const style = computed(() => {
 
 
     if (!advancedColor.value) {
-        newStyle.backgroundColor = $hexToRgba(btnStyle.value.backgroundColor, btnStyle.value.backgroundColorAlpha);
+        newStyle.backgroundColor = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.backgroundColor, btnStyle.value.backgroundColorAlpha);
     }
 
     if (btnStyle.value.fontStyle === 'oblique') {
@@ -178,10 +177,10 @@ const style = computed(() => {
         newStyle.borderWidth = `${btnStyle.value.borderTopWidth}${units.value.borderWidth} ${btnStyle.value.borderRightWidth}${units.value.borderWidth} ${btnStyle.value.borderBottomWidth}${units.value.borderWidth} ${btnStyle.value.borderLeftWidth}${units.value.borderWidth}`;
         newStyle.borderStyle = `${btnStyle.value.borderTopStyle} ${btnStyle.value.borderRightStyle} ${btnStyle.value.borderBottomStyle} ${btnStyle.value.borderLeftStyle}`;
 
-        const top = $hexToRgba(btnStyle.value.borderTopColor, btnStyle.value.borderTopColorAlpha);
-        const right = $hexToRgba(btnStyle.value.borderRightColor, btnStyle.value.borderRightColorAlpha);
-        const bottom = $hexToRgba(btnStyle.value.borderBottomColor, btnStyle.value.borderBottomColorAlpha);
-        const left = $hexToRgba(btnStyle.value.borderLeftColor, btnStyle.value.borderLeftColorAlpha);
+        const top = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.borderTopColor, btnStyle.value.borderTopColorAlpha);
+        const right = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.borderRightColor, btnStyle.value.borderRightColorAlpha);
+        const bottom = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.borderBottomColor, btnStyle.value.borderBottomColorAlpha);
+        const left = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.borderLeftColor, btnStyle.value.borderLeftColorAlpha);
         newStyle.borderColor = `${top} ${right} ${bottom} ${left}`;
         newStyle.borderTopLeftRadius = `${btnStyle.value.borderRadiusTopLeftOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusTopLeftTwo}${units.value.borderRadius}`;
         newStyle.borderTopRightRadius = `${btnStyle.value.borderRadiusTopRightOne}${units.value.borderRadius} ${btnStyle.value.borderRadiusTopRightTwo}${units.value.borderRadius}`;
@@ -195,7 +194,7 @@ const style = computed(() => {
         newStyle.borderWidth = `${btnStyle.value.borderWidth}${units.value.borderWidth}`;
         newStyle.borderStyle = btnStyle.value.borderStyle;
         newStyle.borderRadius = `${btnStyle.value.borderRadius}${units.value.borderRadius}`;
-        newStyle.borderColor = $hexToRgba(btnStyle.value.borderColor, btnStyle.value.borderColorAlpha);
+        newStyle.borderColor = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(btnStyle.value.borderColor, btnStyle.value.borderColorAlpha);
     }
 
     return newStyle;

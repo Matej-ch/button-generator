@@ -188,7 +188,7 @@
 
 <script setup>
 
-import {ref} from "vue";
+import {ref, getCurrentInstance} from "vue";
 import NumberInput from "./NumberInput.vue";
 
 const props = defineProps({
@@ -249,7 +249,7 @@ function updateStyle() {
 function updateTextShadow() {
     let shadows = '';
     textShadowStyles.value.forEach(style => {
-        let color = $hexToRgba(style.color, style.alpha);
+        let color = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(style.color, style.alpha);
         shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${color}`;
     });
     props.btnStyle.textShadow = shadows.slice(0, -1);
@@ -262,7 +262,7 @@ function updateBoxShadow() {
         if (style.isInset) {
             inset = 'inset';
         }
-        let color = $hexToRgba(style.color, style.alpha);
+        let color = getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(style.color, style.alpha);
         shadows += `${inset} ${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${color}`;
     });
     props.btnStyle.boxShadow = shadows.slice(0, -1);

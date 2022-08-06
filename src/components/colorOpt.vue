@@ -130,7 +130,7 @@
 
 <script setup>
 
-import {ref, computed} from "vue";
+import {ref, computed, getCurrentInstance} from "vue";
 
 const emit = defineEmits(['enableAdvancedColor'])
 
@@ -209,7 +209,7 @@ function fullGradient() {
 
         let colorsString = '';
         colors.value.forEach(colorObj => {
-            colorsString += $hexToRgba(colorObj.stop, colorObj.alpha) + ',';
+            colorsString += getCurrentInstance().appContext.config.globalProperties.$filters.hexToRgba(colorObj.stop, colorObj.alpha) + ',';
         });
 
         colorsString = colorsString.slice(0, -1);

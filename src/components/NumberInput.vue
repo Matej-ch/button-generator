@@ -28,10 +28,9 @@
 
 import {clamp, toNumber} from "lodash";
 import SliderInput from "./SliderInput.vue";
-import {ref} from "vue";
-import {computed, watch} from "vue/dist/vue";
+import {ref, computed, watch} from "vue";
 
-const emit = defineEmits(['change','update:modelValue'])
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const props = defineProps({
     showSlider: {
@@ -87,9 +86,11 @@ const stepValue = computed(() => {
 .control-item.number {
     .control {
         display: flex;
+
         .slider {
             flex: 3;
         }
+
         .input {
             flex: 1;
         }
