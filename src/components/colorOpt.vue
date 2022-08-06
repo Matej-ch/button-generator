@@ -82,6 +82,7 @@
                         </div>
 
                         <div class="px-1 w-1/3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Tilt</label>
                             <select
                                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 v-model="angle" @change="updateStyle">

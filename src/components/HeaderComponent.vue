@@ -4,10 +4,8 @@
     </div>
 </template>
 
-<script>
-export default {
-name: "headerComponent"
-}
+<script setup>
+
 </script>
 
 <style scoped lang="scss">

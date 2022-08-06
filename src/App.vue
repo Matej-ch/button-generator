@@ -1,25 +1,15 @@
 <template>
   <div id="app">
-    <btnGenerator/>
+    <BtnGenerator/>
   </div>
 </template>
 
-<script>
+<script setup>
+import BtnGenerator from "./components/BtnGenerator.vue";
 
-import btnGenerator from "@/components/btnGenerator";
-
-export default {
-  name: 'App',
-  components: {
-      btnGenerator
-  }
-}
 </script>
 
-<style>
-
-@import "~normalize.css";
-@import './assets/styles/main.css';
-@import './assets/styles/tailwind.css';
+<style lang="scss">
+@import './assets/styles/main.scss';
 
 </style>

@@ -10,10 +10,8 @@
     </div>
 </template>
 
-<script>
-export default {
-name: "footerComponent"
-}
+<script setup>
+
 </script>
 
 <style scoped>

@@ -64,9 +64,6 @@ name: "sliderInput",
     display: block;
     position: relative;
     cursor: ew-resize;
-    //border: 1px solid #e2e8f0;
-    //border-radius: 4px;
-    //background-color: rgba(237, 242, 247, 1);
     background-image: linear-gradient(90deg, #2FA1D6, #2FA1D6);
     background-size: 0 100%;
     background-repeat: no-repeat;
