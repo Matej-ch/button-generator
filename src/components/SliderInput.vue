@@ -1,8 +1,8 @@
 <template>
-<span ref="slider"
-      class="slider py-1 px-1 bg-blue-100 border-blue-200 rounded-sm border"
-      @mousedown="mouseDownEvent"
-      :style="{width: `${width}px`,'background-size': `${bgWidth}% 100%`}"/>
+    <span ref="slider"
+          class="slider py-1 px-1 bg-blue-100 border-blue-200 rounded-sm border"
+          @mousedown="mouseDownEvent"
+          :style="{width: `${width}px`,'background-size': `${bgWidth}% 100%`}"/>
 </template>
 
 <script setup>
@@ -31,9 +31,9 @@ const bgWidth = computed(() => {
     )
 })
 
-watch(props.value, (val) => {
+/*watch(props.value, (val) => {
     currentValue.value = toNumber(val);
-})
+})*/
 
 function mouseDownEvent(evt) {
     updateState(evt.pageX)
