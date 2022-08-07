@@ -62,9 +62,9 @@ const minValue = ref(typeof props.min === 'number' ? props.min : Number.NEGATIVE
 const maxValue = ref(typeof props.max === 'number' ? props.max : Number.POSITIVE_INFINITY);
 const currentValue = ref(toNumber(props.modelValue));
 
-/*watch(props.modelValue, (number) => {
-    currentValue.value = toNumber(number);
-})*/
+watch(() => props.modelValue, (newNumber, oldNumber) => {
+    currentValue.value = toNumber(newNumber);
+})
 
 const hasSlider = computed(() => {
     return props.showSlider

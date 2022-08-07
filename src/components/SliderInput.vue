@@ -31,9 +31,9 @@ const bgWidth = computed(() => {
     )
 })
 
-/*watch(props.value, (val) => {
-    currentValue.value = toNumber(val);
-})*/
+watch(() => props.value, (newVal, oldVal) => {
+    currentValue.value = toNumber(newVal);
+})
 
 function mouseDownEvent(evt) {
     updateState(evt.pageX)
