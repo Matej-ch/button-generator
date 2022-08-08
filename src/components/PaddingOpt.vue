@@ -26,12 +26,12 @@
 
                     <number-input label="Top"
                                   :min=0 :max=100
-                                  :step="units.paddingTop === 'px' || units.paddingTop === 'pt' ? 1 : 0.1"
+                                  :step="unitStore.paddingTop === 'px' || unitStore.paddingTop === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.paddingTop"/>
 
                     <div class="py-2"/>
 
-                    <Dropdown label="Unit" :obj="units" unitType="paddingTop"
+                    <Dropdown label="Unit" :obj="unitStore.$state" unitType="paddingTop"
                               :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
@@ -39,12 +39,12 @@
 
                     <number-input label="Right"
                                   :min=0 :max=100
-                                  :step="units.paddingRight === 'px' || units.paddingRight === 'pt' ? 1 : 0.1"
+                                  :step="unitStore.paddingRight === 'px' || unitStore.paddingRight === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.paddingRight"/>
 
                     <div class="py-2"/>
 
-                    <Dropdown label="Unit" :obj="units" unitType="paddingRight"
+                    <Dropdown label="Unit" :obj="unitStore.$state" unitType="paddingRight"
                               :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
@@ -52,12 +52,12 @@
 
                     <number-input label="Bottom"
                                   :min=0 :max=100
-                                  :step="units.paddingBottom === 'px' || units.paddingBottom === 'pt' ? 1 : 0.1"
+                                  :step="unitStore.paddingBottom === 'px' || unitStore.paddingBottom === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.paddingBottom"/>
 
                     <div class="py-2"/>
 
-                    <Dropdown label="Unit" :obj="units" unitType="paddingBottom"
+                    <Dropdown label="Unit" :obj="unitStore.$state" unitType="paddingBottom"
                               :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
 
@@ -65,12 +65,12 @@
 
                     <number-input label="Left"
                                   :min=0 :max=100
-                                  :step="units.paddingLeft === 'px' || units.paddingLeft === 'pt' ? 1 : 0.1"
+                                  :step="unitStore.paddingLeft === 'px' || unitStore.paddingLeft === 'pt' ? 1 : 0.1"
                                   v-model="btnStyle.paddingLeft"/>
 
                     <div class="py-2"/>
 
-                    <Dropdown label="Unit" :obj="units" unitType="paddingLeft"
+                    <Dropdown label="Unit" :obj="unitStore.$state" unitType="paddingLeft"
                               :options="['px','pt','pc','em','ex','rem']"></Dropdown>
                 </div>
             </div>
@@ -83,10 +83,12 @@
 import Dropdown from "./Dropdown.vue";
 import NumberInput from "./NumberInput.vue";
 import {ref} from "vue";
+import {useUnitStore} from "../stores/unitStore";
+
+const unitStore = useUnitStore()
 
 const props = defineProps({
     btnStyle: Object,
-    units: Object,
 })
 
 const closePadding = ref(false)

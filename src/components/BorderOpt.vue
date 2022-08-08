@@ -300,7 +300,6 @@ const emit = defineEmits(['enableAdvancedBorder', 'dropdownChange'])
 
 const props = defineProps({
     btnStyle: Object,
-    units: Object,
     enableWidth: Boolean
 })
 
