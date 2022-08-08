@@ -11,9 +11,8 @@
             <div class="flex flex-row py-4 w-full max-w-md justify-between">
                 <a href="#"
                    @click.prevent="copyStyle"
-                   ref="copyBtn"
                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    Copy style
+                    {{copyButtonText}}
                 </a>
                 <a href="#"
                    @click.prevent="showStyle"
@@ -24,8 +23,7 @@
 
             <transition name="fade" mode="out-in">
                 <pre v-show="showCode"
-                     class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap"
-                     ref="textToCopy">.btn {{objToCss(btnStyle)}}
+                     class="flex flex-row py-4 w-full max-w-md justify-between text-xs whitespace-pre-wrap">.btn {{objToCss(btnStyle)}}
                     <br>.btn:hover {filter: brightness(120%) saturate(120%);}
                     <br>.btn:active {filter: saturate(120%);}
                 </pre>
@@ -41,6 +39,7 @@ import {ref, inject} from "vue";
 
 const objToCss = inject('objToCss')
 const emit = defineEmits(['save'])
+const copyButtonText = ref('Copy style')
 
 const props = defineProps({
     btnStyle: Object
@@ -49,27 +48,18 @@ const props = defineProps({
 const showCode = ref(false)
 
 function copyStyle() {
-    const selection = window.getSelection();
-    const range = document.createRange();
-    let node = this.$refs.textToCopy;
-    const copyBtn = this.$refs.copyBtn;
-
-    range.selectNodeContents(node);
-    selection.removeAllRanges();
-    selection.addRange(range);
-
-    document.execCommand('copy');
-    selection.removeAllRanges();
-
-    const original = copyBtn.innerText;
-    copyBtn.innerText = 'Copied!';
+    navigator.clipboard.writeText(`.btn ${objToCss(props.btnStyle)}\n.btn:hover {filter: brightness(120%) saturate(120%);}\n.btn:active {filter: saturate(120%);}`).then(() => {
+        copyButtonText.value = 'Copied!';
+    }, () => {
+        copyButtonText.value = 'Cannot be copied!';
+    });
 
     saveLocal();
 
     emit('save', props.btnStyle);
 
     setTimeout(() => {
-        copyBtn.textContent = original;
+        copyButtonText.value = 'Copy style';
     }, 1200);
 }
 
