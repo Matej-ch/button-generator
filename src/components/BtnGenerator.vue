@@ -5,22 +5,20 @@
         <div class="flex flex-wrap w-full lg:px-4 px-1 mb-auto">
             <div class="flex flex-col flex-wrap lg:w-1/2 sm:w-full">
 
-                <PaddingOpt :btnStyle="btnStyle"/>
+                <PaddingOpt/>
 
-                <MarginOpt :btnStyle="btnStyle"/>
+                <MarginOpt/>
 
-                <SizeOpt :btnStyle="btnStyle"
-                         :enableWidth="enableWidth"
+                <SizeOpt :enableWidth="enableWidth"
                          @enableSize="enableSize"/>
 
-                <FontOpt :btnStyle="btnStyle"/>
+                <FontOpt/>
 
-                <ColorOpt :btnStyle="btnStyle" @enableAdvancedColor="enableAdvancedColor"/>
+                <ColorOpt @enableAdvancedColor="enableAdvancedColor"/>
 
-                <BorderOpt :btnStyle="btnStyle"
-                           @enableAdvancedBorder="enableAdvancedBorder"/>
+                <BorderOpt @enableAdvancedBorder="enableAdvancedBorder"/>
 
-                <ShadowOpt :btnStyle="btnStyle"/>
+                <ShadowOpt/>
 
             </div>
 
@@ -48,42 +46,12 @@ import BorderOpt from "./BorderOpt.vue";
 import ShadowOpt from "./ShadowOpt.vue";
 import {ref, onMounted, computed, inject} from "vue";
 import {useUnitStore} from "../stores/unitStore";
+import {useBtnStore} from "../stores/buttonStore";
 
 const hexToRgba = inject('hexToRgba')
 
-const btnStyle = ref({
-    width: "100",
-    height: "50",
-    fontSize: "16",
-    fontStretch: 'normal',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontFamily: 'Arial',
-    textAlign: "center",
-    paddingTop: '15', paddingRight: '15', paddingBottom: '15', paddingLeft: '15',
-    marginTop: '0', marginRight: '0', marginBottom: '0', marginLeft: '0',
-    color: "#000000", backgroundColor: '#ffffff',
-    borderWidth: '2',
-    borderStyle: 'solid',
-    borderRadius: "4",
-    borderColor: '#000000',
-    borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
-    borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
-    borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
-    borderTopColorAlpha: 1, borderRightColorAlpha: 1, borderBottomColorAlpha: 1, borderLeftColorAlpha: 1,
-    borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
-    borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
-    borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
-    borderRadiusBottomRightOne: '', borderRadiusBottomRightTwo: '',
-    borderTopLeftRadius: '', borderTopRightRadius: '',
-    borderBottomRightRadius: '', borderBottomLeftRadius: '',
-    textShadow: '', boxShadow: '',
-    backgroundImage: '',
-    colorAlpha: 1, backgroundColorAlpha: 1, borderColorAlpha: 1
-
-})
-
 const unitStore = useUnitStore()
+const btnStyle = useBtnStore()
 
 const advancedBorder = ref(false)
 const advancedColor = ref(false)
@@ -121,35 +89,35 @@ function clearHistory() {
 
 const style = computed(() => {
     let newStyle = {
-        width: `${btnStyle.value.width}${unitStore.width}`,
-        height: `${btnStyle.value.height}${unitStore.height}`,
-        fontSize: `${btnStyle.value.fontSize}${unitStore.fontSize}`,
-        fontWeight: `${btnStyle.value.fontWeight}`,
-        fontStretch: `${btnStyle.value.fontStretch}`,
-        fontFamily: `${btnStyle.value.fontFamily}`,
-        fontStyle: `${btnStyle.value.fontStyle}`,
-        textAlign: `${btnStyle.value.textAlign}`,
-        paddingTop: `${btnStyle.value.paddingTop}${unitStore.paddingTop}`,
-        paddingRight: `${btnStyle.value.paddingRight}${unitStore.paddingRight}`,
-        paddingBottom: `${btnStyle.value.paddingBottom}${unitStore.paddingBottom}`,
-        paddingLeft: `${btnStyle.value.paddingLeft}${unitStore.paddingLeft}`,
-        marginTop: `${btnStyle.value.marginTop}${unitStore.marginTop}`,
-        marginRight: `${btnStyle.value.marginRight}${unitStore.marginRight}`,
-        marginBottom: `${btnStyle.value.marginBottom}${unitStore.marginBottom}`,
-        marginLeft: `${btnStyle.value.marginLeft}${unitStore.marginLeft}`,
-        color: hexToRgba(btnStyle.value.color, btnStyle.value.colorAlpha),
-        textShadow: btnStyle.value.textShadow,
-        boxShadow: btnStyle.value.boxShadow,
-        backgroundImage: btnStyle.value.backgroundImage
+        width: `${btnStyle.width}${unitStore.width}`,
+        height: `${btnStyle.height}${unitStore.height}`,
+        fontSize: `${btnStyle.fontSize}${unitStore.fontSize}`,
+        fontWeight: `${btnStyle.fontWeight}`,
+        fontStretch: `${btnStyle.fontStretch}`,
+        fontFamily: `${btnStyle.fontFamily}`,
+        fontStyle: `${btnStyle.fontStyle}`,
+        textAlign: `${btnStyle.textAlign}`,
+        paddingTop: `${btnStyle.paddingTop}${unitStore.paddingTop}`,
+        paddingRight: `${btnStyle.paddingRight}${unitStore.paddingRight}`,
+        paddingBottom: `${btnStyle.paddingBottom}${unitStore.paddingBottom}`,
+        paddingLeft: `${btnStyle.paddingLeft}${unitStore.paddingLeft}`,
+        marginTop: `${btnStyle.marginTop}${unitStore.marginTop}`,
+        marginRight: `${btnStyle.marginRight}${unitStore.marginRight}`,
+        marginBottom: `${btnStyle.marginBottom}${unitStore.marginBottom}`,
+        marginLeft: `${btnStyle.marginLeft}${unitStore.marginLeft}`,
+        color: hexToRgba(btnStyle.color, btnStyle.colorAlpha),
+        textShadow: btnStyle.textShadow,
+        boxShadow: btnStyle.boxShadow,
+        backgroundImage: btnStyle.backgroundImage
     };
 
 
     if (!advancedColor.value) {
-        newStyle.backgroundColor = hexToRgba(btnStyle.value.backgroundColor, btnStyle.value.backgroundColorAlpha);
+        newStyle.backgroundColor = hexToRgba(btnStyle.backgroundColor, btnStyle.backgroundColorAlpha);
     }
 
-    if (btnStyle.value.fontStyle === 'oblique') {
-        newStyle.fontStyle = `${btnStyle.value.fontStyle} ${unitStore.fontStyle}deg`;
+    if (btnStyle.fontStyle === 'oblique') {
+        newStyle.fontStyle = `${btnStyle.fontStyle} ${unitStore.fontStyle}deg`;
     }
 
     if (!enableWidth.value) {
@@ -160,27 +128,27 @@ const style = computed(() => {
     if (advancedBorder.value) {
         delete newStyle.borderRadius;
 
-        newStyle.borderWidth = `${btnStyle.value.borderTopWidth}${unitStore.borderWidth} ${btnStyle.value.borderRightWidth}${unitStore.borderWidth} ${btnStyle.value.borderBottomWidth}${unitStore.borderWidth} ${btnStyle.value.borderLeftWidth}${unitStore.borderWidth}`;
-        newStyle.borderStyle = `${btnStyle.value.borderTopStyle} ${btnStyle.value.borderRightStyle} ${btnStyle.value.borderBottomStyle} ${btnStyle.value.borderLeftStyle}`;
+        newStyle.borderWidth = `${btnStyle.borderTopWidth}${unitStore.borderWidth} ${btnStyle.borderRightWidth}${unitStore.borderWidth} ${btnStyle.borderBottomWidth}${unitStore.borderWidth} ${btnStyle.borderLeftWidth}${unitStore.borderWidth}`;
+        newStyle.borderStyle = `${btnStyle.borderTopStyle} ${btnStyle.borderRightStyle} ${btnStyle.borderBottomStyle} ${btnStyle.borderLeftStyle}`;
 
-        const top = hexToRgba(btnStyle.value.borderTopColor, btnStyle.value.borderTopColorAlpha);
-        const right = hexToRgba(btnStyle.value.borderRightColor, btnStyle.value.borderRightColorAlpha);
-        const bottom = hexToRgba(btnStyle.value.borderBottomColor, btnStyle.value.borderBottomColorAlpha);
-        const left = hexToRgba(btnStyle.value.borderLeftColor, btnStyle.value.borderLeftColorAlpha);
+        const top = hexToRgba(btnStyle.borderTopColor, btnStyle.borderTopColorAlpha);
+        const right = hexToRgba(btnStyle.borderRightColor, btnStyle.borderRightColorAlpha);
+        const bottom = hexToRgba(btnStyle.borderBottomColor, btnStyle.borderBottomColorAlpha);
+        const left = hexToRgba(btnStyle.borderLeftColor, btnStyle.borderLeftColorAlpha);
         newStyle.borderColor = `${top} ${right} ${bottom} ${left}`;
-        newStyle.borderTopLeftRadius = `${btnStyle.value.borderRadiusTopLeftOne}${unitStore.borderRadius} ${btnStyle.value.borderRadiusTopLeftTwo}${unitStore.borderRadius}`;
-        newStyle.borderTopRightRadius = `${btnStyle.value.borderRadiusTopRightOne}${unitStore.borderRadius} ${btnStyle.value.borderRadiusTopRightTwo}${unitStore.borderRadius}`;
-        newStyle.borderBottomRightRadius = `${btnStyle.value.borderRadiusBottomRightOne}${unitStore.borderRadius} ${btnStyle.value.borderRadiusBottomRightTwo}${unitStore.borderRadius}`;
-        newStyle.borderBottomLeftRadius = `${btnStyle.value.borderRadiusBottomLeftOne}${unitStore.borderRadius} ${btnStyle.value.borderRadiusBottomLeftTwo}${unitStore.borderRadius}`;
+        newStyle.borderTopLeftRadius = `${btnStyle.borderRadiusTopLeftOne}${unitStore.borderRadius} ${btnStyle.borderRadiusTopLeftTwo}${unitStore.borderRadius}`;
+        newStyle.borderTopRightRadius = `${btnStyle.borderRadiusTopRightOne}${unitStore.borderRadius} ${btnStyle.borderRadiusTopRightTwo}${unitStore.borderRadius}`;
+        newStyle.borderBottomRightRadius = `${btnStyle.borderRadiusBottomRightOne}${unitStore.borderRadius} ${btnStyle.borderRadiusBottomRightTwo}${unitStore.borderRadius}`;
+        newStyle.borderBottomLeftRadius = `${btnStyle.borderRadiusBottomLeftOne}${unitStore.borderRadius} ${btnStyle.borderRadiusBottomLeftTwo}${unitStore.borderRadius}`;
     } else {
         delete newStyle.borderTopLeftRadius;
         delete newStyle.borderTopRightRadius;
         delete newStyle.borderBottomRightRadius;
         delete newStyle.borderBottomLeftRadius;
-        newStyle.borderWidth = `${btnStyle.value.borderWidth}${unitStore.borderWidth}`;
-        newStyle.borderStyle = btnStyle.value.borderStyle;
-        newStyle.borderRadius = `${btnStyle.value.borderRadius}${unitStore.borderRadius}`;
-        newStyle.borderColor = hexToRgba(btnStyle.value.borderColor, btnStyle.value.borderColorAlpha);
+        newStyle.borderWidth = `${btnStyle.borderWidth}${unitStore.borderWidth}`;
+        newStyle.borderStyle = btnStyle.borderStyle;
+        newStyle.borderRadius = `${btnStyle.borderRadius}${unitStore.borderRadius}`;
+        newStyle.borderColor = hexToRgba(btnStyle.borderColor, btnStyle.borderColorAlpha);
     }
 
     return newStyle;

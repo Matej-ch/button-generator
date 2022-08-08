@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="w-1/4 px-1">
-                    <Dropdown label="Text align" :obj="btnStyle" unitType="textAlign"
+                    <Dropdown label="Text align" :obj="btnStyle.$state" unitType="textAlign"
                               :options="['left','right','center','justify']"/>
 
                     <div class="py-2"/>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="w-1/4 px-1">
-                    <Dropdown label="Style" :obj="btnStyle" unitType="fontStyle"
+                    <Dropdown label="Style" :obj="btnStyle.$state" unitType="fontStyle"
                               :options="['normal','italic','oblique']"/>
 
                     <div class="py-2"/>
@@ -66,14 +66,14 @@
 
                 <div class="w-1/4 px-1">
                     <Dropdown label="Stretch"
-                              :obj="btnStyle"
+                              :obj="btnStyle.$state"
                               unitType="fontStretch"
                               :options="['ultra-condensed','extra-condensed','condensed','semi-condensed','normal','semi-expanded','expanded','extra-expanded','ultra-expanded']"/>
 
                     <div class="py-2"/>
 
                     <Dropdown label="Family"
-                              :obj="btnStyle"
+                              :obj="btnStyle.$state"
                               unitType="fontFamily"
                               :options="['Arial','Verdana','serif','sans-serif','monospace','Open Sans']"/>
                 </div>
@@ -87,13 +87,11 @@ import {ref} from "vue";
 import Dropdown from "./Dropdown.vue";
 import NumberInput from "./NumberInput.vue";
 import {useUnitStore} from "../stores/unitStore";
+import {useBtnStore} from "../stores/buttonStore";
 
 const closePadding = ref(false)
 const unitStore = useUnitStore()
-
-const props = defineProps({
-    btnStyle: Object,
-})
+const btnStyle = useBtnStore()
 
 </script>
 

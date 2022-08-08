@@ -85,10 +85,10 @@ import {ref} from "vue";
 import Dropdown from "./Dropdown.vue";
 import NumberInput from "./NumberInput.vue";
 import {useUnitStore} from "../stores/unitStore";
+import {useBtnStore} from "../stores/buttonStore";
 
 const closePadding = ref(true)
 const unitStore = useUnitStore()
-const props = defineProps({
-    btnStyle: Object,
-})
+const btnStyle = useBtnStore()
+
 </script>

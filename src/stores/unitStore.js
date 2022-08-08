@@ -16,6 +16,5 @@ export const useUnitStore = defineStore('units', {
         borderWidth: 'px',
         borderRadius: 'px',
         fontStyle: '40'
-
     }),
 })
