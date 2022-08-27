@@ -187,31 +187,29 @@
 </template>
 
 <script setup>
-
 import {ref, inject} from "vue";
+import NumberInput from "./NumberInput.vue";
+import {useBtnStore} from "../stores/buttonStore";
 
 const hexToRgba = inject('hexToRgba')
-import NumberInput from "./NumberInput.vue";
 
-const props = defineProps({
-    btnStyle: Object,
-})
+const btnStyle = useBtnStore()
 
 const textShadow = ref(false)
 const boxShadow = ref(false)
 const textShadowStyles = ref([{
-    offsetX: '1',
-    offsetY: '1',
-    blurRadius: '2',
+    offsetX: 1,
+    offsetY: 1,
+    blurRadius: 2,
     color: '#000000',
     alpha: 1
 }])
 const boxShadowStyles = ref([{
     isInset: false,
-    offsetX: '1',
-    offsetY: '1',
-    blurRadius: '2',
-    spreadRadius: '0',
+    offsetX: 1,
+    offsetY: 1,
+    blurRadius: 2,
+    spreadRadius: 0,
     color: '#000000',
     alpha: 1
 }])
@@ -224,7 +222,7 @@ function enableTextShadow() {
     if (textShadow.value) {
         updateTextShadow();
     } else {
-        props.btnStyle.textShadow = '';
+        btnStyle.textShadow = '';
     }
 }
 
@@ -234,7 +232,7 @@ function enableBoxShadow() {
     if (boxShadow.value) {
         updateBoxShadow();
     } else {
-        props.btnStyle.boxShadow = '';
+        btnStyle.boxShadow = '';
     }
 }
 
@@ -254,7 +252,7 @@ function updateTextShadow() {
         let color = hexToRgba(style.color, style.alpha);
         shadows += `${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${color}`;
     });
-    props.btnStyle.textShadow = shadows.slice(0, -1);
+    btnStyle.textShadow = shadows.slice(0, -1);
 }
 
 function updateBoxShadow() {
@@ -267,7 +265,7 @@ function updateBoxShadow() {
         let color = hexToRgba(style.color, style.alpha);
         shadows += `${inset} ${style.offsetX}px ${style.offsetY}px ${style.blurRadius}px ${style.spreadRadius}px ${color}`;
     });
-    props.btnStyle.boxShadow = shadows.slice(0, -1);
+    btnStyle.boxShadow = shadows.slice(0, -1);
 }
 
 function addTextShadow() {

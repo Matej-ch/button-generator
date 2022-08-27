@@ -1,0 +1,37 @@
+import {defineStore} from "pinia";
+
+export const useBtnStore = defineStore('btnStyle', {
+    state: () => ({
+        width: 100,
+        height: 50,
+        fontSize: 16,
+        fontStretch: 'normal',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontFamily: 'Arial',
+        textAlign: "center",
+        paddingTop: 15, paddingRight: 15, paddingBottom: 15, paddingLeft: 15,
+        marginTop: 0, marginRight: 0, marginBottom: 0, marginLeft: 0,
+        color: "#000000", backgroundColor: '#ffffff',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderRadius: 4,
+        borderColor: '#000000',
+        borderTopWidth: '', borderRightWidth: '', borderBottomWidth: '', borderLeftWidth: '',
+        borderTopStyle: '', borderRightStyle: '', borderBottomStyle: '', borderLeftStyle: '',
+        borderTopColor: '', borderRightColor: '', borderBottomColor: '', borderLeftColor: '',
+        borderTopColorAlpha: 1,
+        borderRightColorAlpha: 1,
+        borderBottomColorAlpha: 1,
+        borderLeftColorAlpha: 1,
+        borderRadiusTopLeftOne: '', borderRadiusTopLeftTwo: '',
+        borderRadiusTopRightOne: '', borderRadiusTopRightTwo: '',
+        borderRadiusBottomLeftOne: '', borderRadiusBottomLeftTwo: '',
+        borderRadiusBottomRightOne: '', borderRadiusBottomRightTwo: '',
+        borderTopLeftRadius: '', borderTopRightRadius: '',
+        borderBottomRightRadius: '', borderBottomLeftRadius: '',
+        textShadow: '', boxShadow: '',
+        backgroundImage: '',
+        colorAlpha: 1, backgroundColorAlpha: 1, borderColorAlpha: 1
+    }),
+})

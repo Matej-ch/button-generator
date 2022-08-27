@@ -131,12 +131,13 @@
 <script setup>
 
 import {ref, computed, inject} from "vue";
+import {useBtnStore} from "../stores/buttonStore";
 
 const hexToRgba = inject('hexToRgba')
 const emit = defineEmits(['enableAdvancedColor'])
+const btnStyle = useBtnStore()
 
 const props = defineProps({
-    btnStyle: Object,
     advancedColor: Boolean
 })
 
@@ -201,7 +202,7 @@ function updateStyle() {
 
 function fullGradient() {
     if (enableAdvColor.value) {
-        delete props.btnStyle.backgroundColor;
+        delete btnStyle.backgroundColor;
 
         let fullAngle = `${angle.value}deg`;
         if (gradientType.value === 'radial-gradient') {
@@ -215,10 +216,10 @@ function fullGradient() {
 
         colorsString = colorsString.slice(0, -1);
 
-        props.btnStyle.backgroundImage = `${gradientType.value}(${fullAngle},${colorsString})`;
+        btnStyle.backgroundImage = `${gradientType.value}(${fullAngle},${colorsString})`;
     } else {
-        props.btnStyle.backgroundColor = '#ffffff';
-        props.btnStyle.backgroundImage = '';
+        btnStyle.backgroundColor = '#ffffff';
+        btnStyle.backgroundImage = '';
 
     }
 }

@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="flex-1 px-1">
-                        <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderStyle"
+                        <Dropdown label="Style" :obj="btnStyle.$state" @change="onChangeChild" unitType="borderStyle"
                                   :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                     </div>
 
@@ -102,7 +102,8 @@
                         </div>
 
                         <div class="flex-1 px-1">
-                            <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderTopStyle"
+                            <Dropdown label="Style" :obj="btnStyle.$state" @change="onChangeChild"
+                                      unitType="borderTopStyle"
                                       :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
@@ -155,7 +156,8 @@
                         </div>
 
                         <div class="flex-1 px-1">
-                            <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderRightStyle"
+                            <Dropdown label="Style" :obj="btnStyle.$state" @change="onChangeChild"
+                                      unitType="borderRightStyle"
                                       :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
@@ -208,7 +210,8 @@
                         </div>
 
                         <div class="flex-1 px-1">
-                            <Dropdown label="Style" :obj="btnStyle" @change="onChangeChild" unitType="borderBottomStyle"
+                            <Dropdown label="Style" :obj="btnStyle.$state" @change="onChangeChild"
+                                      unitType="borderBottomStyle"
                                       :options="['none','dotted','inset','dashed','solid','double','groove']"></Dropdown>
                         </div>
 
@@ -295,17 +298,17 @@
 import Dropdown from "./Dropdown.vue";
 import NumberInput from "./NumberInput.vue";
 import {ref} from "vue";
+import {useBtnStore} from "../stores/buttonStore";
 
 const emit = defineEmits(['enableAdvancedBorder', 'dropdownChange'])
 
 const props = defineProps({
-    btnStyle: Object,
-    units: Object,
     enableWidth: Boolean
 })
 
 const enableAdvancedBorder = ref(false);
 const closePadding = ref(false);
+const btnStyle = useBtnStore()
 
 function onChangeChild(value) {
     emit('dropdownChange', value)
@@ -313,26 +316,26 @@ function onChangeChild(value) {
 
 function enableAdvBorder() {
     enableAdvancedBorder.value = !enableAdvancedBorder.value;
-    props.btnStyle.borderTopWidth = props.btnStyle.borderWidth;
-    props.btnStyle.borderRightWidth = props.btnStyle.borderWidth;
-    props.btnStyle.borderBottomWidth = props.btnStyle.borderWidth;
-    props.btnStyle.borderLeftWidth = props.btnStyle.borderWidth;
-    props.btnStyle.borderTopStyle = props.btnStyle.borderStyle;
-    props.btnStyle.borderRightStyle = props.btnStyle.borderStyle;
-    props.btnStyle.borderBottomStyle = props.btnStyle.borderStyle;
-    props.btnStyle.borderLeftStyle = props.btnStyle.borderStyle;
-    props.btnStyle.borderTopColor = '#000000';
-    props.btnStyle.borderRightColor = '#000000';
-    props.btnStyle.borderBottomColor = '#000000';
-    props.btnStyle.borderLeftColor = '#000000';
-    props.btnStyle.borderRadiusTopLeftOne = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusTopLeftTwo = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusTopRightOne = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusTopRightTwo = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusBottomLeftOne = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusBottomLeftTwo = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusBottomRightOne = `${props.btnStyle.borderRadius}`;
-    props.btnStyle.borderRadiusBottomRightTwo = `${props.btnStyle.borderRadius}`;
+    btnStyle.borderTopWidth = btnStyle.borderWidth;
+    btnStyle.borderRightWidth = btnStyle.borderWidth;
+    btnStyle.borderBottomWidth = btnStyle.borderWidth;
+    btnStyle.borderLeftWidth = btnStyle.borderWidth;
+    btnStyle.borderTopStyle = btnStyle.borderStyle;
+    btnStyle.borderRightStyle = btnStyle.borderStyle;
+    btnStyle.borderBottomStyle = btnStyle.borderStyle;
+    btnStyle.borderLeftStyle = btnStyle.borderStyle;
+    btnStyle.borderTopColor = '#000000';
+    btnStyle.borderRightColor = '#000000';
+    btnStyle.borderBottomColor = '#000000';
+    btnStyle.borderLeftColor = '#000000';
+    btnStyle.borderRadiusTopLeftOne = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusTopLeftTwo = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusTopRightOne = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusTopRightTwo = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusBottomLeftOne = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusBottomLeftTwo = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusBottomRightOne = `${btnStyle.borderRadius}`;
+    btnStyle.borderRadiusBottomRightTwo = `${btnStyle.borderRadius}`;
 
     emit('enableAdvancedBorder', enableAdvancedBorder.value);
 }
