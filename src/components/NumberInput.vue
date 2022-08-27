@@ -41,7 +41,8 @@ const props = defineProps({
     max: Number,
     step: Number,
     label: String,
-    modelValue: String
+    modelValue: Number,
+    name: String
 })
 
 function sanitizeNumber(number) {
@@ -50,8 +51,9 @@ function sanitizeNumber(number) {
     if (step !== 0 && Number.isFinite(step)) {
         safeNumber = Math.round(safeNumber / step) * step
     }
-    currentValue.value = safeNumber
-    emit('change', safeNumber)
+
+    currentValue.value = Math.floor(safeNumber)
+    emit('change', props.name, currentValue.value)
 }
 
 function handleChange(evt) {

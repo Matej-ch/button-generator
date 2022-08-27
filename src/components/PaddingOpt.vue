@@ -27,7 +27,9 @@
                     <number-input label="Top"
                                   :min=0 :max=100
                                   :step="unitStore.paddingTop === 'px' || unitStore.paddingTop === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.paddingTop"/>
+                                  v-model=btnStyle.paddingTop
+                                  name="paddingTop"
+                                  @change="updatePadding"/>
 
                     <div class="py-2"/>
 
@@ -40,7 +42,9 @@
                     <number-input label="Right"
                                   :min=0 :max=100
                                   :step="unitStore.paddingRight === 'px' || unitStore.paddingRight === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.paddingRight"/>
+                                  name="paddingRight"
+                                  v-model=btnStyle.paddingRight
+                                  @change="updatePadding"/>
 
                     <div class="py-2"/>
 
@@ -53,7 +57,9 @@
                     <number-input label="Bottom"
                                   :min=0 :max=100
                                   :step="unitStore.paddingBottom === 'px' || unitStore.paddingBottom === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.paddingBottom"/>
+                                  v-model=btnStyle.paddingBottom
+                                  name="paddingBottom"
+                                  @change="updatePadding"/>
 
                     <div class="py-2"/>
 
@@ -66,7 +72,8 @@
                     <number-input label="Left"
                                   :min=0 :max=100
                                   :step="unitStore.paddingLeft === 'px' || unitStore.paddingLeft === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.paddingLeft"/>
+                                  name="paddingLeft"
+                                  v-model=btnStyle.paddingLeft @change="updatePadding"/>
 
                     <div class="py-2"/>
 
@@ -90,6 +97,12 @@ const unitStore = useUnitStore()
 const btnStyle = useBtnStore()
 
 const closePadding = ref(false)
+
+function updatePadding(name, number) {
+    console.log(name)
+    console.log(number)
+    btnStyle[name] = number;
+}
 
 </script>
 

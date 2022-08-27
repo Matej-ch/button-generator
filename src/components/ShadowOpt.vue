@@ -198,18 +198,18 @@ const btnStyle = useBtnStore()
 const textShadow = ref(false)
 const boxShadow = ref(false)
 const textShadowStyles = ref([{
-    offsetX: '1',
-    offsetY: '1',
-    blurRadius: '2',
+    offsetX: 1,
+    offsetY: 1,
+    blurRadius: 2,
     color: '#000000',
     alpha: 1
 }])
 const boxShadowStyles = ref([{
     isInset: false,
-    offsetX: '1',
-    offsetY: '1',
-    blurRadius: '2',
-    spreadRadius: '0',
+    offsetX: 1,
+    offsetY: 1,
+    blurRadius: 2,
+    spreadRadius: 0,
     color: '#000000',
     alpha: 1
 }])
