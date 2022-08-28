@@ -99,8 +99,6 @@ const btnStyle = useBtnStore()
 const closePadding = ref(false)
 
 function updatePadding(name, number) {
-    console.log(name)
-    console.log(number)
     btnStyle[name] = number;
 }
 

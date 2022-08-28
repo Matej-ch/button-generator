@@ -25,7 +25,7 @@
                     <number-input label="Size"
                                   :min=1 :max=200
                                   :step="unitStore.fontSize === 'px' || unitStore.fontSize === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.fontSize"/>
+                                  v-model="btnStyle.fontSize" @change="updateFont" name="fontSize"/>
 
                     <div class="py-2"/>
 
@@ -92,6 +92,10 @@ import {useBtnStore} from "../stores/buttonStore";
 const closePadding = ref(false)
 const unitStore = useUnitStore()
 const btnStyle = useBtnStore()
+
+function updateFont(name, number) {
+    btnStyle[name] = number;
+}
 
 </script>
 

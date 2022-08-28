@@ -294,6 +294,11 @@ function updateInset(index) {
     updateBoxShadow();
 }
 
+function updateShadow(name, number) {
+    btnStyle[name] = number;
+}
+
+
 </script>
 
 <style scoped>

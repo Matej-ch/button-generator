@@ -27,7 +27,7 @@
                     <number-input label="Top"
                                   :min=0 :max=100
                                   :step="unitStore.marginTop === 'px' || unitStore.marginTop === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.marginTop"/>
+                                  v-model="btnStyle.marginTop" @change="updateMargin" name="marginTop"/>
 
                     <div class="py-2"/>
 
@@ -40,7 +40,7 @@
                     <number-input label="Right"
                                   :min=0 :max=100
                                   :step="unitStore.marginRight === 'px' || unitStore.marginRight === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.marginRight"/>
+                                  v-model="btnStyle.marginRight" @change="updateMargin" name="marginRight"/>
 
                     <div class="py-2"/>
 
@@ -53,7 +53,7 @@
                     <number-input label="Bottom"
                                   :min=0 :max=100
                                   :step="unitStore.marginBottom === 'px' || unitStore.marginBottom === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.marginBottom"/>
+                                  v-model="btnStyle.marginBottom" @change="updateMargin" name="marginBottom"/>
 
                     <div class="py-2"/>
 
@@ -66,7 +66,7 @@
                     <number-input label="Left"
                                   :min=0 :max=100
                                   :step="unitStore.marginLeft === 'px' || unitStore.marginLeft === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.marginLeft"/>
+                                  v-model="btnStyle.marginLeft" @change="updateMargin" name="marginLeft"/>
 
                     <div class="py-2"/>
 
@@ -90,5 +90,9 @@ import {useBtnStore} from "../stores/buttonStore";
 const closePadding = ref(true)
 const unitStore = useUnitStore()
 const btnStyle = useBtnStore()
+
+function updateMargin(name, number) {
+    btnStyle[name] = number;
+}
 
 </script>
