@@ -56,7 +56,7 @@ function updateState(pageX) {
     const x = pageX - rect.left
     const width = rect.right - rect.left
     const value = props.min + clamp(x / width, 0, 1) * (props.max - props.min)
-    emit('updateState', value)
+    emit('updateState', Math.floor(value))
 }
 
 </script>

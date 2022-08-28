@@ -42,7 +42,10 @@ const props = defineProps({
     step: Number,
     label: String,
     modelValue: Number,
-    name: String
+    name: {
+        type: String,
+        default: '',
+    }
 })
 
 function sanitizeNumber(number) {

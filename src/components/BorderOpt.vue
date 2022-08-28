@@ -34,14 +34,14 @@
                         <number-input label="Width"
                                       :min=0 :max=100
                                       :step=1
-                                      v-model="btnStyle.borderWidth"/>
+                                      v-model="btnStyle.borderWidth" @change="updateBorder" name="borderWidth"/>
                     </div>
 
                     <div class="flex-1 px-1">
                         <number-input label="Radius"
                                       :min=0 :max=100
                                       :step=1
-                                      v-model="btnStyle.borderRadius"/>
+                                      v-model="btnStyle.borderRadius" @change="updateBorder" name="borderRadius"/>
                     </div>
 
                     <div class="flex-1 px-1">
@@ -82,7 +82,8 @@
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
-                                          v-model="btnStyle.borderTopWidth"/>
+                                          v-model="btnStyle.borderTopWidth" @change="updateBorder"
+                                          name="borderTopWidth"/>
                         </div>
 
                         <div class="flex-1 px-1 flex flex-col">
@@ -90,14 +91,16 @@
                                 <number-input label="TL 1"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusTopLeftOne"/>
+                                              v-model="btnStyle.borderRadiusTopLeftOne" @change="updateBorder"
+                                              name="borderRadiusTopLeftOne"/>
                             </div>
 
                             <div>
                                 <number-input label="TL 2"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusTopLeftTwo"/>
+                                              v-model="btnStyle.borderRadiusTopLeftTwo" @change="updateBorder"
+                                              name="borderRadiusTopLeftTwo"/>
                             </div>
                         </div>
 
@@ -136,7 +139,8 @@
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
-                                          v-model="btnStyle.borderRightWidth"/>
+                                          v-model="btnStyle.borderRightWidth" @change="updateBorder"
+                                          name="borderRightWidth"/>
                         </div>
 
                         <div class="flex-1 px-1 flex flex-col">
@@ -144,14 +148,16 @@
                                 <number-input label="TR 1"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusTopRightOne"/>
+                                              v-model="btnStyle.borderRadiusTopRightOne" @change="updateBorder"
+                                              name="borderRadiusTopRightOne"/>
                             </div>
 
                             <div>
                                 <number-input label="TR 2"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusTopRightTwo"/>
+                                              v-model="btnStyle.borderRadiusTopRightTwo" @change="updateBorder"
+                                              name="borderRadiusTopRightTwo"/>
                             </div>
                         </div>
 
@@ -190,7 +196,8 @@
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
-                                          v-model="btnStyle.borderBottomWidth"/>
+                                          v-model="btnStyle.borderBottomWidth" @change="updateBorder"
+                                          name="borderBottomWidth"/>
                         </div>
 
                         <div class="flex-1 px-1 flex flex-col">
@@ -198,14 +205,16 @@
                                 <number-input label="BR 1"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusBottomRightOne"/>
+                                              v-model="btnStyle.borderRadiusBottomRightOne" @change="updateBorder"
+                                              name="borderRadiusBottomRightOne"/>
                             </div>
 
                             <div>
                                 <number-input label="BR 2"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusBottomRightTwo"/>
+                                              v-model="btnStyle.borderRadiusBottomRightTwo" @change="updateBorder"
+                                              name="borderRadiusBottomRightTwo"/>
                             </div>
                         </div>
 
@@ -243,7 +252,8 @@
                             <number-input label="Width"
                                           :min=0 :max=100
                                           :step=1
-                                          v-model="btnStyle.borderLeftWidth"/>
+                                          v-model="btnStyle.borderLeftWidth" @change="updateBorder"
+                                          name="borderLeftWidth"/>
                         </div>
 
                         <div class="flex-1 px-1 flex flex-col">
@@ -251,14 +261,16 @@
                                 <number-input label="BL 1"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusBottomLeftOne"/>
+                                              v-model="btnStyle.borderRadiusBottomLeftOne" @change="updateBorder"
+                                              name="borderRadiusBottomLeftOne"/>
                             </div>
 
                             <div>
                                 <number-input label="BL 2"
                                               :min=0 :max=100
                                               :step=1
-                                              v-model="btnStyle.borderRadiusBottomLeftTwo"/>
+                                              v-model="btnStyle.borderRadiusBottomLeftTwo" @change="updateBorder"
+                                              name="borderRadiusBottomLeftTwo"/>
                             </div>
                         </div>
 
@@ -339,6 +351,11 @@ function enableAdvBorder() {
 
     emit('enableAdvancedBorder', enableAdvancedBorder.value);
 }
+
+function updateBorder(name, number) {
+    btnStyle[name] = number;
+}
+
 </script>
 
 <style scoped>

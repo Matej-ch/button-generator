@@ -45,7 +45,7 @@
                                   :min=0
                                   :max=200
                                   :step="unitStore.width === 'px' || unitStore.width === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.width"/>
+                                  v-model="btnStyle.width" @change="updateSize" name="width"/>
                 </div>
 
                 <div class="w-1/2 px-1">
@@ -61,7 +61,7 @@
                                   :min=0
                                   :max=200
                                   :step="unitStore.height === 'px' || unitStore.height === 'pt' ? 1 : 0.1"
-                                  v-model="btnStyle.height"/>
+                                  v-model="btnStyle.height" @change="updateSize" name="height"/>
                 </div>
 
                 <div class="w-1/2 px-1">
@@ -100,4 +100,9 @@ function enableSize() {
     paddingAlert.value = !paddingAlert.value;
     emit('enableSize', enableWdth.value);
 }
+
+function updateSize(name, number) {
+    btnStyle[name] = number;
+}
+
 </script>
