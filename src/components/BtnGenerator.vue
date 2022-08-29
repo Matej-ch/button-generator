@@ -9,14 +9,13 @@
 
                 <MarginOpt/>
 
-                <SizeOpt :enableWidth="enableWidth"
-                         @enableSize="enableSize"/>
+                <SizeOpt/>
 
                 <FontOpt/>
 
-                <ColorOpt @enableAdvancedColor="enableAdvancedColor"/>
+                <ColorOpt/>
 
-                <BorderOpt @enableAdvancedBorder="enableAdvancedBorder"/>
+                <BorderOpt/>
 
                 <ShadowOpt/>
 
@@ -47,15 +46,14 @@ import ShadowOpt from "./ShadowOpt.vue";
 import {ref, onMounted, computed, inject} from "vue";
 import {useUnitStore} from "../stores/unitStore";
 import {useBtnStore} from "../stores/buttonStore";
+import {useSettingStore} from "../stores/settingsStore";
 
 const hexToRgba = inject('hexToRgba')
 
 const unitStore = useUnitStore()
 const btnStyle = useBtnStore()
+const settings = useSettingStore()
 
-const advancedBorder = ref(false)
-const advancedColor = ref(false)
-const enableWidth = ref(false)
 const buttons = ref([])
 
 onMounted(() => {
@@ -63,18 +61,6 @@ onMounted(() => {
         buttons.value = JSON.parse(localStorage.getItem('buttons'));
     }
 })
-
-function enableSize(value) {
-    enableWidth.value = value;
-}
-
-function enableAdvancedBorder(value) {
-    advancedBorder.value = value;
-}
-
-function enableAdvancedColor(value) {
-    advancedColor.value = value;
-}
 
 function updateHistory(style) {
     buttons.value.push(style);
@@ -112,7 +98,7 @@ const style = computed(() => {
     };
 
 
-    if (!advancedColor.value) {
+    if (!settings.advancedColor) {
         newStyle.backgroundColor = hexToRgba(btnStyle.backgroundColor, btnStyle.backgroundColorAlpha);
     }
 
@@ -120,12 +106,12 @@ const style = computed(() => {
         newStyle.fontStyle = `${btnStyle.fontStyle} ${unitStore.fontStyle}deg`;
     }
 
-    if (!enableWidth.value) {
+    if (!settings.enableSize) {
         delete newStyle.width;
         delete newStyle.height;
     }
 
-    if (advancedBorder.value) {
+    if (settings.enableAdvancedBorder) {
         delete newStyle.borderRadius;
 
         newStyle.borderWidth = `${btnStyle.borderTopWidth}${unitStore.borderWidth} ${btnStyle.borderRightWidth}${unitStore.borderWidth} ${btnStyle.borderBottomWidth}${unitStore.borderWidth} ${btnStyle.borderLeftWidth}${unitStore.borderWidth}`;

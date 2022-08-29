@@ -2,15 +2,15 @@
     <div class="pb-2 flex flex-wrap">
         <div
             class="flex bg-orange-100 border-t border-l border-r border-orange-400 text-orange-700 px-1 py-1 w-full cursor-pointer"
-            :class="{'border-b' : closePadding }"
-            @click.prevent="closePadding = !closePadding">
+            :class="{'border-b' : settings.closeShadow }"
+            @click.prevent="settings.closeShadow = !settings.closeShadow">
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24"
                      height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"/>
                     <path d="M18 15l-6-6l-6 6h12"
-                          :transform="closePadding === false ? 'rotate(180 12 12)' : 'rotate(90 12 12)'"/>
+                          :transform="settings.closeShadow === false ? 'rotate(180 12 12)' : 'rotate(90 12 12)'"/>
                 </svg>
             </a>
             <p class="font-bold">
@@ -21,7 +21,7 @@
         <transition name="fade" mode="out-in">
             <div
                 class="flex flex-wrap w-full bg-gray-100 border-orange-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2"
-                v-show="!closePadding">
+                v-show="!settings.closeShadow">
                 <div class="w-full flex flex-wrap pb-6">
                     <h4 class="flex w-full px-1 text-gray-800">
                         <span class="font-bold">Text shadow</span>
@@ -33,7 +33,7 @@
 
                     <transition-group name="fade" tag="div" class="flex w-full flex-wrap">
                         <div v-for="(textShadowStyle,index) in textShadowStyles" :key="`text-shadow-${index}`"
-                             class="w-full flex flex-wrap" v-show="textShadow">
+                             class="w-full flex flex-wrap" v-show="settings.enableTextShadow">
                             <div class="px-1 flex-1">
                                 <number-input label="Offset x"
                                               :min=-100 :max=100
@@ -87,7 +87,7 @@
 
                     <div class="px-1 pt-2 ml-auto">
                         <a class="rounded-full h-8 w-8 flex items-center justify-center bg-orange-100 border border-orange-500 font-bold ml-auto"
-                           v-show="textShadow"
+                           v-show="settings.enableTextShadow"
                            href="#"
                            @click.prevent="addTextShadow"
                            title="Add another text shadow">➕
@@ -106,7 +106,7 @@
 
                     <transition-group name="fade" tag="div" class="flex flex-wrap w-full">
                         <div v-for="(boxShadowStyle,index) in boxShadowStyles" :key="`box-shadow-${index}`"
-                             class="w-full flex justify-start flex-wrap" v-show="boxShadow">
+                             class="w-full flex justify-start flex-wrap" v-show="settings.enableBoxShadow">
                             <div class="px-1 flex-1">
                                 <number-input label="Offset x"
                                               :min=-100 :max=100
@@ -172,7 +172,7 @@
 
                     <div class="px-1 pt-2 ml-auto">
                         <a class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold ml-auto"
-                           v-show="boxShadow"
+                           v-show="settings.enableBoxShadow"
                            href="#"
                            title="Add another box shadow"
                            @click.prevent="addBoxShadow">➕</a>
@@ -190,13 +190,13 @@
 import {ref, inject} from "vue";
 import NumberInput from "./NumberInput.vue";
 import {useBtnStore} from "../stores/buttonStore";
+import {useSettingStore} from "../stores/settingsStore";
 
 const hexToRgba = inject('hexToRgba')
 
 const btnStyle = useBtnStore()
+const settings = useSettingStore()
 
-const textShadow = ref(false)
-const boxShadow = ref(false)
 const textShadowStyles = ref([{
     offsetX: 1,
     offsetY: 1,
@@ -214,12 +214,10 @@ const boxShadowStyles = ref([{
     alpha: 1
 }])
 
-const closePadding = ref(false)
-
 function enableTextShadow() {
-    textShadow.value = !textShadow.value;
+    settings.enableTextShadow = !settings.enableTextShadow;
 
-    if (textShadow.value) {
+    if (settings.enableTextShadow) {
         updateTextShadow();
     } else {
         btnStyle.textShadow = '';
@@ -227,9 +225,9 @@ function enableTextShadow() {
 }
 
 function enableBoxShadow() {
-    boxShadow.value = !boxShadow.value;
+    settings.enableBoxShadow = !settings.enableBoxShadow;
 
-    if (boxShadow.value) {
+    if (settings.enableBoxShadow) {
         updateBoxShadow();
     } else {
         btnStyle.boxShadow = '';
@@ -237,11 +235,11 @@ function enableBoxShadow() {
 }
 
 function updateStyle() {
-    if (textShadow.value) {
+    if (settings.enableTextShadow) {
         updateTextShadow();
     }
 
-    if (boxShadow.value) {
+    if (settings.enableBoxShadow) {
         updateBoxShadow();
     }
 }
@@ -269,7 +267,7 @@ function updateBoxShadow() {
 }
 
 function addTextShadow() {
-    textShadowStyles.value.push({offsetX: '1', offsetY: '1', blurRadius: '2', color: '#000000', alpha: 1});
+    textShadowStyles.value.push({offsetX: 1, offsetY: 1, blurRadius: 2, color: '#000000', alpha: 1});
     updateTextShadow();
 }
 
