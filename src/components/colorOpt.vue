@@ -2,15 +2,15 @@
     <div class="pb-2 flex flex-wrap">
         <div
             class="flex bg-blue-100 border-t border-l border-r border-blue-400 text-blue-700 px-1 py-1 w-full cursor-pointer"
-            :class="{'border-b' : closePadding }"
-            @click.prevent="closePadding = !closePadding">
+            :class="{'border-b' : settings.closeColor }"
+            @click.prevent="settings.closeColor = !settings.closeColor">
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" width="24"
                      height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#607D8B" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"/>
                     <path d="M18 15l-6-6l-6 6h12"
-                          :transform="closePadding === false ? 'rotate(180 12 12)' : 'rotate(90 12 12)'"/>
+                          :transform="settings.closeColor === false ? 'rotate(180 12 12)' : 'rotate(90 12 12)'"/>
                 </svg>
             </a>
             <p class="font-bold flex flex-wrap justify-between w-full">
@@ -26,31 +26,31 @@
         <transition name="fade" mode="out-in">
             <div
                 class="flex flex-wrap w-full bg-gray-100 border-blue-400 border-b border-l border-r pb-2 rounded-b-sm pt-2 mb-2"
-                v-show="!closePadding">
+                v-show="!settings.closeColor">
 
                 <div class="flex-1 px-1 flex flex-col">
                     <div class="flex-1 px-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColor"
-                               v-show="!enableAdvColor">Background</label>
+                               v-show="!settings.advancedColor">Background</label>
                         <input
                             class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none"
                             id="backgroundColor"
                             type="color"
                             placeholder="background color"
-                            v-show="!enableAdvColor"
+                            v-show="!settings.advancedColor"
                             v-model="btnStyle.backgroundColor">
                     </div>
 
                     <div class="flex-1 px-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="backgroundColorAlpha"
-                               v-show="!enableAdvColor">Alpha</label>
+                               v-show="!settings.advancedColor">Alpha</label>
                         <input
                             class="shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="backgroundColorAlpha"
                             type="number"
                             step=0.1 max="1" min="0"
                             placeholder="alpha"
-                            v-show="!enableAdvColor"
+                            v-show="!settings.advancedColor"
                             v-model="btnStyle.backgroundColorAlpha">
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 </div>
 
                 <transition name="fade" mode="out-in">
-                    <div class="flex flex-wrap w-full pt-4" v-show="enableAdvColor">
+                    <div class="flex flex-wrap w-full pt-4" v-show="settings.advancedColor">
                         <div class="px-1 w-1/3">
                             <input class="mr-2 leading-tight" type="radio" id="linearGradient" value="linear-gradient"
                                    v-model="gradientType" :checked="switchOptions" @change="updateGradient">
@@ -107,7 +107,7 @@
                 </transition>
 
                 <transition-group name="fade" mode="out-in" tag="div" class="flex flex-wrap w-full pt-4"
-                                  v-show="enableAdvColor">
+                                  v-show="settings.advancedColor">
                     <div v-for="(color,index) in colors" class="px-1 flex flex-col max-w-sm" :key="`color-${index}`">
                         <input type="color" v-model="color.stop" @click="updateStyle" @keyup="updateStyle"
                                @input="updateStyle">
@@ -121,7 +121,7 @@
                 <div class="px-1 pt-2 mr-auto">
                     <a href="#"
                        class="rounded-full h-8 w-8 flex items-center border justify-center bg-orange-100 border-orange-500 font-bold mr-auto"
-                       title="add another color stop" @click="addColorStop()" v-show="enableAdvColor">➕</a>
+                       title="add another color stop" @click="addColorStop()" v-show="settings.advancedColor">➕</a>
                 </div>
             </div>
         </transition>
@@ -132,14 +132,12 @@
 
 import {ref, computed, inject} from "vue";
 import {useBtnStore} from "../stores/buttonStore";
+import {useSettingStore} from "../stores/settingsStore";
 
 const hexToRgba = inject('hexToRgba')
-const emit = defineEmits(['enableAdvancedColor'])
 const btnStyle = useBtnStore()
+const settings = useSettingStore()
 
-const props = defineProps({
-    advancedColor: Boolean
-})
 
 const radialOptions = {
     'circle at center': 'Center',
@@ -165,9 +163,8 @@ const linearOptions = {
 }
 
 const gradientType = ref('linear-gradient')
-const enableAdvColor = ref(props.advancedColor)
 const angle = ref('180')
-const closePadding = ref(false)
+
 const colors = ref([{
     'stop': '#ffffff',
     'alpha': 1
@@ -181,11 +178,9 @@ const switchOptions = computed(() => {
 })
 
 function enableAdvancedColor() {
-    enableAdvColor.value = !enableAdvColor.value;
+    settings.advancedColor = !settings.advancedColor;
 
     fullGradient();
-
-    emit('enableAdvancedColor', enableAdvColor.value);
 }
 
 function addColorStop() {
@@ -201,7 +196,7 @@ function updateStyle() {
 }
 
 function fullGradient() {
-    if (enableAdvColor.value) {
+    if (settings.advancedColor) {
         delete btnStyle.backgroundColor;
 
         let fullAngle = `${angle.value}deg`;

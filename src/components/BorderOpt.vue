@@ -314,10 +314,6 @@ import {useBtnStore} from "../stores/buttonStore";
 
 const emit = defineEmits(['enableAdvancedBorder', 'dropdownChange'])
 
-const props = defineProps({
-    enableWidth: Boolean
-})
-
 const enableAdvancedBorder = ref(false);
 const closePadding = ref(false);
 const btnStyle = useBtnStore()
